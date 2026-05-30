@@ -33,18 +33,29 @@ export const clsScrollbarArrowsTrue = 'nws-scroll-scrollbar-arrows-true';
 export const clsScrollbarArrowsFalse = 'nws-scroll-scrollbar-arrows-false';
 
 /**
+ * サイズ系transition有効（thumbSize・trackSize・thumbBorderWidth）
+ */
+export const clsScrollbarAnimationSize = 'nws-scroll-scrollbar-animation-size';
+
+/**
+ * カラー系transition有効（thumbColor・trackColor・thumbBorderColor）
+ */
+export const clsScrollbarAnimationColor =
+  'nws-scroll-scrollbar-animation-color';
+
+/**
  * 値: ハンドルの色
  */
 export const varScrollbarThumbColor = {
   x: {
     base: '--nws-scroll-scrollbar-thumbColorX',
-    hover: '--nws-scroll-scrollbar-thumbColorXHover',
-    active: '--nws-scroll-scrollbar-thumbColorXActive',
+    hover: '--nws-scroll-scrollbar-thumbColorX-hover',
+    active: '--nws-scroll-scrollbar-thumbColorX-active',
   },
   y: {
     base: '--nws-scroll-scrollbar-thumbColorY',
-    hover: '--nws-scroll-scrollbar-thumbColorYHover',
-    active: '--nws-scroll-scrollbar-thumbColorYActive',
+    hover: '--nws-scroll-scrollbar-thumbColorY-hover',
+    active: '--nws-scroll-scrollbar-thumbColorY-active',
   },
 } as const;
 
@@ -54,13 +65,13 @@ export const varScrollbarThumbColor = {
 export const varScrollbarThumbSize = {
   x: {
     base: '--nws-scroll-scrollbar-thumbSizeX',
-    hover: '--nws-scroll-scrollbar-thumbSizeXHover',
-    active: '--nws-scroll-scrollbar-thumbSizeXActive',
+    hover: '--nws-scroll-scrollbar-thumbSizeX-hover',
+    active: '--nws-scroll-scrollbar-thumbSizeX-active',
   },
   y: {
     base: '--nws-scroll-scrollbar-thumbSizeY',
-    hover: '--nws-scroll-scrollbar-thumbSizeYHover',
-    active: '--nws-scroll-scrollbar-thumbSizeYActive',
+    hover: '--nws-scroll-scrollbar-thumbSizeY-hover',
+    active: '--nws-scroll-scrollbar-thumbSizeY-active',
   },
 } as const;
 
@@ -70,13 +81,13 @@ export const varScrollbarThumbSize = {
 export const varScrollbarThumbRadius = {
   x: {
     base: '--nws-scroll-scrollbar-thumbRadiusX',
-    hover: '--nws-scroll-scrollbar-thumbRadiusXHover',
-    active: '--nws-scroll-scrollbar-thumbRadiusXActive',
+    hover: '--nws-scroll-scrollbar-thumbRadiusX-hover',
+    active: '--nws-scroll-scrollbar-thumbRadiusX-active',
   },
   y: {
     base: '--nws-scroll-scrollbar-thumbRadiusY',
-    hover: '--nws-scroll-scrollbar-thumbRadiusYHover',
-    active: '--nws-scroll-scrollbar-thumbRadiusYActive',
+    hover: '--nws-scroll-scrollbar-thumbRadiusY-hover',
+    active: '--nws-scroll-scrollbar-thumbRadiusY-active',
   },
 } as const;
 
@@ -86,13 +97,13 @@ export const varScrollbarThumbRadius = {
 export const varScrollbarThumbBorderColor = {
   x: {
     base: '--nws-scroll-scrollbar-thumbBorderColorX',
-    hover: '--nws-scroll-scrollbar-thumbBorderColorXHover',
-    active: '--nws-scroll-scrollbar-thumbBorderColorXActive',
+    hover: '--nws-scroll-scrollbar-thumbBorderColorX-hover',
+    active: '--nws-scroll-scrollbar-thumbBorderColorX-active',
   },
   y: {
     base: '--nws-scroll-scrollbar-thumbBorderColorY',
-    hover: '--nws-scroll-scrollbar-thumbBorderColorYHover',
-    active: '--nws-scroll-scrollbar-thumbBorderColorYActive',
+    hover: '--nws-scroll-scrollbar-thumbBorderColorY-hover',
+    active: '--nws-scroll-scrollbar-thumbBorderColorY-active',
   },
 } as const;
 
@@ -102,13 +113,13 @@ export const varScrollbarThumbBorderColor = {
 export const varScrollbarThumbBorderWidth = {
   x: {
     base: '--nws-scroll-scrollbar-thumbBorderWidthX',
-    hover: '--nws-scroll-scrollbar-thumbBorderWidthXHover',
-    active: '--nws-scroll-scrollbar-thumbBorderWidthXActive',
+    hover: '--nws-scroll-scrollbar-thumbBorderWidthX-hover',
+    active: '--nws-scroll-scrollbar-thumbBorderWidthX-active',
   },
   y: {
     base: '--nws-scroll-scrollbar-thumbBorderWidthY',
-    hover: '--nws-scroll-scrollbar-thumbBorderWidthYHover',
-    active: '--nws-scroll-scrollbar-thumbBorderWidthYActive',
+    hover: '--nws-scroll-scrollbar-thumbBorderWidthY-hover',
+    active: '--nws-scroll-scrollbar-thumbBorderWidthY-active',
   },
 } as const;
 
@@ -118,11 +129,11 @@ export const varScrollbarThumbBorderWidth = {
 export const varScrollbarTrackColor = {
   x: {
     base: '--nws-scroll-scrollbar-trackColorX',
-    hover: '--nws-scroll-scrollbar-trackColorXHover',
+    hover: '--nws-scroll-scrollbar-trackColorX-hover',
   },
   y: {
     base: '--nws-scroll-scrollbar-trackColorY',
-    hover: '--nws-scroll-scrollbar-trackColorYHover',
+    hover: '--nws-scroll-scrollbar-trackColorY-hover',
   },
 } as const;
 
@@ -132,11 +143,11 @@ export const varScrollbarTrackColor = {
 export const varScrollbarTrackSize = {
   x: {
     base: '--nws-scroll-scrollbar-trackSizeX',
-    hover: '--nws-scroll-scrollbar-trackSizeXHover',
+    hover: '--nws-scroll-scrollbar-trackSizeX-hover',
   },
   y: {
     base: '--nws-scroll-scrollbar-trackSizeY',
-    hover: '--nws-scroll-scrollbar-trackSizeYHover',
+    hover: '--nws-scroll-scrollbar-trackSizeY-hover',
   },
 } as const;
 

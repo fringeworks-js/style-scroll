@@ -5,6 +5,8 @@ import resolveStyleStateXY from '../_internal/resolveStyleStateXY';
 import unit from '../_internal/unit';
 import type { CreateStyle, StyleResult } from '../types';
 import {
+  clsScrollbarAnimationColor,
+  clsScrollbarAnimationSize,
   clsScrollbarArrowsFalse,
   clsScrollbarArrowsTrue,
   clsScrollbarThumbBorderWidthXAuto,
@@ -54,6 +56,7 @@ const scrollbar: CreateStyle<ScrollbarOptions> = (options = {}) => {
     trackSizeY,
     fallbackSize,
     arrows,
+    noAnimation,
   } = options;
 
   const result: StyleResult = {
@@ -143,6 +146,26 @@ const scrollbar: CreateStyle<ScrollbarOptions> = (options = {}) => {
     );
   }
 
+  // noAnimation → transition クラス（noAnimation の反転でクラスを付与）
+  const noSize =
+    noAnimation === true ||
+    (typeof noAnimation === 'object' && !!noAnimation?.size);
+  const noColor =
+    noAnimation === true ||
+    (typeof noAnimation === 'object' && !!noAnimation?.color);
+  if (!noSize) {
+    result.className = mergeClassName(
+      result.className,
+      clsScrollbarAnimationSize,
+    );
+  }
+  if (!noColor) {
+    result.className = mergeClassName(
+      result.className,
+      clsScrollbarAnimationColor,
+    );
+  }
+
   // autoの設定
   _applyThumbSizeAuto(
     result,
@@ -164,8 +187,6 @@ const scrollbar: CreateStyle<ScrollbarOptions> = (options = {}) => {
     resolvedTrackSize.y.base,
     clsScrollbarTrackSizeYAuto,
   );
-
-  console.log(options, result);
 
   return result;
 };

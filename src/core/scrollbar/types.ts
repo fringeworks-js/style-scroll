@@ -109,7 +109,7 @@ export type ScrollbarOptions = {
   /**
    * 縦横共通のトラックの幅
    * - number: 指定値で固定（ホバー時も同じ幅）
-   * - `'auto'`: thumbSizeActive + 2×thumbBorderWidth に追従（hover 時にアニメーション）
+   * - `'auto'`: thumbSize-active + 2×thumbBorderWidth に追従（hover 時にアニメーション）
    * - { base?, hover? }: 状態別に値を指定
    *
    * @default 'auto'
@@ -119,7 +119,7 @@ export type ScrollbarOptions = {
   /**
    * 横スクロールバーのトラックの幅
    * - number: 指定値で固定
-   * - `'auto'`: thumbSizeXActive + 2×thumbBorderWidthX に追従
+   * - `'auto'`: thumbSizeX-active + 2×thumbBorderWidthX に追従
    * - { base?, hover? }: 状態別に値を指定
    */
   trackSizeX?: StyleState<TrackSize, TrackState>;
@@ -127,7 +127,7 @@ export type ScrollbarOptions = {
   /**
    * 縦スクロールバーのトラックの幅
    * - number: 指定値で固定
-   * - `'auto'`: thumbSizeYActive + 2×thumbBorderWidthY に追従
+   * - `'auto'`: thumbSizeY-active + 2×thumbBorderWidthY に追従
    * - { base?, hover? }: 状態別に値を指定
    */
   trackSizeY?: StyleState<TrackSize, TrackState>;
@@ -151,6 +151,16 @@ export type ScrollbarOptions = {
    * @default false
    */
   arrows?: boolean;
+
+  /**
+   * アニメーション（transition）の無効化
+   * - `true`: 全アニメーションを無効化
+   * - `{ size?, color? }`: グループ別に無効化
+   *   - `size`: thumbSize・trackSize・thumbBorderWidth のtransitionを無効化
+   *   - `color`: thumbColor・trackColor・thumbBorderColor のtransitionを無効化
+   * 未指定・`false` はCSSデフォルト（transitionあり）
+   */
+  noAnimation?: NoAnimation;
 };
 
 /**
@@ -182,3 +192,17 @@ type TrackSize = number | 'auto';
  * フォールバック時のスクロールバーの幅
  */
 type FallbackSize = 'auto' | 'thin' | 'none';
+
+/**
+ * アニメーション（transition）の無効化
+ * - `true`: 全アニメーションを無効化
+ * - `{ size?, color? }`: グループ別に無効化
+ *   - `size`: thumbSize・trackSize・thumbBorderWidth のtransitionを無効化
+ *   - `color`: thumbColor・trackColor・thumbBorderColor のtransitionを無効化
+ */
+type NoAnimation =
+  | boolean
+  | {
+      size?: boolean;
+      color?: boolean;
+    };

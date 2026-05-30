@@ -59,10 +59,10 @@ CSSと関数を個別に管理したい場合は `core` ディレクトリ配下
 import { scrollbar } from '@niche-works/style-scroll/core';
 
 // 全スタイルをまとめてインポート
-import '@niche-works/style-scroll/core/styles.scss';
+import '@niche-works/style-scroll/core/styles.css';
 
 // 必要なスタイルのみインポート
-import '@niche-works/style-scroll/core/scrollbar.scss';
+import '@niche-works/style-scroll/core/scrollbar.css';
 ```
 
 ### `StyleState` について
@@ -91,13 +91,13 @@ thumbColor: { hover: 'rgba(0, 0, 0, 0.5)' }
 
 ```ts
 scrollbar({
-  thumbColor: 'rgba(0, 0, 0, 0.3)',       // 縦横共通
-  thumbColorX: 'rgba(0, 0, 255, 0.3)',    // 横のみ上書き
+  thumbColor: 'rgba(0, 0, 0, 0.3)', // 縦横共通
+  thumbColorX: 'rgba(0, 0, 255, 0.3)', // 横のみ上書き
 
   // ホバー時: X軸は thumbColorX に指定がないため thumbColor の hover にフォールバック
   thumbColor: { base: 'rgba(0,0,0,0.3)', hover: 'rgba(0,0,0,0.5)' },
   thumbColorX: { base: 'rgba(0,0,255,0.3)' }, // X のホバーは上記 hover にフォールバック
-})
+});
 ```
 
 ## スタイル種別
@@ -130,15 +130,15 @@ const { className, style } = scrollbar({
 
 オプション未指定時のCSSデフォルト値です。
 
-| プロパティ          | デフォルト値                |
-| ------------------- | --------------------------- |
-| `thumbSize`         | `5` (通常) / `9` (ホバー)   |
-| `thumbColor`        | `rgba(0, 0, 0, 0.1)`        |
-| `thumbColor.hover`  | `rgba(0, 0, 0, 0.3)`        |
-| `trackColor`        | `rgba(128, 128, 128, 0.04)` |
-| `thumbRadius`       | `'full'` (9999px)           |
-| `thumbBorderWidth`  | `2`                         |
-| `thumbBorderColor`  | `transparent`               |
+| プロパティ         | デフォルト値                |
+| ------------------ | --------------------------- |
+| `thumbSize`        | `5` (通常) / `9` (ホバー)   |
+| `thumbColor`       | `rgba(0, 0, 0, 0.1)`        |
+| `thumbColor.hover` | `rgba(0, 0, 0, 0.3)`        |
+| `trackColor`       | `rgba(128, 128, 128, 0.04)` |
+| `thumbRadius`      | `'full'` (9999px)           |
+| `thumbBorderWidth` | `2`                         |
+| `thumbBorderColor` | `transparent`               |
 
 ## オプション（`ScrollbarOptions`）
 
@@ -146,32 +146,32 @@ const { className, style } = scrollbar({
 
 #### `thumbSize` — ハンドルの太さ
 
-| オプション    | 型                                | ステート              |
-| ------------- | --------------------------------- | --------------------- |
-| `thumbSize?`  | `StyleState<number, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbSizeX?` | `StyleState<number, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbSizeY?` | `StyleState<number, ThumbState>`  | `base`, `hover`, `active` |
+| オプション    | 型                               | ステート                  |
+| ------------- | -------------------------------- | ------------------------- |
+| `thumbSize?`  | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
+| `thumbSizeX?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
+| `thumbSizeY?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
 
 数値は `px` 単位として扱われます。
 
 ```ts
 // 縦横共通・全ステートで 6px
-scrollbar({ thumbSize: 6 })
+scrollbar({ thumbSize: 6 });
 
 // 通常時 5px、ホバー時 9px
-scrollbar({ thumbSize: { base: 5, hover: 9 } })
+scrollbar({ thumbSize: { base: 5, hover: 9 } });
 
 // 縦と横で異なる値
-scrollbar({ thumbSize: 6, thumbSizeY: 10 })
+scrollbar({ thumbSize: 6, thumbSizeY: 10 });
 ```
 
 #### `thumbColor` — ハンドルの色
 
-| オプション     | 型                                | ステート              |
-| -------------- | --------------------------------- | --------------------- |
-| `thumbColor?`  | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbColorX?` | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbColorY?` | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
+| オプション     | 型                               | ステート                  |
+| -------------- | -------------------------------- | ------------------------- |
+| `thumbColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 - `hover`: コンテナにポインターがホバーしたときの色
 - `active`: thumbそのものに直接ホバーしたときの色（WebKitのみ）
@@ -183,38 +183,38 @@ scrollbar({
     hover: 'rgba(0, 0, 0, 0.4)',
     active: 'rgba(0, 0, 0, 0.6)',
   },
-})
+});
 ```
 
 #### `thumbRadius` — ハンドルの角丸
 
-| オプション      | 型                                          | ステート              |
-| --------------- | ------------------------------------------- | --------------------- |
-| `thumbRadius?`  | `StyleState<ThumbRadius, ThumbState>`       | `base`, `hover`, `active` |
-| `thumbRadiusX?` | `StyleState<ThumbRadius, ThumbState>`       | `base`, `hover`, `active` |
-| `thumbRadiusY?` | `StyleState<ThumbRadius, ThumbState>`       | `base`, `hover`, `active` |
+| オプション      | 型                                    | ステート                  |
+| --------------- | ------------------------------------- | ------------------------- |
+| `thumbRadius?`  | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
+| `thumbRadiusX?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
+| `thumbRadiusY?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbRadius` の値
 
-| 値       | 変換結果 | 説明                |
-| -------- | -------- | ------------------- |
-| `number` | `${n}px` | 指定値 (px)         |
-| `'full'` | `9999px` | 完全な角丸          |
-| `'none'` | `0`      | 角丸なし            |
+| 値       | 変換結果 | 説明        |
+| -------- | -------- | ----------- |
+| `number` | `${n}px` | 指定値 (px) |
+| `'full'` | `9999px` | 完全な角丸  |
+| `'none'` | `0`      | 角丸なし    |
 
 ```ts
-scrollbar({ thumbRadius: 'full' })   // 9999px
-scrollbar({ thumbRadius: 'none' })   // 0
-scrollbar({ thumbRadius: 4 })        // 4px
+scrollbar({ thumbRadius: 'full' }); // 9999px
+scrollbar({ thumbRadius: 'none' }); // 0
+scrollbar({ thumbRadius: 4 }); // 4px
 ```
 
 #### `thumbBorderWidth` — ハンドルのボーダーの太さ
 
-| オプション          | 型                                           | ステート              |
-| ------------------- | -------------------------------------------- | --------------------- |
-| `thumbBorderWidth?`  | `StyleState<ThumbBorderWidth, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbBorderWidthX?` | `StyleState<ThumbBorderWidth, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbBorderWidthY?` | `StyleState<ThumbBorderWidth, ThumbState>`  | `base`, `hover`, `active` |
+| オプション           | 型                                         | ステート                  |
+| -------------------- | ------------------------------------------ | ------------------------- |
+| `thumbBorderWidth?`  | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderWidthX?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderWidthY?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbBorderWidth` の値
 
@@ -223,30 +223,30 @@ scrollbar({ thumbRadius: 4 })        // 4px
 | `number` | 固定幅 (px)                                                 |
 | `'auto'` | thumbサイズのアニメーションに追従して自動調整（autoモード） |
 
-> **autoモード**: `thumbBorderWidth` の base が `null`・`undefined`・`'auto'` のとき、autoクラス（`nws-scroll-scrollbar-thumbBorderWidthX-auto` / `...Y-auto`）が付与されます。\
+> **autoモード**: `thumbBorderWidth` の base が `null`・`undefined`・`'auto'` のときautoモードが適用されます。\
 > オプション未指定時（デフォルト）もautoモードが適用されます。
 
 ```ts
-scrollbar({ thumbBorderWidth: 2 })         // 固定 2px
-scrollbar({ thumbBorderWidth: 'auto' })    // autoモード
-scrollbar({ thumbBorderWidthX: 2 })        // 横のみ固定、縦はautoモード
+scrollbar({ thumbBorderWidth: 2 }); // 固定 2px
+scrollbar({ thumbBorderWidth: 'auto' }); // autoモード
+scrollbar({ thumbBorderWidthX: 2 }); // 横のみ固定、縦はautoモード
 ```
 
 #### `thumbBorderColor` — ハンドルのボーダーの色
 
-| オプション           | 型                                | ステート              |
-| -------------------- | --------------------------------- | --------------------- |
-| `thumbBorderColor?`  | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbBorderColorX?` | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbBorderColorY?` | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
+| オプション           | 型                               | ステート                  |
+| -------------------- | -------------------------------- | ------------------------- |
+| `thumbBorderColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 未指定時のCSSデフォルトは `transparent` です。
 
 ```ts
 scrollbar({
   thumbBorderWidth: 2,
-  thumbBorderColor: 'transparent',  // thumbの背景が透けて見える
-})
+  thumbBorderColor: 'transparent', // thumbの背景が透けて見える
+});
 ```
 
 ---
@@ -255,11 +255,11 @@ scrollbar({
 
 #### `trackColor` — トラックの色
 
-| オプション     | 型                                | ステート       |
-| -------------- | --------------------------------- | -------------- |
-| `trackColor?`  | `StyleState<string, TrackState>`  | `base`, `hover` |
-| `trackColorX?` | `StyleState<string, TrackState>`  | `base`, `hover` |
-| `trackColorY?` | `StyleState<string, TrackState>`  | `base`, `hover` |
+| オプション     | 型                               | ステート        |
+| -------------- | -------------------------------- | --------------- |
+| `trackColor?`  | `StyleState<string, TrackState>` | `base`, `hover` |
+| `trackColorX?` | `StyleState<string, TrackState>` | `base`, `hover` |
+| `trackColorY?` | `StyleState<string, TrackState>` | `base`, `hover` |
 
 - `hover`: コンテナにポインターがホバーしたときの色
 
@@ -269,38 +269,38 @@ scrollbar({
     base: 'rgba(0, 0, 0, 0.04)',
     hover: 'rgba(0, 0, 0, 0.08)',
   },
-})
+});
 ```
 
 #### `trackSize` — トラックの幅
 
-| オプション     | 型                                         | ステート       |
-| -------------- | ------------------------------------------ | -------------- |
-| `trackSize?`   | `StyleState<TrackSize, TrackState>`        | `base`, `hover` |
-| `trackSizeX?`  | `StyleState<TrackSize, TrackState>`        | `base`, `hover` |
-| `trackSizeY?`  | `StyleState<TrackSize, TrackState>`        | `base`, `hover` |
+| オプション    | 型                                  | ステート        |
+| ------------- | ----------------------------------- | --------------- |
+| `trackSize?`  | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| `trackSizeX?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| `trackSizeY?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
 
 ##### `TrackSize` の値
 
-| 値       | 説明                                                                             |
-| -------- | -------------------------------------------------------------------------------- |
-| `number` | 固定幅 (px)                                                                      |
+| 値       | 説明                                                                            |
+| -------- | ------------------------------------------------------------------------------- |
+| `number` | 固定幅 (px)                                                                     |
 | `'auto'` | `thumbSizeActive + 2×thumbBorderWidth` に追従。ホバー時にアニメーションして拡縮 |
 
-> **autoモード**: `trackSize` に `'auto'` を指定すると、autoクラス（`nws-scroll-scrollbar-trackSizeX-auto` / `...Y-auto`）が付与されます。
+> **autoモード**: `trackSize` に `'auto'` を指定するとautoモードが適用されます。
 
 ```ts
 // 固定幅
-scrollbar({ trackSize: 12 })
+scrollbar({ trackSize: 12 });
 
 // autoモード（thumbサイズに追従）
-scrollbar({ trackSize: 'auto' })
+scrollbar({ trackSize: 'auto' });
 
 // 通常 8px・ホバー時 12px
-scrollbar({ trackSize: { base: 8, hover: 12 } })
+scrollbar({ trackSize: { base: 8, hover: 12 } });
 
 // 縦と横で異なる設定
-scrollbar({ trackSize: 12, trackSizeX: 'auto' })
+scrollbar({ trackSize: 12, trackSizeX: 'auto' });
 ```
 
 ---
@@ -309,9 +309,9 @@ scrollbar({ trackSize: 12, trackSizeX: 'auto' })
 
 #### `fallbackSize` — 非WebKit向けフォールバック
 
-| オプション      | 型                              | デフォルト |
-| --------------- | ------------------------------- | ---------- |
-| `fallbackSize?` | `'auto' \| 'thin' \| 'none'`   | `'auto'`   |
+| オプション      | 型                           | デフォルト |
+| --------------- | ---------------------------- | ---------- |
+| `fallbackSize?` | `'auto' \| 'thin' \| 'none'` | `'auto'`   |
 
 非WebKitブラウザー（Firefox）向けの `scrollbar-width` CSSプロパティの値を制御します。WebKitブラウザーでは無効です。
 
@@ -322,7 +322,7 @@ scrollbar({ trackSize: 12, trackSizeX: 'auto' })
 | `'none'` | 非表示（スクロール操作は維持） |
 
 ```ts
-scrollbar({ fallbackSize: 'thin' })
+scrollbar({ fallbackSize: 'thin' });
 ```
 
 #### `arrows` — 矢印ボタン
@@ -333,14 +333,47 @@ scrollbar({ fallbackSize: 'thin' })
 
 スクロールバー端の矢印ボタンの表示・非表示を強制します（WebKitのみ有効）。
 
-| 値          | 説明                               |
-| ----------- | ---------------------------------- |
-| `true`      | 矢印ボタンを表示                   |
-| `false`     | 矢印ボタンを非表示                 |
+| 値          | 説明                                   |
+| ----------- | -------------------------------------- |
+| `true`      | 矢印ボタンを表示                       |
+| `false`     | 矢印ボタンを非表示                     |
 | `undefined` | クラス付与なし（ブラウザーデフォルト） |
 
 ```ts
-scrollbar({ arrows: false })  // 矢印非表示
+scrollbar({ arrows: false }); // 矢印非表示
+```
+
+#### `noAnimation` — アニメーションの無効化
+
+| オプション     | 型            | デフォルト  |
+| -------------- | ------------- | ----------- |
+| `noAnimation?` | `NoAnimation` | `undefined` |
+
+トランジションアニメーションを無効化します。未指定時はアニメーションが有効です。
+
+| 値                    | 説明                             |
+| --------------------- | -------------------------------- |
+| `undefined` / `false` | アニメーション有効（デフォルト） |
+| `true`                | サイズ・カラー両方を無効化       |
+| `{ size: true }`      | サイズ系のみ無効化               |
+| `{ color: true }`     | カラー系のみ無効化               |
+
+アニメーションはプロパティのグループ単位で制御できます。
+
+| グループ | 対象プロパティ                                              |
+| -------- | ----------------------------------------------------------- |
+| `size`   | `thumbSize`, `trackSize`, `thumbBorderWidth`, `thumbRadius` |
+| `color`  | `thumbColor`, `trackColor`, `thumbBorderColor`              |
+
+```ts
+// 全アニメーション無効
+scrollbar({ noAnimation: true });
+
+// サイズ系のみ無効
+scrollbar({ noAnimation: { size: true } });
+
+// カラー系のみ無効
+scrollbar({ noAnimation: { color: true } });
 ```
 
 ---
@@ -366,6 +399,9 @@ type TrackSize = number | 'auto';
 /** 非WebKit向けフォールバックサイズ */
 type FallbackSize = 'auto' | 'thin' | 'none';
 
+/** アニメーション無効化の設定 */
+type NoAnimation = boolean | { size?: boolean; color?: boolean };
+
 /** ステート別の値型 */
 type StyleState<T, S extends string> =
   | T
@@ -385,62 +421,6 @@ type StyleResult = {
   };
 };
 ```
-
-### 付与されるCSSクラス
-
-| クラス名                                        | 付与条件                                      |
-| ----------------------------------------------- | --------------------------------------------- |
-| `nws-scroll-scrollbar`                          | 常に付与                                      |
-| `nws-scroll-scrollbar-thumbBorderWidthX-auto`   | `thumbBorderWidth` X軸 base が null/undefined/auto |
-| `nws-scroll-scrollbar-thumbBorderWidthY-auto`   | `thumbBorderWidth` Y軸 base が null/undefined/auto |
-| `nws-scroll-scrollbar-trackSizeX-auto`          | `trackSize` X軸 base が `'auto'`              |
-| `nws-scroll-scrollbar-trackSizeY-auto`          | `trackSize` Y軸 base が `'auto'`              |
-| `nws-scroll-scrollbar-arrows-true`              | `arrows: true`                                |
-| `nws-scroll-scrollbar-arrows-false`             | `arrows: false`                               |
-
-### 生成されるCSS変数
-
-| CSS変数                                          | 対応オプション                    |
-| ------------------------------------------------ | --------------------------------- |
-| `--nws-scroll-scrollbar-thumbSizeX`              | `thumbSize` / `thumbSizeX` base   |
-| `--nws-scroll-scrollbar-thumbSizeXHover`         | `thumbSize` / `thumbSizeX` hover  |
-| `--nws-scroll-scrollbar-thumbSizeXActive`        | `thumbSize` / `thumbSizeX` active |
-| `--nws-scroll-scrollbar-thumbSizeY`              | `thumbSize` / `thumbSizeY` base   |
-| `--nws-scroll-scrollbar-thumbSizeYHover`         | `thumbSize` / `thumbSizeY` hover  |
-| `--nws-scroll-scrollbar-thumbSizeYActive`        | `thumbSize` / `thumbSizeY` active |
-| `--nws-scroll-scrollbar-thumbColorX`             | `thumbColor` / `thumbColorX` base   |
-| `--nws-scroll-scrollbar-thumbColorXHover`        | `thumbColor` / `thumbColorX` hover  |
-| `--nws-scroll-scrollbar-thumbColorXActive`       | `thumbColor` / `thumbColorX` active |
-| `--nws-scroll-scrollbar-thumbColorY`             | `thumbColor` / `thumbColorY` base   |
-| `--nws-scroll-scrollbar-thumbColorYHover`        | `thumbColor` / `thumbColorY` hover  |
-| `--nws-scroll-scrollbar-thumbColorYActive`       | `thumbColor` / `thumbColorY` active |
-| `--nws-scroll-scrollbar-thumbRadiusX`            | `thumbRadius` / `thumbRadiusX` base   |
-| `--nws-scroll-scrollbar-thumbRadiusXHover`       | `thumbRadius` / `thumbRadiusX` hover  |
-| `--nws-scroll-scrollbar-thumbRadiusXActive`      | `thumbRadius` / `thumbRadiusX` active |
-| `--nws-scroll-scrollbar-thumbRadiusY`            | `thumbRadius` / `thumbRadiusY` base   |
-| `--nws-scroll-scrollbar-thumbRadiusYHover`       | `thumbRadius` / `thumbRadiusY` hover  |
-| `--nws-scroll-scrollbar-thumbRadiusYActive`      | `thumbRadius` / `thumbRadiusY` active |
-| `--nws-scroll-scrollbar-thumbBorderWidthX`       | `thumbBorderWidth` / `thumbBorderWidthX` base   |
-| `--nws-scroll-scrollbar-thumbBorderWidthXHover`  | `thumbBorderWidth` / `thumbBorderWidthX` hover  |
-| `--nws-scroll-scrollbar-thumbBorderWidthXActive` | `thumbBorderWidth` / `thumbBorderWidthX` active |
-| `--nws-scroll-scrollbar-thumbBorderWidthY`       | `thumbBorderWidth` / `thumbBorderWidthY` base   |
-| `--nws-scroll-scrollbar-thumbBorderWidthYHover`  | `thumbBorderWidth` / `thumbBorderWidthY` hover  |
-| `--nws-scroll-scrollbar-thumbBorderWidthYActive` | `thumbBorderWidth` / `thumbBorderWidthY` active |
-| `--nws-scroll-scrollbar-thumbBorderColorX`       | `thumbBorderColor` / `thumbBorderColorX` base   |
-| `--nws-scroll-scrollbar-thumbBorderColorXHover`  | `thumbBorderColor` / `thumbBorderColorX` hover  |
-| `--nws-scroll-scrollbar-thumbBorderColorXActive` | `thumbBorderColor` / `thumbBorderColorX` active |
-| `--nws-scroll-scrollbar-thumbBorderColorY`       | `thumbBorderColor` / `thumbBorderColorY` base   |
-| `--nws-scroll-scrollbar-thumbBorderColorYHover`  | `thumbBorderColor` / `thumbBorderColorY` hover  |
-| `--nws-scroll-scrollbar-thumbBorderColorYActive` | `thumbBorderColor` / `thumbBorderColorY` active |
-| `--nws-scroll-scrollbar-trackColorX`             | `trackColor` / `trackColorX` base   |
-| `--nws-scroll-scrollbar-trackColorXHover`        | `trackColor` / `trackColorX` hover  |
-| `--nws-scroll-scrollbar-trackColorY`             | `trackColor` / `trackColorY` base   |
-| `--nws-scroll-scrollbar-trackColorYHover`        | `trackColor` / `trackColorY` hover  |
-| `--nws-scroll-scrollbar-trackSizeX`              | `trackSize` / `trackSizeX` base   |
-| `--nws-scroll-scrollbar-trackSizeXHover`         | `trackSize` / `trackSizeX` hover  |
-| `--nws-scroll-scrollbar-trackSizeY`              | `trackSize` / `trackSizeY` base   |
-| `--nws-scroll-scrollbar-trackSizeYHover`         | `trackSize` / `trackSizeY` hover  |
-| `--nws-scroll-scrollbar-fallbackSize`            | `fallbackSize`                    |
 
 ## 動作環境（対応ブラウザー）
 

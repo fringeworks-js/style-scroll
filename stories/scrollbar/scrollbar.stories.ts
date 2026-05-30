@@ -67,6 +67,8 @@ type ScrollbarStoryOptions = {
   trackSizeYHover?: string | 'auto';
   fallbackSize?: 'auto' | 'thin' | 'none';
   arrows?: boolean;
+  noAnimationSize?: boolean;
+  noAnimationColor?: boolean;
 };
 
 type StoryOptions = ScrollbarStoryOptions & DebugOptions;
@@ -167,6 +169,8 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
     trackSizeHover,
     trackSizeXHover,
     trackSizeYHover,
+    noAnimationSize,
+    noAnimationColor,
     ...rest
   } = opts;
 
@@ -217,7 +221,17 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
     trackSize: toNumberStyleState(trackSize, trackSizeHover),
     trackSizeX: toNumberStyleState(trackSizeX, trackSizeXHover),
     trackSizeY: toNumberStyleState(trackSizeY, trackSizeYHover),
+    noAnimation: toNoAnimation(noAnimationSize, noAnimationColor),
   };
+}
+
+function toNoAnimation(
+  size?: boolean,
+  color?: boolean,
+): ScrollbarOptions['noAnimation'] {
+  if (!size && !color) return undefined;
+  if (size && color) return true;
+  return { size, color };
 }
 
 const ARG_TYPES: ArgTypes<StoryOptions> = {
@@ -284,6 +298,16 @@ const ARG_TYPES: ArgTypes<StoryOptions> = {
     description: 'Non-WebKit only (CSS scrollbar-width)',
   },
   arrows: { control: 'boolean' },
+  noAnimationSize: {
+    control: 'boolean',
+    description:
+      'Disable size transitions (thumbSize, trackSize, thumbBorderWidth)',
+  },
+  noAnimationColor: {
+    control: 'boolean',
+    description:
+      'Disable color transitions (thumbColor, trackColor, thumbBorderColor)',
+  },
   containerWidth: { control: 'number' },
   containerHeight: { control: 'number' },
   containerBackground: { control: 'color' },
@@ -486,6 +510,55 @@ export const FallbackHidden: Story = {
   argTypes: ARG_TYPES,
   args: {
     fallbackSize: 'none',
+  },
+};
+
+// 全アニメーション無効（サイズ・色の変化が即時）
+export const NoAnimation: Story = {
+  argTypes: ARG_TYPES,
+  args: {
+    thumbSize: 5,
+    thumbSizeHover: 11,
+    thumbSizeActive: 17,
+    thumbBorderWidth: '2',
+    trackSize: 'auto',
+    thumbColor: 'rgb(169, 198, 207)',
+    thumbColorHover: 'rgb(203, 168, 111)',
+    thumbColorActive: 'rgb(237, 138, 15)',
+    noAnimationSize: true,
+    noAnimationColor: true,
+  },
+};
+
+// サイズ系アニメーション無効（拡縮は即時・色の変化はふわっと）
+export const NoAnimationSize: Story = {
+  argTypes: ARG_TYPES,
+  args: {
+    thumbSize: 5,
+    thumbSizeHover: 11,
+    thumbSizeActive: 17,
+    thumbBorderWidth: '2',
+    trackSize: 'auto',
+    thumbColor: 'rgb(169, 198, 207)',
+    thumbColorHover: 'rgb(203, 168, 111)',
+    thumbColorActive: 'rgb(237, 138, 15)',
+    noAnimationSize: true,
+  },
+};
+
+// カラー系アニメーション無効（色の変化は即時・拡縮はアニメーション）
+export const NoAnimationColor: Story = {
+  argTypes: ARG_TYPES,
+  args: {
+    thumbSize: 5,
+    thumbSizeHover: 11,
+    thumbSizeActive: 17,
+    thumbBorderWidth: '2',
+    trackSize: 'auto',
+    thumbColor: 'rgb(169, 198, 207)',
+    thumbColorHover: 'rgb(203, 168, 111)',
+    thumbColorActive: 'rgb(237, 138, 15)',
+    noAnimationColor: true,
   },
 };
 

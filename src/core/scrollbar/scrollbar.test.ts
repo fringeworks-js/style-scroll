@@ -44,10 +44,10 @@ describe('scrollbar', () => {
   describe('thumbSize hover', () => {
     it('hover を指定するとX・Y両方にpx変換される', () => {
       const result = scrollbar({ thumbSize: { hover: 12 } });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeX-hover']).toBe(
         '12px',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeY-hover']).toBe(
         '12px',
       );
     });
@@ -57,10 +57,10 @@ describe('scrollbar', () => {
         thumbSize: { hover: 12 },
         thumbSizeX: { hover: 6 },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeX-hover']).toBe(
         '6px',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeY-hover']).toBe(
         '12px',
       );
     });
@@ -70,10 +70,10 @@ describe('scrollbar', () => {
         thumbSize: { hover: 12 },
         thumbSizeY: { hover: 16 },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeX-hover']).toBe(
         '12px',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbSizeY-hover']).toBe(
         '16px',
       );
     });
@@ -114,30 +114,30 @@ describe('scrollbar', () => {
   describe('thumbColor hover', () => {
     it('thumbColor の hover を指定するとX・Yに展開される', () => {
       const result = scrollbar({ thumbColor: { hover: 'rgba(0,0,0,0.5)' } });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-hover']).toBe(
         'rgba(0,0,0,0.5)',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-hover']).toBe(
         'rgba(0,0,0,0.5)',
       );
     });
 
     it('thumbColorX の hover のみ指定するとXだけ設定される', () => {
       const result = scrollbar({ thumbColorX: { hover: 'rgba(0,0,0,0.3)' } });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-hover']).toBe(
         'rgba(0,0,0,0.3)',
       );
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbColorYHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbColorY-hover'],
       ).toBeUndefined();
     });
 
     it('thumbColorY の hover のみ指定するとYだけ設定される', () => {
       const result = scrollbar({ thumbColorY: { hover: 'rgba(0,0,0,0.7)' } });
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbColorXHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbColorX-hover'],
       ).toBeUndefined();
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-hover']).toBe(
         'rgba(0,0,0,0.7)',
       );
     });
@@ -147,10 +147,10 @@ describe('scrollbar', () => {
         thumbColor: { hover: 'red' },
         thumbColorX: { hover: 'blue' },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-hover']).toBe(
         'blue',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-hover']).toBe(
         'red',
       );
     });
@@ -160,10 +160,10 @@ describe('scrollbar', () => {
         thumbColor: { hover: 'blue' },
         thumbColorX: { base: 'green' },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-hover']).toBe(
         'blue',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-hover']).toBe(
         'blue',
       );
     });
@@ -172,30 +172,30 @@ describe('scrollbar', () => {
   describe('thumbColor active', () => {
     it('thumbColor の active を指定するとX・Yに展開される', () => {
       const result = scrollbar({ thumbColor: { active: '#333' } });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-active']).toBe(
         '#333',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-active']).toBe(
         '#333',
       );
     });
 
     it('thumbColorX の active のみ指定するとXだけ設定される', () => {
       const result = scrollbar({ thumbColorX: { active: '#555' } });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-active']).toBe(
         '#555',
       );
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbColorYActive'],
+        result.style?.['--nws-scroll-scrollbar-thumbColorY-active'],
       ).toBeUndefined();
     });
 
     it('thumbColorY の active のみ指定するとYだけ設定される', () => {
       const result = scrollbar({ thumbColorY: { active: '#777' } });
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbColorXActive'],
+        result.style?.['--nws-scroll-scrollbar-thumbColorX-active'],
       ).toBeUndefined();
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-active']).toBe(
         '#777',
       );
     });
@@ -205,10 +205,10 @@ describe('scrollbar', () => {
         thumbColor: { active: '#333' },
         thumbColorX: { active: '#555' },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-active']).toBe(
         '#555',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-active']).toBe(
         '#333',
       );
     });
@@ -218,10 +218,10 @@ describe('scrollbar', () => {
         thumbColor: { active: '#333' },
         thumbColorX: { base: 'blue' },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorXActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorX-active']).toBe(
         '#333',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-thumbColorYActive']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-thumbColorY-active']).toBe(
         '#333',
       );
     });
@@ -366,10 +366,10 @@ describe('scrollbar', () => {
     it('thumbBorderColor の hover を指定するとX・Yに展開される', () => {
       const result = scrollbar({ thumbBorderColor: { hover: 'red' } });
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorXHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorX-hover'],
       ).toBe('red');
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorYHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorY-hover'],
       ).toBe('red');
       expect(
         result.style?.['--nws-scroll-scrollbar-thumbBorderColorX'],
@@ -382,10 +382,10 @@ describe('scrollbar', () => {
     it('thumbBorderColorX の hover のみ指定するとXだけ設定される', () => {
       const result = scrollbar({ thumbBorderColorX: { hover: 'blue' } });
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorXHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorX-hover'],
       ).toBe('blue');
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorYHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorY-hover'],
       ).toBeUndefined();
     });
 
@@ -395,10 +395,10 @@ describe('scrollbar', () => {
         thumbBorderColorX: { hover: 'blue' },
       });
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorXHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorX-hover'],
       ).toBe('blue');
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorYHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorY-hover'],
       ).toBe('red');
     });
 
@@ -411,10 +411,10 @@ describe('scrollbar', () => {
         'white',
       );
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorXHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorX-hover'],
       ).toBe('red');
       expect(
-        result.style?.['--nws-scroll-scrollbar-thumbBorderColorYHover'],
+        result.style?.['--nws-scroll-scrollbar-thumbBorderColorY-hover'],
       ).toBe('red');
     });
   });
@@ -467,10 +467,10 @@ describe('scrollbar', () => {
   describe('trackColor hover', () => {
     it('trackColor の hover を指定するとX・Yに展開される', () => {
       const result = scrollbar({ trackColor: { hover: 'rgba(0,0,0,0.2)' } });
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorX-hover']).toBe(
         'rgba(0,0,0,0.2)',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorY-hover']).toBe(
         'rgba(0,0,0,0.2)',
       );
       expect(
@@ -483,11 +483,11 @@ describe('scrollbar', () => {
 
     it('trackColorX の hover のみ指定するとXだけ設定される', () => {
       const result = scrollbar({ trackColorX: { hover: 'rgba(0,0,0,0.3)' } });
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorX-hover']).toBe(
         'rgba(0,0,0,0.3)',
       );
       expect(
-        result.style?.['--nws-scroll-scrollbar-trackColorYHover'],
+        result.style?.['--nws-scroll-scrollbar-trackColorY-hover'],
       ).toBeUndefined();
     });
 
@@ -496,10 +496,10 @@ describe('scrollbar', () => {
         trackColor: { hover: 'rgba(0,0,0,0.2)' },
         trackColorX: { hover: 'rgba(0,0,0,0.4)' },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorX-hover']).toBe(
         'rgba(0,0,0,0.4)',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorY-hover']).toBe(
         'rgba(0,0,0,0.2)',
       );
     });
@@ -512,10 +512,10 @@ describe('scrollbar', () => {
       expect(result.style?.['--nws-scroll-scrollbar-trackColorX']).toBe(
         'rgba(0,0,0,0.1)',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorX-hover']).toBe(
         'rgba(0,0,0,0.2)',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackColorYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackColorY-hover']).toBe(
         'rgba(0,0,0,0.2)',
       );
     });
@@ -568,10 +568,10 @@ describe('scrollbar', () => {
   describe('trackSize hover', () => {
     it('trackSize の hover を指定するとX・Yにpx変換される', () => {
       const result = scrollbar({ trackSize: { hover: 16 } });
-      expect(result.style?.['--nws-scroll-scrollbar-trackSizeXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackSizeX-hover']).toBe(
         '16px',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackSizeYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackSizeY-hover']).toBe(
         '16px',
       );
       expect(
@@ -586,10 +586,10 @@ describe('scrollbar', () => {
       const result = scrollbar({ trackSize: { base: 12, hover: 16 } });
       expect(result.style?.['--nws-scroll-scrollbar-trackSizeX']).toBe('12px');
       expect(result.style?.['--nws-scroll-scrollbar-trackSizeY']).toBe('12px');
-      expect(result.style?.['--nws-scroll-scrollbar-trackSizeXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackSizeX-hover']).toBe(
         '16px',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackSizeYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackSizeY-hover']).toBe(
         '16px',
       );
     });
@@ -599,10 +599,10 @@ describe('scrollbar', () => {
         trackSize: { hover: 16 },
         trackSizeX: { hover: 20 },
       });
-      expect(result.style?.['--nws-scroll-scrollbar-trackSizeXHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackSizeX-hover']).toBe(
         '20px',
       );
-      expect(result.style?.['--nws-scroll-scrollbar-trackSizeYHover']).toBe(
+      expect(result.style?.['--nws-scroll-scrollbar-trackSizeY-hover']).toBe(
         '16px',
       );
     });
@@ -627,6 +627,62 @@ describe('scrollbar', () => {
       const result = scrollbar({ fallbackSize: 'auto' });
       expect(result.style?.['--nws-scroll-scrollbar-fallbackSize']).toBe(
         'auto',
+      );
+    });
+  });
+
+  describe('noAnimation', () => {
+    it('noAnimation 未指定では size・color 両方のtransitionクラスが付与される', () => {
+      const result = scrollbar({});
+      expect(result.className).toContain('nws-scroll-scrollbar-animation-size');
+      expect(result.className).toContain(
+        'nws-scroll-scrollbar-animation-color',
+      );
+    });
+
+    it('noAnimation: false では size・color 両方のtransitionクラスが付与される', () => {
+      const result = scrollbar({ noAnimation: false });
+      expect(result.className).toContain('nws-scroll-scrollbar-animation-size');
+      expect(result.className).toContain(
+        'nws-scroll-scrollbar-animation-color',
+      );
+    });
+
+    it('noAnimation: true では transitionクラスが付与されない', () => {
+      const result = scrollbar({ noAnimation: true });
+      expect(result.className).not.toContain(
+        'nws-scroll-scrollbar-animation-size',
+      );
+      expect(result.className).not.toContain(
+        'nws-scroll-scrollbar-animation-color',
+      );
+    });
+
+    it('noAnimation: { size: true } では color のみ transitionクラスが付与される', () => {
+      const result = scrollbar({ noAnimation: { size: true } });
+      expect(result.className).not.toContain(
+        'nws-scroll-scrollbar-animation-size',
+      );
+      expect(result.className).toContain(
+        'nws-scroll-scrollbar-animation-color',
+      );
+    });
+
+    it('noAnimation: { color: true } では size のみ transitionクラスが付与される', () => {
+      const result = scrollbar({ noAnimation: { color: true } });
+      expect(result.className).toContain('nws-scroll-scrollbar-animation-size');
+      expect(result.className).not.toContain(
+        'nws-scroll-scrollbar-animation-color',
+      );
+    });
+
+    it('noAnimation: { size: true, color: true } では transitionクラスが付与されない', () => {
+      const result = scrollbar({ noAnimation: { size: true, color: true } });
+      expect(result.className).not.toContain(
+        'nws-scroll-scrollbar-animation-size',
+      );
+      expect(result.className).not.toContain(
+        'nws-scroll-scrollbar-animation-color',
       );
     });
   });

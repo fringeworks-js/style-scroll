@@ -59,10 +59,10 @@ To manage CSS and functions separately, use modules under the `core` directory.
 import { scrollbar } from '@niche-works/style-scroll/core';
 
 // Import all styles at once
-import '@niche-works/style-scroll/core/styles.scss';
+import '@niche-works/style-scroll/core/styles.css';
 
 // Import only what you need
-import '@niche-works/style-scroll/core/scrollbar.scss';
+import '@niche-works/style-scroll/core/scrollbar.css';
 ```
 
 ### About `StyleState`
@@ -91,13 +91,13 @@ When an axis-specific value is provided, it takes precedence. Unspecified states
 
 ```ts
 scrollbar({
-  thumbColor: 'rgba(0, 0, 0, 0.3)',       // common for both axes
-  thumbColorX: 'rgba(0, 0, 255, 0.3)',    // overrides horizontal only
+  thumbColor: 'rgba(0, 0, 0, 0.3)', // common for both axes
+  thumbColorX: 'rgba(0, 0, 255, 0.3)', // overrides horizontal only
 
   // On hover: X falls back to thumbColor's hover since thumbColorX has no hover
   thumbColor: { base: 'rgba(0,0,0,0.3)', hover: 'rgba(0,0,0,0.5)' },
   thumbColorX: { base: 'rgba(0,0,255,0.3)' }, // X hover falls back to above
-})
+});
 ```
 
 ## Style Types
@@ -130,15 +130,15 @@ const { className, style } = scrollbar({
 
 These are the CSS defaults when no option is specified.
 
-| Property            | Default Value               |
-| ------------------- | --------------------------- |
-| `thumbSize`         | `5` (normal) / `9` (hover)  |
-| `thumbColor`        | `rgba(0, 0, 0, 0.1)`        |
-| `thumbColor.hover`  | `rgba(0, 0, 0, 0.3)`        |
-| `trackColor`        | `rgba(128, 128, 128, 0.04)` |
-| `thumbRadius`       | `'full'` (9999px)           |
-| `thumbBorderWidth`  | `2`                         |
-| `thumbBorderColor`  | `transparent`               |
+| Property           | Default Value               |
+| ------------------ | --------------------------- |
+| `thumbSize`        | `5` (normal) / `9` (hover)  |
+| `thumbColor`       | `rgba(0, 0, 0, 0.1)`        |
+| `thumbColor.hover` | `rgba(0, 0, 0, 0.3)`        |
+| `trackColor`       | `rgba(128, 128, 128, 0.04)` |
+| `thumbRadius`      | `'full'` (9999px)           |
+| `thumbBorderWidth` | `2`                         |
+| `thumbBorderColor` | `transparent`               |
 
 ## Options (`ScrollbarOptions`)
 
@@ -146,32 +146,32 @@ These are the CSS defaults when no option is specified.
 
 #### `thumbSize` — Thumb thickness
 
-| Option        | Type                              | States                    |
-| ------------- | --------------------------------- | ------------------------- |
-| `thumbSize?`  | `StyleState<number, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbSizeX?` | `StyleState<number, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbSizeY?` | `StyleState<number, ThumbState>`  | `base`, `hover`, `active` |
+| Option        | Type                             | States                    |
+| ------------- | -------------------------------- | ------------------------- |
+| `thumbSize?`  | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
+| `thumbSizeX?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
+| `thumbSizeY?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
 
 Numbers are treated as `px` values.
 
 ```ts
 // 6px for both axes, all states
-scrollbar({ thumbSize: 6 })
+scrollbar({ thumbSize: 6 });
 
 // 5px normally, 9px on hover
-scrollbar({ thumbSize: { base: 5, hover: 9 } })
+scrollbar({ thumbSize: { base: 5, hover: 9 } });
 
 // Different values per axis
-scrollbar({ thumbSize: 6, thumbSizeY: 10 })
+scrollbar({ thumbSize: 6, thumbSizeY: 10 });
 ```
 
 #### `thumbColor` — Thumb color
 
-| Option         | Type                              | States                    |
-| -------------- | --------------------------------- | ------------------------- |
-| `thumbColor?`  | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbColorX?` | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbColorY?` | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
+| Option         | Type                             | States                    |
+| -------------- | -------------------------------- | ------------------------- |
+| `thumbColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 - `hover`: color when the container is hovered
 - `active`: color when the thumb itself is directly hovered (WebKit only)
@@ -183,70 +183,70 @@ scrollbar({
     hover: 'rgba(0, 0, 0, 0.4)',
     active: 'rgba(0, 0, 0, 0.6)',
   },
-})
+});
 ```
 
 #### `thumbRadius` — Thumb corner radius
 
-| Option          | Type                                    | States                    |
-| --------------- | --------------------------------------- | ------------------------- |
-| `thumbRadius?`  | `StyleState<ThumbRadius, ThumbState>`   | `base`, `hover`, `active` |
-| `thumbRadiusX?` | `StyleState<ThumbRadius, ThumbState>`   | `base`, `hover`, `active` |
-| `thumbRadiusY?` | `StyleState<ThumbRadius, ThumbState>`   | `base`, `hover`, `active` |
+| Option          | Type                                  | States                    |
+| --------------- | ------------------------------------- | ------------------------- |
+| `thumbRadius?`  | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
+| `thumbRadiusX?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
+| `thumbRadiusY?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbRadius` values
 
-| Value    | Output   | Description        |
-| -------- | -------- | ------------------ |
-| `number` | `${n}px` | Fixed value (px)   |
-| `'full'` | `9999px` | Fully rounded      |
-| `'none'` | `0`      | No rounding        |
+| Value    | Output   | Description      |
+| -------- | -------- | ---------------- |
+| `number` | `${n}px` | Fixed value (px) |
+| `'full'` | `9999px` | Fully rounded    |
+| `'none'` | `0`      | No rounding      |
 
 ```ts
-scrollbar({ thumbRadius: 'full' })   // 9999px
-scrollbar({ thumbRadius: 'none' })   // 0
-scrollbar({ thumbRadius: 4 })        // 4px
+scrollbar({ thumbRadius: 'full' }); // 9999px
+scrollbar({ thumbRadius: 'none' }); // 0
+scrollbar({ thumbRadius: 4 }); // 4px
 ```
 
 #### `thumbBorderWidth` — Thumb border width
 
-| Option               | Type                                         | States                    |
-| -------------------- | -------------------------------------------- | ------------------------- |
-| `thumbBorderWidth?`  | `StyleState<ThumbBorderWidth, ThumbState>`   | `base`, `hover`, `active` |
-| `thumbBorderWidthX?` | `StyleState<ThumbBorderWidth, ThumbState>`   | `base`, `hover`, `active` |
-| `thumbBorderWidthY?` | `StyleState<ThumbBorderWidth, ThumbState>`   | `base`, `hover`, `active` |
+| Option               | Type                                       | States                    |
+| -------------------- | ------------------------------------------ | ------------------------- |
+| `thumbBorderWidth?`  | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderWidthX?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderWidthY?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbBorderWidth` values
 
-| Value    | Description                                                       |
-| -------- | ----------------------------------------------------------------- |
-| `number` | Fixed width (px)                                                  |
+| Value    | Description                                                          |
+| -------- | -------------------------------------------------------------------- |
+| `number` | Fixed width (px)                                                     |
 | `'auto'` | Automatically adjusts to follow the thumb size animation (auto mode) |
 
-> **Auto mode**: When the `base` of `thumbBorderWidth` is `null`, `undefined`, or `'auto'`, the auto class (`nws-scroll-scrollbar-thumbBorderWidthX-auto` / `...Y-auto`) is applied.\
+> **Auto mode**: When the `base` of `thumbBorderWidth` is `null`, `undefined`, or `'auto'`, auto mode is applied.\
 > Auto mode is also active by default when the option is not specified at all.
 
 ```ts
-scrollbar({ thumbBorderWidth: 2 })         // fixed 2px
-scrollbar({ thumbBorderWidth: 'auto' })    // auto mode
-scrollbar({ thumbBorderWidthX: 2 })        // horizontal fixed, vertical auto mode
+scrollbar({ thumbBorderWidth: 2 }); // fixed 2px
+scrollbar({ thumbBorderWidth: 'auto' }); // auto mode
+scrollbar({ thumbBorderWidthX: 2 }); // horizontal fixed, vertical auto mode
 ```
 
 #### `thumbBorderColor` — Thumb border color
 
-| Option                | Type                              | States                    |
-| --------------------- | --------------------------------- | ------------------------- |
-| `thumbBorderColor?`   | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbBorderColorX?`  | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
-| `thumbBorderColorY?`  | `StyleState<string, ThumbState>`  | `base`, `hover`, `active` |
+| Option               | Type                             | States                    |
+| -------------------- | -------------------------------- | ------------------------- |
+| `thumbBorderColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| `thumbBorderColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 The CSS default when not specified is `transparent`.
 
 ```ts
 scrollbar({
   thumbBorderWidth: 2,
-  thumbBorderColor: 'transparent',  // thumb background shows through
-})
+  thumbBorderColor: 'transparent', // thumb background shows through
+});
 ```
 
 ---
@@ -255,11 +255,11 @@ scrollbar({
 
 #### `trackColor` — Track color
 
-| Option         | Type                              | States          |
-| -------------- | --------------------------------- | --------------- |
-| `trackColor?`  | `StyleState<string, TrackState>`  | `base`, `hover` |
-| `trackColorX?` | `StyleState<string, TrackState>`  | `base`, `hover` |
-| `trackColorY?` | `StyleState<string, TrackState>`  | `base`, `hover` |
+| Option         | Type                             | States          |
+| -------------- | -------------------------------- | --------------- |
+| `trackColor?`  | `StyleState<string, TrackState>` | `base`, `hover` |
+| `trackColorX?` | `StyleState<string, TrackState>` | `base`, `hover` |
+| `trackColorY?` | `StyleState<string, TrackState>` | `base`, `hover` |
 
 - `hover`: color when the container is hovered
 
@@ -269,38 +269,38 @@ scrollbar({
     base: 'rgba(0, 0, 0, 0.04)',
     hover: 'rgba(0, 0, 0, 0.08)',
   },
-})
+});
 ```
 
 #### `trackSize` — Track width
 
-| Option         | Type                                | States          |
-| -------------- | ----------------------------------- | --------------- |
-| `trackSize?`   | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-| `trackSizeX?`  | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-| `trackSizeY?`  | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| Option        | Type                                | States          |
+| ------------- | ----------------------------------- | --------------- |
+| `trackSize?`  | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| `trackSizeX?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| `trackSizeY?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
 
 ##### `TrackSize` values
 
-| Value    | Description                                                                              |
-| -------- | ---------------------------------------------------------------------------------------- |
-| `number` | Fixed width (px)                                                                         |
+| Value    | Description                                                         |
+| -------- | ------------------------------------------------------------------- |
+| `number` | Fixed width (px)                                                    |
 | `'auto'` | Tracks `thumbSizeActive + 2×thumbBorderWidth` and animates on hover |
 
-> **Auto mode**: Specifying `'auto'` for `trackSize` applies the auto class (`nws-scroll-scrollbar-trackSizeX-auto` / `...Y-auto`).
+> **Auto mode**: Specifying `'auto'` for `trackSize` activates auto mode.
 
 ```ts
 // Fixed width
-scrollbar({ trackSize: 12 })
+scrollbar({ trackSize: 12 });
 
 // Auto mode (follows thumb size)
-scrollbar({ trackSize: 'auto' })
+scrollbar({ trackSize: 'auto' });
 
 // 8px normally, 12px on hover
-scrollbar({ trackSize: { base: 8, hover: 12 } })
+scrollbar({ trackSize: { base: 8, hover: 12 } });
 
 // Different settings per axis
-scrollbar({ trackSize: 12, trackSizeX: 'auto' })
+scrollbar({ trackSize: 12, trackSizeX: 'auto' });
 ```
 
 ---
@@ -309,38 +309,71 @@ scrollbar({ trackSize: 12, trackSizeX: 'auto' })
 
 #### `fallbackSize` — Non-WebKit fallback
 
-| Option          | Type                             | Default  |
-| --------------- | -------------------------------- | -------- |
-| `fallbackSize?` | `'auto' \| 'thin' \| 'none'`    | `'auto'` |
+| Option          | Type                         | Default  |
+| --------------- | ---------------------------- | -------- |
+| `fallbackSize?` | `'auto' \| 'thin' \| 'none'` | `'auto'` |
 
 Controls the `scrollbar-width` CSS property for non-WebKit browsers (Firefox). Has no effect in WebKit browsers.
 
-| Value    | Description                              |
-| -------- | ---------------------------------------- |
-| `'auto'` | Browser default                          |
-| `'thin'` | Thin scrollbar                           |
-| `'none'` | Hidden (scrolling still works)           |
+| Value    | Description                    |
+| -------- | ------------------------------ |
+| `'auto'` | Browser default                |
+| `'thin'` | Thin scrollbar                 |
+| `'none'` | Hidden (scrolling still works) |
 
 ```ts
-scrollbar({ fallbackSize: 'thin' })
+scrollbar({ fallbackSize: 'thin' });
 ```
 
 #### `arrows` — Arrow buttons
 
-| Option     | Type      | Default     |
-| ---------- | --------- | ----------- |
-| `arrows?`  | `boolean` | `undefined` |
+| Option    | Type      | Default     |
+| --------- | --------- | ----------- |
+| `arrows?` | `boolean` | `undefined` |
 
 Forces the display or hiding of scrollbar end arrow buttons (WebKit only).
 
-| Value       | Description                              |
-| ----------- | ---------------------------------------- |
-| `true`      | Show arrow buttons                       |
-| `false`     | Hide arrow buttons                       |
-| `undefined` | No class applied (browser default)       |
+| Value       | Description                        |
+| ----------- | ---------------------------------- |
+| `true`      | Show arrow buttons                 |
+| `false`     | Hide arrow buttons                 |
+| `undefined` | No class applied (browser default) |
 
 ```ts
-scrollbar({ arrows: false })  // hide arrows
+scrollbar({ arrows: false }); // hide arrows
+```
+
+#### `noAnimation` — Disable animations
+
+| Option         | Type          | Default     |
+| -------------- | ------------- | ----------- |
+| `noAnimation?` | `NoAnimation` | `undefined` |
+
+Disables transition animations. Animations are enabled by default when not specified.
+
+| Value                 | Description                   |
+| --------------------- | ----------------------------- |
+| `undefined` / `false` | Animations enabled (default)  |
+| `true`                | Disable both size and color   |
+| `{ size: true }`      | Disable size animations only  |
+| `{ color: true }`     | Disable color animations only |
+
+Animations can be controlled per property group.
+
+| Group   | Target Properties                                           |
+| ------- | ----------------------------------------------------------- |
+| `size`  | `thumbSize`, `trackSize`, `thumbBorderWidth`, `thumbRadius` |
+| `color` | `thumbColor`, `trackColor`, `thumbBorderColor`              |
+
+```ts
+// Disable all animations
+scrollbar({ noAnimation: true });
+
+// Disable size animations only
+scrollbar({ noAnimation: { size: true } });
+
+// Disable color animations only
+scrollbar({ noAnimation: { color: true } });
 ```
 
 ---
@@ -366,6 +399,9 @@ type TrackSize = number | 'auto';
 /** Non-WebKit fallback size */
 type FallbackSize = 'auto' | 'thin' | 'none';
 
+/** Animation disable configuration */
+type NoAnimation = boolean | { size?: boolean; color?: boolean };
+
 /** Per-state value type */
 type StyleState<T, S extends string> =
   | T
@@ -386,72 +422,16 @@ type StyleResult = {
 };
 ```
 
-### Applied CSS Classes
-
-| Class Name                                      | Applied When                                         |
-| ----------------------------------------------- | ---------------------------------------------------- |
-| `nws-scroll-scrollbar`                          | Always                                               |
-| `nws-scroll-scrollbar-thumbBorderWidthX-auto`   | `thumbBorderWidth` X base is null/undefined/auto     |
-| `nws-scroll-scrollbar-thumbBorderWidthY-auto`   | `thumbBorderWidth` Y base is null/undefined/auto     |
-| `nws-scroll-scrollbar-trackSizeX-auto`          | `trackSize` X base is `'auto'`                       |
-| `nws-scroll-scrollbar-trackSizeY-auto`          | `trackSize` Y base is `'auto'`                       |
-| `nws-scroll-scrollbar-arrows-true`              | `arrows: true`                                       |
-| `nws-scroll-scrollbar-arrows-false`             | `arrows: false`                                      |
-
-### Generated CSS Variables
-
-| CSS Variable                                     | Corresponding Option              |
-| ------------------------------------------------ | --------------------------------- |
-| `--nws-scroll-scrollbar-thumbSizeX`              | `thumbSize` / `thumbSizeX` base   |
-| `--nws-scroll-scrollbar-thumbSizeXHover`         | `thumbSize` / `thumbSizeX` hover  |
-| `--nws-scroll-scrollbar-thumbSizeXActive`        | `thumbSize` / `thumbSizeX` active |
-| `--nws-scroll-scrollbar-thumbSizeY`              | `thumbSize` / `thumbSizeY` base   |
-| `--nws-scroll-scrollbar-thumbSizeYHover`         | `thumbSize` / `thumbSizeY` hover  |
-| `--nws-scroll-scrollbar-thumbSizeYActive`        | `thumbSize` / `thumbSizeY` active |
-| `--nws-scroll-scrollbar-thumbColorX`             | `thumbColor` / `thumbColorX` base   |
-| `--nws-scroll-scrollbar-thumbColorXHover`        | `thumbColor` / `thumbColorX` hover  |
-| `--nws-scroll-scrollbar-thumbColorXActive`       | `thumbColor` / `thumbColorX` active |
-| `--nws-scroll-scrollbar-thumbColorY`             | `thumbColor` / `thumbColorY` base   |
-| `--nws-scroll-scrollbar-thumbColorYHover`        | `thumbColor` / `thumbColorY` hover  |
-| `--nws-scroll-scrollbar-thumbColorYActive`       | `thumbColor` / `thumbColorY` active |
-| `--nws-scroll-scrollbar-thumbRadiusX`            | `thumbRadius` / `thumbRadiusX` base   |
-| `--nws-scroll-scrollbar-thumbRadiusXHover`       | `thumbRadius` / `thumbRadiusX` hover  |
-| `--nws-scroll-scrollbar-thumbRadiusXActive`      | `thumbRadius` / `thumbRadiusX` active |
-| `--nws-scroll-scrollbar-thumbRadiusY`            | `thumbRadius` / `thumbRadiusY` base   |
-| `--nws-scroll-scrollbar-thumbRadiusYHover`       | `thumbRadius` / `thumbRadiusY` hover  |
-| `--nws-scroll-scrollbar-thumbRadiusYActive`      | `thumbRadius` / `thumbRadiusY` active |
-| `--nws-scroll-scrollbar-thumbBorderWidthX`       | `thumbBorderWidth` / `thumbBorderWidthX` base   |
-| `--nws-scroll-scrollbar-thumbBorderWidthXHover`  | `thumbBorderWidth` / `thumbBorderWidthX` hover  |
-| `--nws-scroll-scrollbar-thumbBorderWidthXActive` | `thumbBorderWidth` / `thumbBorderWidthX` active |
-| `--nws-scroll-scrollbar-thumbBorderWidthY`       | `thumbBorderWidth` / `thumbBorderWidthY` base   |
-| `--nws-scroll-scrollbar-thumbBorderWidthYHover`  | `thumbBorderWidth` / `thumbBorderWidthY` hover  |
-| `--nws-scroll-scrollbar-thumbBorderWidthYActive` | `thumbBorderWidth` / `thumbBorderWidthY` active |
-| `--nws-scroll-scrollbar-thumbBorderColorX`       | `thumbBorderColor` / `thumbBorderColorX` base   |
-| `--nws-scroll-scrollbar-thumbBorderColorXHover`  | `thumbBorderColor` / `thumbBorderColorX` hover  |
-| `--nws-scroll-scrollbar-thumbBorderColorXActive` | `thumbBorderColor` / `thumbBorderColorX` active |
-| `--nws-scroll-scrollbar-thumbBorderColorY`       | `thumbBorderColor` / `thumbBorderColorY` base   |
-| `--nws-scroll-scrollbar-thumbBorderColorYHover`  | `thumbBorderColor` / `thumbBorderColorY` hover  |
-| `--nws-scroll-scrollbar-thumbBorderColorYActive` | `thumbBorderColor` / `thumbBorderColorY` active |
-| `--nws-scroll-scrollbar-trackColorX`             | `trackColor` / `trackColorX` base   |
-| `--nws-scroll-scrollbar-trackColorXHover`        | `trackColor` / `trackColorX` hover  |
-| `--nws-scroll-scrollbar-trackColorY`             | `trackColor` / `trackColorY` base   |
-| `--nws-scroll-scrollbar-trackColorYHover`        | `trackColor` / `trackColorY` hover  |
-| `--nws-scroll-scrollbar-trackSizeX`              | `trackSize` / `trackSizeX` base   |
-| `--nws-scroll-scrollbar-trackSizeXHover`         | `trackSize` / `trackSizeX` hover  |
-| `--nws-scroll-scrollbar-trackSizeY`              | `trackSize` / `trackSizeY` base   |
-| `--nws-scroll-scrollbar-trackSizeYHover`         | `trackSize` / `trackSizeY` hover  |
-| `--nws-scroll-scrollbar-fallbackSize`            | `fallbackSize`                    |
-
 ## Browser Support
 
 This library is designed using modern CSS standards and supports the following major browser versions.
 
-| Browser         | Supported Version       | Supported Version (no animation) | Scrollbar Customization            |
-| --------------- | ----------------------- | --------------------------------- | ---------------------------------- |
-| Google Chrome   | 85 (August 2020)+       | 83 (May 2020)+                    | Full customization (WebKit)        |
-| Microsoft Edge  | 85 (August 2020)+       | 83 (May 2020)+                    | Full customization (WebKit)        |
-| Apple Safari    | 16.4 (March 2023)+      | 14.1 (April 2021)+                | Full customization (WebKit)        |
-| Mozilla Firefox | 128 (July 2024)+        | 83 (November 2020)+               | Fallback (`scrollbar-width`)       |
+| Browser         | Supported Version  | Supported Version (no animation) | Scrollbar Customization      |
+| --------------- | ------------------ | -------------------------------- | ---------------------------- |
+| Google Chrome   | 85 (August 2020)+  | 83 (May 2020)+                   | Full customization (WebKit)  |
+| Microsoft Edge  | 85 (August 2020)+  | 83 (May 2020)+                   | Full customization (WebKit)  |
+| Apple Safari    | 16.4 (March 2023)+ | 14.1 (April 2021)+               | Full customization (WebKit)  |
+| Mozilla Firefox | 128 (July 2024)+   | 83 (November 2020)+              | Fallback (`scrollbar-width`) |
 
 > **WebKit browsers (Chrome, Edge, Safari)** support full customization via `::-webkit-scrollbar`.\
 > **Non-WebKit browsers (Firefox)** only apply `scrollbar-width` / `scrollbar-color` (color and width only).
