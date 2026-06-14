@@ -3,7 +3,7 @@ import { clsScrollScrollbar } from '../_constants';
 import mergeClassName from '../_internal/mergeClassName';
 import resolveStyleStateXY from '../_internal/resolveStyleStateXY';
 import unit from '../_internal/unit';
-import type { CreateStyle, StyleResult } from '../types';
+import type { CreateScrollStyle, ScrollStyle } from '../types';
 import {
   clsScrollbarAnimationColor,
   clsScrollbarAnimationSize,
@@ -31,7 +31,7 @@ import type { ScrollbarOptions } from './types';
  *
  * - スクロールバーの見た目のカスタマイズ
  */
-const scrollbar: CreateStyle<ScrollbarOptions> = (options = {}) => {
+const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   const {
     thumbColor,
     thumbColorX,
@@ -59,7 +59,7 @@ const scrollbar: CreateStyle<ScrollbarOptions> = (options = {}) => {
     noAnimation,
   } = options;
 
-  const result: StyleResult = {
+  const result: ScrollStyle = {
     className: clsScrollScrollbar,
     style: {},
   };
@@ -193,21 +193,21 @@ const scrollbar: CreateStyle<ScrollbarOptions> = (options = {}) => {
 export default scrollbar;
 
 function _applyStylesXY<T, S extends string>(
-  result: StyleResult,
+  result: ScrollStyle,
   keys: Record<'x' | 'y', Record<S, string>>,
   records: Record<'x' | 'y', StyleStateRecord<T, S>>,
 ) {
   _applyXY(result, keys, records, _applyStyle);
 }
 
-function _applyStyle(result: StyleResult, key: string, value: unknown) {
+function _applyStyle(result: ScrollStyle, key: string, value: unknown) {
   if (_hasValidValue(value)) {
     result.style[key] = value;
   }
 }
 
 function _applyPxStylesXY<T, S extends string>(
-  result: StyleResult,
+  result: ScrollStyle,
   keys: Record<'x' | 'y', Record<S, string>>,
   records: Record<'x' | 'y', StyleStateRecord<T, S>>,
 ) {
@@ -215,7 +215,7 @@ function _applyPxStylesXY<T, S extends string>(
 }
 
 function _applyPxStyle(
-  result: StyleResult,
+  result: ScrollStyle,
   key: string,
   value: number | string | null | undefined,
 ): void {
@@ -225,7 +225,7 @@ function _applyPxStyle(
 }
 
 function _applyRadiusStylesXY<T, S extends string>(
-  result: StyleResult,
+  result: ScrollStyle,
   keys: Record<'x' | 'y', Record<S, string>>,
   records: Record<'x' | 'y', StyleStateRecord<T, S>>,
 ) {
@@ -233,7 +233,7 @@ function _applyRadiusStylesXY<T, S extends string>(
 }
 
 function _applyRadiusStyle(
-  result: StyleResult,
+  result: ScrollStyle,
   key: string,
   value: number | string | null | undefined,
 ) {
@@ -251,11 +251,11 @@ function _applyRadiusStyle(
 }
 
 function _applyXY<T, S extends string>(
-  result: StyleResult,
+  result: ScrollStyle,
   keys: Record<'x' | 'y', Record<S, string>>,
   records: Record<'x' | 'y', StyleStateRecord<T, S>>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  applyFn: (result: StyleResult, key: string, value: any) => void,
+  applyFn: (result: ScrollStyle, key: string, value: any) => void,
 ) {
   for (const state in records.x) {
     applyFn(result, keys.x[state], records.x[state]);
@@ -270,7 +270,7 @@ function _hasValidValue(value: unknown) {
 }
 
 function _applyThumbSizeAuto(
-  result: StyleResult,
+  result: ScrollStyle,
   value: unknown,
   className: string,
 ) {
@@ -280,7 +280,7 @@ function _applyThumbSizeAuto(
 }
 
 function _applyTrackSizeAuto(
-  result: StyleResult,
+  result: ScrollStyle,
   value: unknown,
   className: string,
 ) {

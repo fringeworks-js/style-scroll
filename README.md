@@ -411,10 +411,10 @@ type StyleState<T, S extends string> =
 
 ## Return Value
 
-Style functions return a `StyleResult`.
+Style functions return a `ScrollStyle`.
 
 ```ts
-type StyleResult = {
+type ScrollStyle = {
   className?: string;
   style?: {
     [key: `--${string}`]: string | undefined;

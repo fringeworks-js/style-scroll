@@ -1,9 +1,9 @@
-import type { StyleResult } from '../types';
+import type { ScrollStyle } from '../types';
 import mergeClassName from './mergeClassName';
 
-export default function mergeStyleResults(results: StyleResult[]): StyleResult {
+export default function mergeStyleResults(results: ScrollStyle[]): ScrollStyle {
   // 全てのクラス&スタイルを統合
-  return results.reduce<StyleResult>((styleResult, result) => {
+  return results.reduce<ScrollStyle>((styleResult, result) => {
     if (result.className) {
       styleResult.className = mergeClassName(
         styleResult.className,
@@ -14,5 +14,5 @@ export default function mergeStyleResults(results: StyleResult[]): StyleResult {
       styleResult.style = { ...styleResult.style, ...result.style };
     }
     return styleResult;
-  }, {} satisfies StyleResult);
+  }, {} satisfies ScrollStyle);
 }
