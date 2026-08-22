@@ -1,0 +1,56 @@
+// scrollSnapコンテナのスタイル
+.nws-scroll-snap {
+  scroll-snap-type: var(--nws-scroll-snap-type, none);
+  scroll-behavior: var(--nws-scroll-snap-behavior, auto);
+
+  // アイテムオプション指定時: 直接の子要素にスナップアイテムスタイルを一括適用
+  // nws-scroll-snap-item* クラスをコンテナに付与することで > * に適用される
+  &.nws-scroll-snap-item > * {
+    scroll-snap-align: var(--nws-scroll-snap-item-align, none);
+    scroll-snap-stop: var(--nws-scroll-snap-item-stop, normal);
+  }
+
+  &.nws-scroll-snap-item-margin > * {
+    scroll-margin: var(--nws-scroll-snap-item-margin);
+  }
+
+  &.nws-scroll-snap-item-margin-x > * {
+    scroll-margin-inline: var(--nws-scroll-snap-item-margin-x);
+  }
+
+  &.nws-scroll-snap-item-margin-y > * {
+    scroll-margin-block: var(--nws-scroll-snap-item-margin-y);
+  }
+}
+
+// scroll-paddingは指定時のみクラスを付与（shorthandと個別指定の競合を避けるため個別クラス）
+.nws-scroll-snap-padding {
+  scroll-padding: var(--nws-scroll-snap-padding);
+}
+
+.nws-scroll-snap-padding-x {
+  scroll-padding-inline: var(--nws-scroll-snap-padding-x);
+}
+
+.nws-scroll-snap-padding-y {
+  scroll-padding-block: var(--nws-scroll-snap-padding-y);
+}
+
+// scrollSnapItemのスタイル
+.nws-scroll-snap-item {
+  scroll-snap-align: var(--nws-scroll-snap-item-align, none);
+  scroll-snap-stop: var(--nws-scroll-snap-item-stop, normal);
+}
+
+// scroll-marginは指定時のみクラスを付与
+.nws-scroll-snap-item-margin {
+  scroll-margin: var(--nws-scroll-snap-item-margin);
+}
+
+.nws-scroll-snap-item-margin-x {
+  scroll-margin-inline: var(--nws-scroll-snap-item-margin-x);
+}
+
+.nws-scroll-snap-item-margin-y {
+  scroll-margin-block: var(--nws-scroll-snap-item-margin-y);
+}

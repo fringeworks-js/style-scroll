@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './src',
-  testMatch: '**/*.spec.ts',
+  testMatch: '**/*.e2e.spec.ts',
   webServer: {
     command: 'pnpm storybook',
     url: 'http://localhost:6006',
