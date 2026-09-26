@@ -1,350 +1,342 @@
 // 現在の横方向のthumbの色
-@property --nws-scroll-scrollbar-thumbColorX-state {
+@property --lx-scroll-scrollbar-thumbColorX-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.1);
 }
 
 // 現在の縦方向のthumbの色
-@property --nws-scroll-scrollbar-thumbColorY-state {
+@property --lx-scroll-scrollbar-thumbColorY-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.1);
 }
 
 // 現在の横方向のthumbのサイズ
-@property --nws-scroll-scrollbar-thumbSizeX-state {
+@property --lx-scroll-scrollbar-thumbSizeX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 5px;
 }
 
 // 現在の縦方向のthumbのサイズ
-@property --nws-scroll-scrollbar-thumbSizeY-state {
+@property --lx-scroll-scrollbar-thumbSizeY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 5px;
 }
 
 // 現在の横方向のthumbの角丸
-@property --nws-scroll-scrollbar-thumbRadiusX-state {
+@property --lx-scroll-scrollbar-thumbRadiusX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 9999px;
 }
 
 // 現在の縦方向のthumbの角丸
-@property --nws-scroll-scrollbar-thumbRadiusY-state {
+@property --lx-scroll-scrollbar-thumbRadiusY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 9999px;
 }
 
 // 現在の横方向のthumbの線の色
-@property --nws-scroll-scrollbar-thumbBorderColorX-state {
+@property --lx-scroll-scrollbar-thumbBorderColorX-state {
   syntax: '<color>';
   inherits: true;
   initial-value: transparent;
 }
 
 // 現在の縦方向のthumbの線の色
-@property --nws-scroll-scrollbar-thumbBorderColorY-state {
+@property --lx-scroll-scrollbar-thumbBorderColorY-state {
   syntax: '<color>';
   inherits: true;
   initial-value: transparent;
 }
 
 // 現在の横方向のthumbの線の幅
-@property --nws-scroll-scrollbar-thumbBorderWidthX-state {
+@property --lx-scroll-scrollbar-thumbBorderWidthX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 0px;
 }
 
 // 現在の縦方向のthumbの線の幅
-@property --nws-scroll-scrollbar-thumbBorderWidthY-state {
+@property --lx-scroll-scrollbar-thumbBorderWidthY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 0px;
 }
 
 // 現在の横方向のtrackの色
-@property --nws-scroll-scrollbar-trackColorX-state {
+@property --lx-scroll-scrollbar-trackColorX-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.04);
 }
 
 // 現在の縦方向のtrackの色
-@property --nws-scroll-scrollbar-trackColorY-state {
+@property --lx-scroll-scrollbar-trackColorY-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.04);
 }
 
 // 現在の横方向のtrackのサイズ
-@property --nws-scroll-scrollbar-trackSizeX-state {
+@property --lx-scroll-scrollbar-trackSizeX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 13px;
 }
 
 // 現在の縦方向のtrackのサイズ
-@property --nws-scroll-scrollbar-trackSizeY-state {
+@property --lx-scroll-scrollbar-trackSizeY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 13px;
 }
 
 // scrollbarのスタイル
-.nws-scroll-scrollbar {
+.lx-scroll-scrollbar {
   // 初期値
   // thumbColor
-  --nws-scroll-scrollbar-thumbColorX: rgba(127, 127, 127, 0.1);
-  --nws-scroll-scrollbar-thumbColorY: rgba(127, 127, 127, 0.1);
-  --nws-scroll-scrollbar-thumbColorX-hover: rgba(127, 127, 127, 0.3);
-  --nws-scroll-scrollbar-thumbColorY-hover: rgba(127, 127, 127, 0.3);
-  --nws-scroll-scrollbar-thumbColorX-active: rgba(127, 127, 127, 0.5);
-  --nws-scroll-scrollbar-thumbColorY-active: rgba(127, 127, 127, 0.5);
+  --lx-scroll-scrollbar-thumbColorX: rgba(127, 127, 127, 0.1);
+  --lx-scroll-scrollbar-thumbColorY: rgba(127, 127, 127, 0.1);
+  --lx-scroll-scrollbar-thumbColorX-hover: rgba(127, 127, 127, 0.3);
+  --lx-scroll-scrollbar-thumbColorY-hover: rgba(127, 127, 127, 0.3);
+  --lx-scroll-scrollbar-thumbColorX-active: rgba(127, 127, 127, 0.5);
+  --lx-scroll-scrollbar-thumbColorY-active: rgba(127, 127, 127, 0.5);
   // thumbSize
-  --nws-scroll-scrollbar-thumbSizeX: 5px;
-  --nws-scroll-scrollbar-thumbSizeY: 5px;
-  --nws-scroll-scrollbar-thumbSizeX-hover: 7px;
-  --nws-scroll-scrollbar-thumbSizeY-hover: 7px;
-  --nws-scroll-scrollbar-thumbSizeX-active: 7px;
-  --nws-scroll-scrollbar-thumbSizeY-active: 7px;
+  --lx-scroll-scrollbar-thumbSizeX: 5px;
+  --lx-scroll-scrollbar-thumbSizeY: 5px;
+  --lx-scroll-scrollbar-thumbSizeX-hover: 7px;
+  --lx-scroll-scrollbar-thumbSizeY-hover: 7px;
+  --lx-scroll-scrollbar-thumbSizeX-active: 7px;
+  --lx-scroll-scrollbar-thumbSizeY-active: 7px;
   // thumbRadius
-  --nws-scroll-scrollbar-thumbRadiusX: 9999px;
-  --nws-scroll-scrollbar-thumbRadiusY: 9999px;
-  --nws-scroll-scrollbar-thumbRadiusX-hover: 9999px;
-  --nws-scroll-scrollbar-thumbRadiusY-hover: 9999px;
-  --nws-scroll-scrollbar-thumbRadiusX-active: 9999px;
-  --nws-scroll-scrollbar-thumbRadiusY-active: 9999px;
+  --lx-scroll-scrollbar-thumbRadiusX: 9999px;
+  --lx-scroll-scrollbar-thumbRadiusY: 9999px;
+  --lx-scroll-scrollbar-thumbRadiusX-hover: 9999px;
+  --lx-scroll-scrollbar-thumbRadiusY-hover: 9999px;
+  --lx-scroll-scrollbar-thumbRadiusX-active: 9999px;
+  --lx-scroll-scrollbar-thumbRadiusY-active: 9999px;
   // thumbBorderWidth
-  --nws-scroll-scrollbar-thumbBorderWidthX: 0px;
-  --nws-scroll-scrollbar-thumbBorderWidthY: 0px;
-  --nws-scroll-scrollbar-thumbBorderWidthX-hover: 0px;
-  --nws-scroll-scrollbar-thumbBorderWidthY-hover: 0px;
-  --nws-scroll-scrollbar-thumbBorderWidthX-active: 0px;
-  --nws-scroll-scrollbar-thumbBorderWidthY-active: 0px;
+  --lx-scroll-scrollbar-thumbBorderWidthX: 0px;
+  --lx-scroll-scrollbar-thumbBorderWidthY: 0px;
+  --lx-scroll-scrollbar-thumbBorderWidthX-hover: 0px;
+  --lx-scroll-scrollbar-thumbBorderWidthY-hover: 0px;
+  --lx-scroll-scrollbar-thumbBorderWidthX-active: 0px;
+  --lx-scroll-scrollbar-thumbBorderWidthY-active: 0px;
   // thumbBorderColor
-  --nws-scroll-scrollbar-thumbBorderColorX: rgba(0, 0, 0, 0);
-  --nws-scroll-scrollbar-thumbBorderColorY: rgba(0, 0, 0, 0);
-  --nws-scroll-scrollbar-thumbBorderColorX-hover: rgba(0, 0, 0, 0);
-  --nws-scroll-scrollbar-thumbBorderColorY-hover: rgba(0, 0, 0, 0);
-  --nws-scroll-scrollbar-thumbBorderColorX-active: rgba(0, 0, 0, 0);
-  --nws-scroll-scrollbar-thumbBorderColorY-active: rgba(0, 0, 0, 0);
+  --lx-scroll-scrollbar-thumbBorderColorX: rgba(0, 0, 0, 0);
+  --lx-scroll-scrollbar-thumbBorderColorY: rgba(0, 0, 0, 0);
+  --lx-scroll-scrollbar-thumbBorderColorX-hover: rgba(0, 0, 0, 0);
+  --lx-scroll-scrollbar-thumbBorderColorY-hover: rgba(0, 0, 0, 0);
+  --lx-scroll-scrollbar-thumbBorderColorX-active: rgba(0, 0, 0, 0);
+  --lx-scroll-scrollbar-thumbBorderColorY-active: rgba(0, 0, 0, 0);
   // trackColor
-  --nws-scroll-scrollbar-trackColorX: rgba(127, 127, 127, 0.04);
-  --nws-scroll-scrollbar-trackColorY: rgba(127, 127, 127, 0.04);
-  --nws-scroll-scrollbar-trackColorX-hover: rgba(127, 127, 127, 0.04);
-  --nws-scroll-scrollbar-trackColorY-hover: rgba(127, 127, 127, 0.04);
+  --lx-scroll-scrollbar-trackColorX: rgba(127, 127, 127, 0.04);
+  --lx-scroll-scrollbar-trackColorY: rgba(127, 127, 127, 0.04);
+  --lx-scroll-scrollbar-trackColorX-hover: rgba(127, 127, 127, 0.04);
+  --lx-scroll-scrollbar-trackColorY-hover: rgba(127, 127, 127, 0.04);
   // trackSize
-  --nws-scroll-scrollbar-trackSizeX: 13px;
-  --nws-scroll-scrollbar-trackSizeY: 13px;
-  --nws-scroll-scrollbar-trackSizeX-hover: 13px;
-  --nws-scroll-scrollbar-trackSizeY-hover: 13px;
+  --lx-scroll-scrollbar-trackSizeX: 13px;
+  --lx-scroll-scrollbar-trackSizeY: 13px;
+  --lx-scroll-scrollbar-trackSizeX-hover: 13px;
+  --lx-scroll-scrollbar-trackSizeY-hover: 13px;
   // fallbackSize
-  --nws-scroll-scrollbar-fallbackSize: thin;
+  --lx-scroll-scrollbar-fallbackSize: thin;
 
   // 以降はCSSカスタムプロパティへ値を設定
 
-  --nws-scroll-scrollbar-thumbColorX-state: var(
-    --nws-scroll-scrollbar-thumbColorX
+  --lx-scroll-scrollbar-thumbColorX-state: var(
+    --lx-scroll-scrollbar-thumbColorX
   );
-  --nws-scroll-scrollbar-thumbColorY-state: var(
-    --nws-scroll-scrollbar-thumbColorY
+  --lx-scroll-scrollbar-thumbColorY-state: var(
+    --lx-scroll-scrollbar-thumbColorY
   );
-  --nws-scroll-scrollbar-thumbSizeX-state: var(
-    --nws-scroll-scrollbar-thumbSizeX
+  --lx-scroll-scrollbar-thumbSizeX-state: var(--lx-scroll-scrollbar-thumbSizeX);
+  --lx-scroll-scrollbar-thumbSizeY-state: var(--lx-scroll-scrollbar-thumbSizeY);
+  --lx-scroll-scrollbar-thumbRadiusX-state: var(
+    --lx-scroll-scrollbar-thumbRadiusX
   );
-  --nws-scroll-scrollbar-thumbSizeY-state: var(
-    --nws-scroll-scrollbar-thumbSizeY
+  --lx-scroll-scrollbar-thumbRadiusY-state: var(
+    --lx-scroll-scrollbar-thumbRadiusY
   );
-  --nws-scroll-scrollbar-thumbRadiusX-state: var(
-    --nws-scroll-scrollbar-thumbRadiusX
+  --lx-scroll-scrollbar-thumbBorderColorX-state: var(
+    --lx-scroll-scrollbar-thumbBorderColorX
   );
-  --nws-scroll-scrollbar-thumbRadiusY-state: var(
-    --nws-scroll-scrollbar-thumbRadiusY
+  --lx-scroll-scrollbar-thumbBorderColorY-state: var(
+    --lx-scroll-scrollbar-thumbBorderColorY
   );
-  --nws-scroll-scrollbar-thumbBorderColorX-state: var(
-    --nws-scroll-scrollbar-thumbBorderColorX
+  --lx-scroll-scrollbar-thumbBorderWidthX-state: var(
+    --lx-scroll-scrollbar-thumbBorderWidthX
   );
-  --nws-scroll-scrollbar-thumbBorderColorY-state: var(
-    --nws-scroll-scrollbar-thumbBorderColorY
+  --lx-scroll-scrollbar-thumbBorderWidthY-state: var(
+    --lx-scroll-scrollbar-thumbBorderWidthY
   );
-  --nws-scroll-scrollbar-thumbBorderWidthX-state: var(
-    --nws-scroll-scrollbar-thumbBorderWidthX
+  --lx-scroll-scrollbar-trackColorX-state: var(
+    --lx-scroll-scrollbar-trackColorX
   );
-  --nws-scroll-scrollbar-thumbBorderWidthY-state: var(
-    --nws-scroll-scrollbar-thumbBorderWidthY
+  --lx-scroll-scrollbar-trackColorY-state: var(
+    --lx-scroll-scrollbar-trackColorY
   );
-  --nws-scroll-scrollbar-trackColorX-state: var(
-    --nws-scroll-scrollbar-trackColorX
-  );
-  --nws-scroll-scrollbar-trackColorY-state: var(
-    --nws-scroll-scrollbar-trackColorY
-  );
-  --nws-scroll-scrollbar-trackSizeX-state: var(
-    --nws-scroll-scrollbar-trackSizeX
-  );
-  --nws-scroll-scrollbar-trackSizeY-state: var(
-    --nws-scroll-scrollbar-trackSizeY
-  );
+  --lx-scroll-scrollbar-trackSizeX-state: var(--lx-scroll-scrollbar-trackSizeX);
+  --lx-scroll-scrollbar-trackSizeY-state: var(--lx-scroll-scrollbar-trackSizeY);
 
   &:hover {
     // エレメントへのホバー時
-    --nws-scroll-scrollbar-thumbColorX-state: var(
-      --nws-scroll-scrollbar-thumbColorX-hover
+    --lx-scroll-scrollbar-thumbColorX-state: var(
+      --lx-scroll-scrollbar-thumbColorX-hover
     );
-    --nws-scroll-scrollbar-thumbColorY-state: var(
-      --nws-scroll-scrollbar-thumbColorY-hover
+    --lx-scroll-scrollbar-thumbColorY-state: var(
+      --lx-scroll-scrollbar-thumbColorY-hover
     );
-    --nws-scroll-scrollbar-thumbSizeX-state: var(
-      --nws-scroll-scrollbar-thumbSizeX-hover
+    --lx-scroll-scrollbar-thumbSizeX-state: var(
+      --lx-scroll-scrollbar-thumbSizeX-hover
     );
-    --nws-scroll-scrollbar-thumbSizeY-state: var(
-      --nws-scroll-scrollbar-thumbSizeY-hover
+    --lx-scroll-scrollbar-thumbSizeY-state: var(
+      --lx-scroll-scrollbar-thumbSizeY-hover
     );
-    --nws-scroll-scrollbar-thumbRadiusX-state: var(
-      --nws-scroll-scrollbar-thumbRadiusX-hover
+    --lx-scroll-scrollbar-thumbRadiusX-state: var(
+      --lx-scroll-scrollbar-thumbRadiusX-hover
     );
-    --nws-scroll-scrollbar-thumbRadiusY-state: var(
-      --nws-scroll-scrollbar-thumbRadiusY-hover
+    --lx-scroll-scrollbar-thumbRadiusY-state: var(
+      --lx-scroll-scrollbar-thumbRadiusY-hover
     );
-    --nws-scroll-scrollbar-thumbBorderColorX-state: var(
-      --nws-scroll-scrollbar-thumbBorderColorX-hover
+    --lx-scroll-scrollbar-thumbBorderColorX-state: var(
+      --lx-scroll-scrollbar-thumbBorderColorX-hover
     );
-    --nws-scroll-scrollbar-thumbBorderColorY-state: var(
-      --nws-scroll-scrollbar-thumbBorderColorY-hover
+    --lx-scroll-scrollbar-thumbBorderColorY-state: var(
+      --lx-scroll-scrollbar-thumbBorderColorY-hover
     );
-    --nws-scroll-scrollbar-thumbBorderWidthX-state: var(
-      --nws-scroll-scrollbar-thumbBorderWidthX-hover
+    --lx-scroll-scrollbar-thumbBorderWidthX-state: var(
+      --lx-scroll-scrollbar-thumbBorderWidthX-hover
     );
-    --nws-scroll-scrollbar-thumbBorderWidthY-state: var(
-      --nws-scroll-scrollbar-thumbBorderWidthY-hover
+    --lx-scroll-scrollbar-thumbBorderWidthY-state: var(
+      --lx-scroll-scrollbar-thumbBorderWidthY-hover
     );
-    --nws-scroll-scrollbar-trackColorX-state: var(
-      --nws-scroll-scrollbar-trackColorX-hover
+    --lx-scroll-scrollbar-trackColorX-state: var(
+      --lx-scroll-scrollbar-trackColorX-hover
     );
-    --nws-scroll-scrollbar-trackColorY-state: var(
-      --nws-scroll-scrollbar-trackColorY-hover
+    --lx-scroll-scrollbar-trackColorY-state: var(
+      --lx-scroll-scrollbar-trackColorY-hover
     );
-    --nws-scroll-scrollbar-trackSizeX-state: var(
-      --nws-scroll-scrollbar-trackSizeX-hover
+    --lx-scroll-scrollbar-trackSizeX-state: var(
+      --lx-scroll-scrollbar-trackSizeX-hover
     );
-    --nws-scroll-scrollbar-trackSizeY-state: var(
-      --nws-scroll-scrollbar-trackSizeY-hover
+    --lx-scroll-scrollbar-trackSizeY-state: var(
+      --lx-scroll-scrollbar-trackSizeY-hover
     );
   }
 
   &::-webkit-scrollbar-thumb:horizontal:hover {
     // thumbのホバー
-    --nws-scroll-scrollbar-thumbColorX-state: var(
-      --nws-scroll-scrollbar-thumbColorX-active
+    --lx-scroll-scrollbar-thumbColorX-state: var(
+      --lx-scroll-scrollbar-thumbColorX-active
     );
-    --nws-scroll-scrollbar-thumbSizeX-state: var(
-      --nws-scroll-scrollbar-thumbSizeX-active
+    --lx-scroll-scrollbar-thumbSizeX-state: var(
+      --lx-scroll-scrollbar-thumbSizeX-active
     );
-    --nws-scroll-scrollbar-thumbRadiusX-state: var(
-      --nws-scroll-scrollbar-thumbRadiusX-active
+    --lx-scroll-scrollbar-thumbRadiusX-state: var(
+      --lx-scroll-scrollbar-thumbRadiusX-active
     );
-    --nws-scroll-scrollbar-thumbBorderColorX-state: var(
-      --nws-scroll-scrollbar-thumbBorderColorX-active
+    --lx-scroll-scrollbar-thumbBorderColorX-state: var(
+      --lx-scroll-scrollbar-thumbBorderColorX-active
     );
-    --nws-scroll-scrollbar-thumbBorderWidthX-state: var(
-      --nws-scroll-scrollbar-thumbBorderWidthX-active
+    --lx-scroll-scrollbar-thumbBorderWidthX-state: var(
+      --lx-scroll-scrollbar-thumbBorderWidthX-active
     );
   }
 
   &::-webkit-scrollbar-thumb:vertical:hover {
     // thumbのホバー
-    --nws-scroll-scrollbar-thumbColorY-state: var(
-      --nws-scroll-scrollbar-thumbColorY-active
+    --lx-scroll-scrollbar-thumbColorY-state: var(
+      --lx-scroll-scrollbar-thumbColorY-active
     );
-    --nws-scroll-scrollbar-thumbSizeY-state: var(
-      --nws-scroll-scrollbar-thumbSizeY-active
+    --lx-scroll-scrollbar-thumbSizeY-state: var(
+      --lx-scroll-scrollbar-thumbSizeY-active
     );
-    --nws-scroll-scrollbar-thumbRadiusY-state: var(
-      --nws-scroll-scrollbar-thumbRadiusY-active
+    --lx-scroll-scrollbar-thumbRadiusY-state: var(
+      --lx-scroll-scrollbar-thumbRadiusY-active
     );
-    --nws-scroll-scrollbar-thumbBorderColorY-state: var(
-      --nws-scroll-scrollbar-thumbBorderColorY-active
+    --lx-scroll-scrollbar-thumbBorderColorY-state: var(
+      --lx-scroll-scrollbar-thumbBorderColorY-active
     );
-    --nws-scroll-scrollbar-thumbBorderWidthY-state: var(
-      --nws-scroll-scrollbar-thumbBorderWidthY-active
+    --lx-scroll-scrollbar-thumbBorderWidthY-state: var(
+      --lx-scroll-scrollbar-thumbBorderWidthY-active
     );
   }
 
-  &.nws-scroll-scrollbar-thumbBorderWidthX-auto,
-  &.nws-scroll-scrollbar-thumbBorderWidthX-auto::-webkit-scrollbar-thumb:horizontal:hover {
+  &.lx-scroll-scrollbar-thumbBorderWidthX-auto,
+  &.lx-scroll-scrollbar-thumbBorderWidthX-auto::-webkit-scrollbar-thumb:horizontal:hover {
     // thumbBorderWidthX を thumbSizeX & trackSizeX から算出（両側にかかるため÷2）
-    --nws-scroll-scrollbar-thumbBorderWidthX-state: calc(
+    --lx-scroll-scrollbar-thumbBorderWidthX-state: calc(
       (
-          var(--nws-scroll-scrollbar-trackSizeX-state) - var(
-              --nws-scroll-scrollbar-thumbSizeX-state
+          var(--lx-scroll-scrollbar-trackSizeX-state) - var(
+              --lx-scroll-scrollbar-thumbSizeX-state
             )
         ) /
         2
     );
-    &.nws-scroll-scrollbar-trackSizeX-auto {
+    &.lx-scroll-scrollbar-trackSizeX-auto {
       // thumbBorderWidthX は 0
-      --nws-scroll-scrollbar-thumbBorderWidthX-state: 0px;
+      --lx-scroll-scrollbar-thumbBorderWidthX-state: 0px;
       // trackSizeX を thumbSizeX と同値にする
-      --nws-scroll-scrollbar-trackSizeX-state: var(
-        --nws-scroll-scrollbar-thumbSizeX-state
+      --lx-scroll-scrollbar-trackSizeX-state: var(
+        --lx-scroll-scrollbar-thumbSizeX-state
       );
     }
   }
 
-  &.nws-scroll-scrollbar-thumbBorderWidthY-auto,
-  &.nws-scroll-scrollbar-thumbBorderWidthX-auto::-webkit-scrollbar-thumb:vertical:hover {
+  &.lx-scroll-scrollbar-thumbBorderWidthY-auto,
+  &.lx-scroll-scrollbar-thumbBorderWidthX-auto::-webkit-scrollbar-thumb:vertical:hover {
     // thumbBorderWidthY を thumbSizeY & trackSizeY から算出（両側にかかるため÷2）
-    --nws-scroll-scrollbar-thumbBorderWidthY-state: calc(
+    --lx-scroll-scrollbar-thumbBorderWidthY-state: calc(
       (
-          var(--nws-scroll-scrollbar-trackSizeY-state) - var(
-              --nws-scroll-scrollbar-thumbSizeY-state
+          var(--lx-scroll-scrollbar-trackSizeY-state) - var(
+              --lx-scroll-scrollbar-thumbSizeY-state
             )
         ) /
         2
     );
-    &.nws-scroll-scrollbar-trackSizeY-auto {
+    &.lx-scroll-scrollbar-trackSizeY-auto {
       // thumbBorderWidthY は 0
-      --nws-scroll-scrollbar-thumbBorderWidthY-state: 0px;
+      --lx-scroll-scrollbar-thumbBorderWidthY-state: 0px;
       // trackSizeY を thumbSizeY と同値にする
-      --nws-scroll-scrollbar-trackSizeY-state: var(
-        --nws-scroll-scrollbar-thumbSizeY-state
+      --lx-scroll-scrollbar-trackSizeY-state: var(
+        --lx-scroll-scrollbar-thumbSizeY-state
       );
     }
   }
 
-  &.nws-scroll-scrollbar-trackSizeX-auto {
+  &.lx-scroll-scrollbar-trackSizeX-auto {
     // trackSizeX を thumbSizeX & thumbBorderWidthX から算出
-    --nws-scroll-scrollbar-trackSizeX-state: calc(
-      var(--nws-scroll-scrollbar-thumbSizeX-state) + 2 *
-        var(--nws-scroll-scrollbar-thumbBorderWidthX-state)
+    --lx-scroll-scrollbar-trackSizeX-state: calc(
+      var(--lx-scroll-scrollbar-thumbSizeX-state) + 2 *
+        var(--lx-scroll-scrollbar-thumbBorderWidthX-state)
     );
   }
 
-  &.nws-scroll-scrollbar-trackSizeY-auto {
+  &.lx-scroll-scrollbar-trackSizeY-auto {
     // trackSizeY を thumbSizeY & thumbBorderWidthY から算出
-    --nws-scroll-scrollbar-trackSizeY-state: calc(
-      var(--nws-scroll-scrollbar-thumbSizeY-state) + 2 *
-        var(--nws-scroll-scrollbar-thumbBorderWidthY-state)
+    --lx-scroll-scrollbar-trackSizeY-state: calc(
+      var(--lx-scroll-scrollbar-thumbSizeY-state) + 2 *
+        var(--lx-scroll-scrollbar-thumbBorderWidthY-state)
     );
   }
 
   // 以降はCSSカスタムプロパティの値を含めて要素に適用
 
   &::-webkit-scrollbar {
-    height: var(--nws-scroll-scrollbar-trackSizeX-state);
-    width: var(--nws-scroll-scrollbar-trackSizeY-state);
+    height: var(--lx-scroll-scrollbar-trackSizeX-state);
+    width: var(--lx-scroll-scrollbar-trackSizeY-state);
   }
 
   &::-webkit-scrollbar-corner {
     background-color: var(
-      --nws-scroll-scrollbar-trackColorX-state,
-      --nws-scroll-scrollbar-trackColorY-state
+      --lx-scroll-scrollbar-trackColorX-state,
+      --lx-scroll-scrollbar-trackColorY-state
     );
     cursor: pointer;
   }
@@ -352,82 +344,82 @@
   &::-webkit-scrollbar-thumb:horizontal {
     // 横スクロールバーのthumb
     border-style: solid;
-    border-color: var(--nws-scroll-scrollbar-thumbBorderColorX-state);
-    border-width: var(--nws-scroll-scrollbar-thumbBorderWidthX-state);
-    background-color: var(--nws-scroll-scrollbar-thumbColorX-state);
-    border-radius: var(--nws-scroll-scrollbar-thumbRadiusX);
+    border-color: var(--lx-scroll-scrollbar-thumbBorderColorX-state);
+    border-width: var(--lx-scroll-scrollbar-thumbBorderWidthX-state);
+    background-color: var(--lx-scroll-scrollbar-thumbColorX-state);
+    border-radius: var(--lx-scroll-scrollbar-thumbRadiusX);
     background-clip: content-box;
   }
 
   &::-webkit-scrollbar-thumb:vertical {
     // 縦スクロールバーのthumb
     border-style: solid;
-    border-color: var(--nws-scroll-scrollbar-thumbBorderColorY-state);
-    border-width: var(--nws-scroll-scrollbar-thumbBorderWidthY-state);
-    background-color: var(--nws-scroll-scrollbar-thumbColorY-state);
-    border-radius: var(--nws-scroll-scrollbar-thumbRadiusY);
+    border-color: var(--lx-scroll-scrollbar-thumbBorderColorY-state);
+    border-width: var(--lx-scroll-scrollbar-thumbBorderWidthY-state);
+    background-color: var(--lx-scroll-scrollbar-thumbColorY-state);
+    border-radius: var(--lx-scroll-scrollbar-thumbRadiusY);
     background-clip: content-box;
   }
 
   &::-webkit-scrollbar-track:horizontal {
     // 横スクロールバーのtrack
-    background-color: var(--nws-scroll-scrollbar-trackColorX-state);
+    background-color: var(--lx-scroll-scrollbar-trackColorX-state);
   }
 
   &::-webkit-scrollbar-track:vertical {
     // 縦スクロールバーのtrack
-    background-color: var(--nws-scroll-scrollbar-trackColorY-state);
+    background-color: var(--lx-scroll-scrollbar-trackColorY-state);
   }
 
-  &.nws-scroll-scrollbar-animation-size {
+  &.lx-scroll-scrollbar-animation-size {
     // サイズ系transition（thumbSize・trackSize・thumbBorderWidth）
     transition:
-      --nws-scroll-scrollbar-thumbSizeX-state 0.3s,
-      --nws-scroll-scrollbar-thumbSizeY-state 0.3s,
-      --nws-scroll-scrollbar-thumbRadiusX-state 0.3s,
-      --nws-scroll-scrollbar-thumbRadiusY-state 0.3s,
-      --nws-scroll-scrollbar-thumbBorderWidthX-state 0.3s,
-      --nws-scroll-scrollbar-thumbBorderWidthY-state 0.3s,
-      --nws-scroll-scrollbar-trackSizeX-state 0.3s,
-      --nws-scroll-scrollbar-trackSizeY-state 0.3s;
+      --lx-scroll-scrollbar-thumbSizeX-state 0.3s,
+      --lx-scroll-scrollbar-thumbSizeY-state 0.3s,
+      --lx-scroll-scrollbar-thumbRadiusX-state 0.3s,
+      --lx-scroll-scrollbar-thumbRadiusY-state 0.3s,
+      --lx-scroll-scrollbar-thumbBorderWidthX-state 0.3s,
+      --lx-scroll-scrollbar-thumbBorderWidthY-state 0.3s,
+      --lx-scroll-scrollbar-trackSizeX-state 0.3s,
+      --lx-scroll-scrollbar-trackSizeY-state 0.3s;
   }
 
-  &.nws-scroll-scrollbar-animation-color {
+  &.lx-scroll-scrollbar-animation-color {
     // カラー系transition（thumbColor・trackColor・thumbBorderColor）
     transition:
-      --nws-scroll-scrollbar-thumbColorX-state 0.5s,
-      --nws-scroll-scrollbar-thumbColorY-state 0.5s,
-      --nws-scroll-scrollbar-thumbBorderColorX-state 0.5s,
-      --nws-scroll-scrollbar-thumbBorderColorY-state 0.5s,
-      --nws-scroll-scrollbar-trackColorX-state 0.5s,
-      --nws-scroll-scrollbar-trackColorY-state 0.5s;
+      --lx-scroll-scrollbar-thumbColorX-state 0.5s,
+      --lx-scroll-scrollbar-thumbColorY-state 0.5s,
+      --lx-scroll-scrollbar-thumbBorderColorX-state 0.5s,
+      --lx-scroll-scrollbar-thumbBorderColorY-state 0.5s,
+      --lx-scroll-scrollbar-trackColorX-state 0.5s,
+      --lx-scroll-scrollbar-trackColorY-state 0.5s;
   }
 
-  &.nws-scroll-scrollbar-animation-size.nws-scroll-scrollbar-animation-color {
+  &.lx-scroll-scrollbar-animation-size.lx-scroll-scrollbar-animation-color {
     // 両方有効: 全transition
     transition:
-      --nws-scroll-scrollbar-thumbColorX-state 0.5s,
-      --nws-scroll-scrollbar-thumbColorY-state 0.5s,
-      --nws-scroll-scrollbar-thumbSizeX-state 0.3s,
-      --nws-scroll-scrollbar-thumbSizeY-state 0.3s,
-      --nws-scroll-scrollbar-thumbRadiusX-state 0.3s,
-      --nws-scroll-scrollbar-thumbRadiusY-state 0.3s,
-      --nws-scroll-scrollbar-thumbBorderColorX-state 0.5s,
-      --nws-scroll-scrollbar-thumbBorderColorY-state 0.5s,
-      --nws-scroll-scrollbar-thumbBorderWidthX-state 0.3s,
-      --nws-scroll-scrollbar-thumbBorderWidthY-state 0.3s,
-      --nws-scroll-scrollbar-trackColorX-state 0.5s,
-      --nws-scroll-scrollbar-trackColorY-state 0.5s,
-      --nws-scroll-scrollbar-trackSizeX-state 0.3s,
-      --nws-scroll-scrollbar-trackSizeY-state 0.3s;
+      --lx-scroll-scrollbar-thumbColorX-state 0.5s,
+      --lx-scroll-scrollbar-thumbColorY-state 0.5s,
+      --lx-scroll-scrollbar-thumbSizeX-state 0.3s,
+      --lx-scroll-scrollbar-thumbSizeY-state 0.3s,
+      --lx-scroll-scrollbar-thumbRadiusX-state 0.3s,
+      --lx-scroll-scrollbar-thumbRadiusY-state 0.3s,
+      --lx-scroll-scrollbar-thumbBorderColorX-state 0.5s,
+      --lx-scroll-scrollbar-thumbBorderColorY-state 0.5s,
+      --lx-scroll-scrollbar-thumbBorderWidthX-state 0.3s,
+      --lx-scroll-scrollbar-thumbBorderWidthY-state 0.3s,
+      --lx-scroll-scrollbar-trackColorX-state 0.5s,
+      --lx-scroll-scrollbar-trackColorY-state 0.5s,
+      --lx-scroll-scrollbar-trackSizeX-state 0.3s,
+      --lx-scroll-scrollbar-trackSizeY-state 0.3s;
   }
 
-  &.nws-scroll-scrollbar-arrows-false::-webkit-scrollbar-button {
+  &.lx-scroll-scrollbar-arrows-false::-webkit-scrollbar-button {
     // 矢印ボタンなし
     display: none;
   }
 
-  &.nws-scroll-scrollbar-arrows-true {
+  &.lx-scroll-scrollbar-arrows-true {
     // 矢印ボタンあり
     &::-webkit-scrollbar-button:start:decrement,
     &::-webkit-scrollbar-button:end:increment {
@@ -439,12 +431,12 @@
 
     &::-webkit-scrollbar-button:vertical:start:decrement,
     &::-webkit-scrollbar-button:vertical:end:increment {
-      background-color: var(--nws-scroll-scrollbar-trackColorY-state);
+      background-color: var(--lx-scroll-scrollbar-trackColorY-state);
     }
 
     &::-webkit-scrollbar-button:horizontal:start:decrement,
     &::-webkit-scrollbar-button:horizontal:end:increment {
-      background-color: var(--nws-scroll-scrollbar-trackColorX-state);
+      background-color: var(--lx-scroll-scrollbar-trackColorX-state);
     }
 
     &::-webkit-scrollbar-button:start:increment,
@@ -457,7 +449,7 @@
       background-image: conic-gradient(
         at 50% 0%,
         transparent 150deg,
-        var(--nws-scroll-scrollbar-thumbColorY-state) 150deg 210deg,
+        var(--lx-scroll-scrollbar-thumbColorY-state) 150deg 210deg,
         transparent 210deg 360deg
       );
     }
@@ -466,9 +458,9 @@
       // ▽
       background-image: conic-gradient(
         at 50% 100%,
-        var(--nws-scroll-scrollbar-thumbColorY-state) 0deg 30deg,
+        var(--lx-scroll-scrollbar-thumbColorY-state) 0deg 30deg,
         transparent 30deg 330deg,
-        var(--nws-scroll-scrollbar-thumbColorY-state) 330deg
+        var(--lx-scroll-scrollbar-thumbColorY-state) 330deg
       );
     }
 
@@ -477,7 +469,7 @@
       background-image: conic-gradient(
         at 0% 50%,
         transparent 0deg 60deg,
-        var(--nws-scroll-scrollbar-thumbColorX-state) 60deg 120deg,
+        var(--lx-scroll-scrollbar-thumbColorX-state) 60deg 120deg,
         transparent 120deg 360deg
       );
     }
@@ -487,18 +479,18 @@
       background-image: conic-gradient(
         at 100% 50%,
         transparent 0deg 240deg,
-        var(--nws-scroll-scrollbar-thumbColorX-state) 240deg 300deg,
+        var(--lx-scroll-scrollbar-thumbColorX-state) 240deg 300deg,
         transparent 300deg 360deg
       );
     }
   }
 
   @supports not (selector(::-webkit-scrollbar)) {
-    scrollbar-width: var(--nws-scroll-scrollbar-fallbackSize, thin);
-    scrollbar-color: var(--nws-scroll-scrollbar-thumbColorY-state)
-      var(--nws-scroll-scrollbar-trackColorY);
+    scrollbar-width: var(--lx-scroll-scrollbar-fallbackSize, thin);
+    scrollbar-color: var(--lx-scroll-scrollbar-thumbColorY-state)
+      var(--lx-scroll-scrollbar-trackColorY);
 
-    &.nws-scroll-scrollbar-animation-color {
+    &.lx-scroll-scrollbar-animation-color {
       // カラー系transition有効時のみ scrollbar-color をアニメーション
       transition: scrollbar-color 0.5s;
     }

@@ -1,6 +1,6 @@
 {
   "name": "@niche-works/style-scroll",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "keywords": [
     "css",
@@ -52,7 +52,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
     "@eslint/js": "^10.0.1",
-    "@niche-works/dev": "^0.5.4",
+    "@niche-works/dev": "^0.5.5",
     "@niche-works/rollup-plugin-dist-package": "^0.2.2",
     "@playwright/test": "^1.60.0",
     "@storybook/addon-a11y": "^10.3.6",

@@ -1,4 +1,4 @@
 /**
  * スタイル種別: scrollbar
  */
-export const clsScrollScrollbar = 'nws-scroll-scrollbar';
+export const clsScrollScrollbar = 'lx-scroll-scrollbar';

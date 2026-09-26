@@ -35,7 +35,7 @@ export default function createScrollContainer(
     }
     containerStyle = { ...containerStyle, ...style };
   } else {
-    container.className = 'nws-scroll-disabled';
+    container.className = 'lx-scroll-disabled';
   }
   assignStyle(container, containerStyle);
 

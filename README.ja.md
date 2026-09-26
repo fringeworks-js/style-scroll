@@ -32,14 +32,14 @@ const { className, style } = scrollbar({
   trackColor: 'rgba(0, 0, 0, 0.05)',
 });
 
-// className: "nws-scroll-scrollbar ..."
-// style: { "--nws-scroll-scrollbar-thumbSizeX": "6px", ... }
+// className: "lx-scroll-scrollbar ..."
+// style: { "--lx-scroll-scrollbar-thumbSizeX": "6px", ... }
 ```
 
 ```html
 <div
-  class="nws-scroll-scrollbar ..."
-  style="--nws-scroll-scrollbar-thumbSizeX: 6px; ..."
+  class="lx-scroll-scrollbar ..."
+  style="--lx-scroll-scrollbar-thumbSizeX: 6px; ..."
 >
   <!-- スクロール可能なコンテンツ -->
 </div>
