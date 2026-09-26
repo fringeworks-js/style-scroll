@@ -47,22 +47,22 @@ const { className, style } = scrollbar({
 
 ### CSSの読み込み
 
-デフォルトのインポートではCSSが自動的に読み込まれます。
+関数はCSSをインポートしないため、SSRやReact Server Componentsでもそのまま使用できます。CSSは別途インポートしてください。
 
 ```ts
 import { scrollbar } from '@niche-works/style-scroll';
-```
-
-CSSと関数を個別に管理したい場合は `core` ディレクトリ配下のモジュールを使用してください。
-
-```ts
-import { scrollbar } from '@niche-works/style-scroll/core';
 
 // 全スタイルをまとめてインポート
-import '@niche-works/style-scroll/core/styles.css';
+import '@niche-works/style-scroll/styles.css';
 
 // 必要なスタイルのみインポート
-import '@niche-works/style-scroll/core/scrollbar.css';
+import '@niche-works/style-scroll/scrollbar.css';
+```
+
+CSSを自動的に読み込みたい場合は `with-css` 配下のモジュールを使用してください。CSSのインポートを扱えるバンドラーが必要です。
+
+```ts
+import { scrollbar } from '@niche-works/style-scroll/with-css';
 ```
 
 ### `StyleState` について

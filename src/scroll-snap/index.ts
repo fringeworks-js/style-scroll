@@ -1,4 +1,3 @@
-import '../core/scroll-snap/styles.scss';
-
-export type * from '../core/scroll-snap';
-export { scrollSnap, scrollSnapItem } from '../core/scroll-snap';
+export { default as scrollSnap } from './scroll-snap';
+export { default as scrollSnapItem } from './scroll-snap-item';
+export type * from './types';

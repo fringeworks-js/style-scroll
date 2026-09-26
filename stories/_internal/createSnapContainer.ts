@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 import type { ScrollSnapOptions } from '../../src/scroll-snap';
-import { scrollSnap } from '../../src/scroll-snap';
+import { scrollSnap } from '../../src/with-css/scroll-snap';
 import assignStyle from './assignStyle';
 
 export type SnapDebugOptions = {

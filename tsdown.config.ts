@@ -38,28 +38,20 @@ export default defineConfig({
             import: './index.mjs',
             require: './index.cjs',
           },
+          './styles.css': './styles.css',
+          './*.css': './*/styles.css',
+          './with-css': {
+            import: './with-css/index.mjs',
+            require: './with-css/index.cjs',
+          },
+          './with-css/*': {
+            import: './with-css/*/index.mjs',
+            require: './with-css/*/index.cjs',
+          },
           './*': {
             import: './*/index.mjs',
             require: './*/index.cjs',
           },
-          './constants': {
-            import: './constants.mjs',
-            require: './constants.cjs',
-          },
-          './core/*': {
-            import: './core/*/index.mjs',
-            require: './core/*/index.cjs',
-          },
-          './core/constants': {
-            import: './core/constants.mjs',
-            require: './core/constants.cjs',
-          },
-          './helpers/*': {
-            import: './helpers/*.mjs',
-            require: './helpers/*.cjs',
-          },
-          './core/styles.css': './core/styles.css',
-          './core/*.css': './core/*/styles.css',
         },
       },
       resolveWorkspaceDeps: true,

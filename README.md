@@ -47,22 +47,22 @@ const { className, style } = scrollbar({
 
 ### Loading CSS
 
-When using the default import, CSS is loaded automatically.
+The functions do not import any CSS, so they work as-is in SSR and React Server Components. Import the CSS separately.
 
 ```ts
 import { scrollbar } from '@niche-works/style-scroll';
-```
-
-To manage CSS and functions separately, use modules under the `core` directory.
-
-```ts
-import { scrollbar } from '@niche-works/style-scroll/core';
 
 // Import all styles at once
-import '@niche-works/style-scroll/core/styles.css';
+import '@niche-works/style-scroll/styles.css';
 
 // Import only what you need
-import '@niche-works/style-scroll/core/scrollbar.css';
+import '@niche-works/style-scroll/scrollbar.css';
+```
+
+If you want the CSS to be loaded automatically, use the modules under `with-css`. This requires a bundler that can handle CSS imports.
+
+```ts
+import { scrollbar } from '@niche-works/style-scroll/with-css';
 ```
 
 ### About `StyleState`

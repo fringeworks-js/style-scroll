@@ -1,6 +1,6 @@
 {
   "name": "@niche-works/style-scroll",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "keywords": [
     "css",
@@ -20,14 +20,13 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./*": "./src/*/index.ts",
-    "./constants": "./src/constants.ts",
-    "./core/*": "./src/core/*/index.ts",
-    "./core/constants": "./src/core/constants.ts",
-    "./core/styles.scss": "./src/core/styles.scss",
-    "./core/styles.css": "./src/core/styles.scss",
-    "./core/*.scss": "./src/core/*/styles.scss",
-    "./core/*.css": "./src/core/*/styles.scss"
+    "./styles.scss": "./src/styles.scss",
+    "./styles.css": "./src/styles.scss",
+    "./*.scss": "./src/*/styles.scss",
+    "./*.css": "./src/*/styles.scss",
+    "./with-css": "./src/with-css/index.ts",
+    "./with-css/*": "./src/with-css/*/index.ts",
+    "./*": "./src/*/index.ts"
   },
   "main": "./src/index.ts",
   "module": "./src/index.ts",
