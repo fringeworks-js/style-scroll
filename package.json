@@ -1,6 +1,6 @@
 {
   "name": "@niche-works/style-scroll",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "keywords": [
     "css",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mitsuhiroseino/niche-works-style-scroll.git"
+    "url": "git+https://github.com/mitsuhiroseino/niche-works-style-scroll.git"
   },
   "license": "MIT",
   "author": "Mitsuhiro Seino",
@@ -43,7 +43,7 @@
     "tidy": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" --config ./prettier.tidy.config.js"
   },
   "dependencies": {
-    "@niche-works/style-utils": "^0.1.1",
+    "@niche-works/style-utils": "^0.2.0",
     "@niche-works/types": "^0.3.2",
     "@niche-works/utils": "^0.4.2",
     "tslib": "^2.8.1"
