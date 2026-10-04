@@ -1,6 +1,9 @@
-import type { LooseDictionary } from '@niche-works/types';
+import type { LooseDictionary } from '@fringeworks/types';
 
-export default function assignStyle(element: HTMLElement, style: LooseDictionary): void {
+export default function assignStyle(
+  element: HTMLElement,
+  style: LooseDictionary,
+): void {
   for (const name in style) {
     if (name.startsWith('--')) {
       element.style.setProperty(name, style[name]);

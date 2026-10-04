@@ -1,6 +1,6 @@
-# @niche-works/style-scroll
+# @fringeworks/style-scroll
 
-`@niche-works/style-scroll` is a niche library specialized in controlling scroll-related styles via CSS.\
+`@fringeworks/style-scroll` is a niche library specialized in controlling scroll-related styles via CSS.\
 It returns class names and CSS variables as an object based on the provided options. Framework-agnostic and SSR-compatible.
 
 **[日本語版READMEはこちら](./README.ja.md)**
@@ -14,9 +14,9 @@ It returns class names and CSS variables as an object based on the provided opti
 ## Installation
 
 ```bash
-npm install @niche-works/style-scroll
+npm install @fringeworks/style-scroll
 # or
-pnpm add @niche-works/style-scroll
+pnpm add @fringeworks/style-scroll
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ pnpm add @niche-works/style-scroll
 Each style function returns a `{ className, style }` object. Apply it to the target element.
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll';
+import { scrollbar } from '@fringeworks/style-scroll';
 
 const { className, style } = scrollbar({
   thumbSize: 6,
@@ -50,19 +50,19 @@ const { className, style } = scrollbar({
 The functions do not import any CSS, so they work as-is in SSR and React Server Components. Import the CSS separately.
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll';
+import { scrollbar } from '@fringeworks/style-scroll';
 
 // Import all styles at once
-import '@niche-works/style-scroll/styles.css';
+import '@fringeworks/style-scroll/styles.css';
 
 // Import only what you need
-import '@niche-works/style-scroll/scrollbar.css';
+import '@fringeworks/style-scroll/scrollbar.css';
 ```
 
 If you want the CSS to be loaded automatically, use the modules under `with-css`. This requires a bundler that can handle CSS imports.
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll/with-css';
+import { scrollbar } from '@fringeworks/style-scroll/with-css';
 ```
 
 ### About `StyleState`
@@ -110,7 +110,7 @@ In WebKit browsers (Chrome, Edge, Safari), full customization via `::-webkit-scr
 In non-WebKit browsers (Firefox), a fallback using `scrollbar-width` / `scrollbar-color` is applied.
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll';
+import { scrollbar } from '@fringeworks/style-scroll';
 
 const { className, style } = scrollbar({
   thumbColor: {

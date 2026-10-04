@@ -1,5 +1,5 @@
-import type { StyleState, StyleStateRecord } from '@niche-works/style-utils';
-import { fillStyleState, resolveXY } from '@niche-works/style-utils';
+import type { StyleState, StyleStateRecord } from '@fringeworks/style-utils';
+import { fillStyleState, resolveXY } from '@fringeworks/style-utils';
 
 /**
  * StyleState を持つ共通値・X値・Y値から、X軸とY軸の base/hover/active 値を確定する。

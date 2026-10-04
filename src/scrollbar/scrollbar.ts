@@ -1,4 +1,4 @@
-import type { StyleStateRecord } from '@niche-works/style-utils';
+import type { StyleStateRecord } from '@fringeworks/style-utils';
 import { clsScrollScrollbar } from '../_constants';
 import mergeClassName from '../_internal/mergeClassName';
 import resolveStyleStateXY from '../_internal/resolveStyleStateXY';

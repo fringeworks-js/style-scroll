@@ -1,6 +1,6 @@
-# @niche-works/style-scroll
+# @fringeworks/style-scroll
 
-`@niche-works/style-scroll` は、CSSによるスクロール関連スタイルの制御に特化したニッチなライブラリです。\
+`@fringeworks/style-scroll` は、CSSによるスクロール関連スタイルの制御に特化したニッチなライブラリです。\
 オプションに応じたクラス名とCSS変数をオブジェクトとして返します。フレームワーク非依存でSSRにも対応しています。
 
 **[English README is available here](./README.md)**
@@ -14,9 +14,9 @@
 ## インストール
 
 ```bash
-npm install @niche-works/style-scroll
+npm install @fringeworks/style-scroll
 # または
-pnpm add @niche-works/style-scroll
+pnpm add @fringeworks/style-scroll
 ```
 
 ## 使い方
@@ -24,7 +24,7 @@ pnpm add @niche-works/style-scroll
 各スタイル関数は `{ className, style }` オブジェクトを返します。対象要素に適用してください。
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll';
+import { scrollbar } from '@fringeworks/style-scroll';
 
 const { className, style } = scrollbar({
   thumbSize: 6,
@@ -50,19 +50,19 @@ const { className, style } = scrollbar({
 関数はCSSをインポートしないため、SSRやReact Server Componentsでもそのまま使用できます。CSSは別途インポートしてください。
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll';
+import { scrollbar } from '@fringeworks/style-scroll';
 
 // 全スタイルをまとめてインポート
-import '@niche-works/style-scroll/styles.css';
+import '@fringeworks/style-scroll/styles.css';
 
 // 必要なスタイルのみインポート
-import '@niche-works/style-scroll/scrollbar.css';
+import '@fringeworks/style-scroll/scrollbar.css';
 ```
 
 CSSを自動的に読み込みたい場合は `with-css` 配下のモジュールを使用してください。CSSのインポートを扱えるバンドラーが必要です。
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll/with-css';
+import { scrollbar } from '@fringeworks/style-scroll/with-css';
 ```
 
 ### `StyleState` について
@@ -110,7 +110,7 @@ WebKitブラウザー（Chrome・Edge・Safari）では `::-webkit-scrollbar` �
 非WebKitブラウザー（Firefox）では `scrollbar-width` / `scrollbar-color` によるフォールバックが適用されます。
 
 ```ts
-import { scrollbar } from '@niche-works/style-scroll';
+import { scrollbar } from '@fringeworks/style-scroll';
 
 const { className, style } = scrollbar({
   thumbColor: {

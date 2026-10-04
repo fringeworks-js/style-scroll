@@ -1,4 +1,4 @@
-import type { StyleState } from '@niche-works/style-utils';
+import type { StyleState } from '@fringeworks/style-utils';
 
 /**
  * scrollbarのオプション

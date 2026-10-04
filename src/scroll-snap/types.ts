@@ -1,4 +1,4 @@
-import type { WithChildStyle } from '@niche-works/style-utils';
+import type { WithChildStyle } from '@fringeworks/style-utils';
 
 type ScrollSnapContainerOptions = {
   /**

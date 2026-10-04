@@ -1,5 +1,5 @@
-import type { StyleResult } from '@niche-works/style-utils';
-import type { LooseDictionary } from '@niche-works/types';
+import type { StyleResult } from '@fringeworks/style-utils';
+import type { LooseDictionary } from '@fringeworks/types';
 
 /**
  * スタイルを作る関数
