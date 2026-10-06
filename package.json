@@ -1,7 +1,8 @@
 {
   "name": "@fringeworks/style-scroll",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
+  "description": "A library some will find handy, specialized in controlling scroll-related styles via CSS.",
   "keywords": [
     "css",
     "style",

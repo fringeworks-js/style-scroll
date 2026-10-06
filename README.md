@@ -1,6 +1,6 @@
 # @fringeworks/style-scroll
 
-`@fringeworks/style-scroll` is a niche library specialized in controlling scroll-related styles via CSS.\
+`@fringeworks/style-scroll` is a library some will find handy, specialized in controlling scroll-related styles via CSS.\
 It returns class names and CSS variables as an object based on the provided options. Framework-agnostic and SSR-compatible.
 
 **[日本語版READMEはこちら](./README.ja.md)**
@@ -57,17 +57,18 @@ import '@fringeworks/style-scroll/styles.css';
 
 // Import only what you need
 import '@fringeworks/style-scroll/scrollbar.css';
+import '@fringeworks/style-scroll/scroll-snap.css';
 ```
 
 If you want the CSS to be loaded automatically, use the modules under `with-css`. This requires a bundler that can handle CSS imports.
 
 ```ts
-import { scrollbar } from '@fringeworks/style-scroll/with-css';
+import { scrollbar, scrollSnap } from '@fringeworks/style-scroll/with-css';
 ```
 
 ### About `StyleState`
 
-Many options accept the `StyleState<T, S>` type. You can specify either a scalar value or a per-state object.
+Many `scrollbar` options accept the `StyleState<T, S>` type. You can specify either a scalar value or a per-state object.
 
 ```ts
 // Scalar: applies the same value to all states
@@ -86,17 +87,28 @@ thumbColor: { hover: 'rgba(0, 0, 0, 0.5)' }
 
 ### Axis-specific and Common Options
 
-To set different values for the horizontal and vertical axes, use the `X` (horizontal) and `Y` (vertical) suffixed options.\
-When an axis-specific value is provided, it takes precedence. Unspecified states fall back to the corresponding common option's value.
+For both `scrollbar` and `scrollSnap`, top-level options apply to both axes. To set different values per axis, override them under `x` (horizontal) or `y` (vertical).\
+The options accepted by `x` and `y` are `ScrollbarAxisOptions` and `ScrollSnapAxisOptions` respectively.
 
 ```ts
 scrollbar({
   thumbColor: 'rgba(0, 0, 0, 0.3)', // common for both axes
-  thumbColorX: 'rgba(0, 0, 255, 0.3)', // overrides horizontal only
+  x: { thumbColor: 'rgba(0, 0, 255, 0.3)' }, // overrides horizontal only
+});
 
-  // On hover: X falls back to thumbColor's hover since thumbColorX has no hover
+scrollSnap({
+  align: 'start', // common for both axes
+  x: { align: 'center' }, // overrides horizontal only
+});
+```
+
+For options that accept `StyleState`, axis-specific values take precedence per state; unspecified states fall back to the common value.
+
+```ts
+scrollbar({
   thumbColor: { base: 'rgba(0,0,0,0.3)', hover: 'rgba(0,0,0,0.5)' },
-  thumbColorX: { base: 'rgba(0,0,255,0.3)' }, // X hover falls back to above
+  // x has no hover, so horizontal hover falls back to thumbColor's hover
+  x: { thumbColor: { base: 'rgba(0,0,255,0.3)' } },
 });
 ```
 
@@ -140,17 +152,42 @@ These are the CSS defaults when no option is specified.
 | `thumbBorderWidth` | `2`                         |
 | `thumbBorderColor` | `transparent`               |
 
-## Options (`ScrollbarOptions`)
+### `scrollSnap`
+
+Configures scroll snapping. Apply it to the scroll container.\
+`align`, `stop` and `margin` are applied to all direct children (`> *`) at once.
+
+```ts
+import { scrollSnap } from '@fringeworks/style-scroll';
+
+// Scroll vertically and snap to the start of each child
+const { className, style } = scrollSnap({ axis: 'y', align: 'start' });
+```
+
+To enable snapping, specify both `axis` and `align`. Both default to `none`, so nothing snaps when they are omitted.
+
+#### Per-child settings
+
+To use a different alignment (or other setting) for a specific child, set the CSS property directly in that child's inline style. Inline styles take precedence over the styles applied via `> *`.
+
+```html
+<div class="lx-scroll-snap ..." style="...">
+  <div>...</div>
+  <div style="scroll-snap-align: center">...</div>
+</div>
+```
+
+## `scrollbar` Options (`ScrollbarOptions`)
+
+All Thumb and Track options can also be specified per axis under `x` / `y` (see [Axis-specific and Common Options](#axis-specific-and-common-options)).
 
 ### Thumb
 
 #### `thumbSize` — Thumb thickness
 
-| Option        | Type                             | States                    |
-| ------------- | -------------------------------- | ------------------------- |
-| `thumbSize?`  | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
-| `thumbSizeX?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
-| `thumbSizeY?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
+| Option       | Type                             | States                    |
+| ------------ | -------------------------------- | ------------------------- |
+| `thumbSize?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
 
 Numbers are treated as `px` values.
 
@@ -162,16 +199,14 @@ scrollbar({ thumbSize: 6 });
 scrollbar({ thumbSize: { base: 5, hover: 9 } });
 
 // Different values per axis
-scrollbar({ thumbSize: 6, thumbSizeY: 10 });
+scrollbar({ thumbSize: 6, y: { thumbSize: 10 } });
 ```
 
 #### `thumbColor` — Thumb color
 
-| Option         | Type                             | States                    |
-| -------------- | -------------------------------- | ------------------------- |
-| `thumbColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| Option        | Type                             | States                    |
+| ------------- | -------------------------------- | ------------------------- |
+| `thumbColor?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 - `hover`: color when the container is hovered
 - `active`: color when the thumb itself is directly hovered (WebKit only)
@@ -188,11 +223,9 @@ scrollbar({
 
 #### `thumbRadius` — Thumb corner radius
 
-| Option          | Type                                  | States                    |
-| --------------- | ------------------------------------- | ------------------------- |
-| `thumbRadius?`  | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
-| `thumbRadiusX?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
-| `thumbRadiusY?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
+| Option         | Type                                  | States                    |
+| -------------- | ------------------------------------- | ------------------------- |
+| `thumbRadius?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbRadius` values
 
@@ -210,11 +243,9 @@ scrollbar({ thumbRadius: 4 }); // 4px
 
 #### `thumbBorderWidth` — Thumb border width
 
-| Option               | Type                                       | States                    |
-| -------------------- | ------------------------------------------ | ------------------------- |
-| `thumbBorderWidth?`  | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderWidthX?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderWidthY?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
+| Option              | Type                                       | States                    |
+| ------------------- | ------------------------------------------ | ------------------------- |
+| `thumbBorderWidth?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbBorderWidth` values
 
@@ -229,16 +260,14 @@ scrollbar({ thumbRadius: 4 }); // 4px
 ```ts
 scrollbar({ thumbBorderWidth: 2 }); // fixed 2px
 scrollbar({ thumbBorderWidth: 'auto' }); // auto mode
-scrollbar({ thumbBorderWidthX: 2 }); // horizontal fixed, vertical auto mode
+scrollbar({ x: { thumbBorderWidth: 2 } }); // horizontal fixed, vertical auto mode
 ```
 
 #### `thumbBorderColor` — Thumb border color
 
-| Option               | Type                             | States                    |
-| -------------------- | -------------------------------- | ------------------------- |
-| `thumbBorderColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| Option              | Type                             | States                    |
+| ------------------- | -------------------------------- | ------------------------- |
+| `thumbBorderColor?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 The CSS default when not specified is `transparent`.
 
@@ -255,11 +284,9 @@ scrollbar({
 
 #### `trackColor` — Track color
 
-| Option         | Type                             | States          |
-| -------------- | -------------------------------- | --------------- |
-| `trackColor?`  | `StyleState<string, TrackState>` | `base`, `hover` |
-| `trackColorX?` | `StyleState<string, TrackState>` | `base`, `hover` |
-| `trackColorY?` | `StyleState<string, TrackState>` | `base`, `hover` |
+| Option        | Type                             | States          |
+| ------------- | -------------------------------- | --------------- |
+| `trackColor?` | `StyleState<string, TrackState>` | `base`, `hover` |
 
 - `hover`: color when the container is hovered
 
@@ -274,11 +301,9 @@ scrollbar({
 
 #### `trackSize` — Track width
 
-| Option        | Type                                | States          |
-| ------------- | ----------------------------------- | --------------- |
-| `trackSize?`  | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-| `trackSizeX?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-| `trackSizeY?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| Option       | Type                                | States          |
+| ------------ | ----------------------------------- | --------------- |
+| `trackSize?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
 
 ##### `TrackSize` values
 
@@ -300,7 +325,7 @@ scrollbar({ trackSize: 'auto' });
 scrollbar({ trackSize: { base: 8, hover: 12 } });
 
 // Different settings per axis
-scrollbar({ trackSize: 12, trackSizeX: 'auto' });
+scrollbar({ trackSize: 12, x: { trackSize: 'auto' } });
 ```
 
 ---
@@ -378,9 +403,144 @@ scrollbar({ noAnimation: { color: true } });
 
 ---
 
+## `scrollSnap` Options (`ScrollSnapOptions`)
+
+`padding`, `align` and `margin` can also be specified per axis under `x` / `y` (see [Axis-specific and Common Options](#axis-specific-and-common-options)).
+
+### Container
+
+#### `axis` — Snap axis
+
+| Option  | Type                             | Default     |
+| ------- | -------------------------------- | ----------- |
+| `axis?` | `'x' \| 'y' \| 'both' \| 'none'` | `undefined` |
+
+Sets the axis of `scroll-snap-type`. When omitted, nothing snaps.
+
+| Value    | Description       |
+| -------- | ----------------- |
+| `'x'`    | Horizontal only   |
+| `'y'`    | Vertical only     |
+| `'both'` | Both axes         |
+| `'none'` | Snapping disabled |
+
+#### `strictness` — Snap strictness
+
+| Option        | Type                         | Default       |
+| ------------- | ---------------------------- | ------------- |
+| `strictness?` | `'mandatory' \| 'proximity'` | `'mandatory'` |
+
+Combined with `axis` to form the `scroll-snap-type` value.
+
+| Value         | Description                              |
+| ------------- | ---------------------------------------- |
+| `'mandatory'` | Always rests on a snap position          |
+| `'proximity'` | Snaps only when close to a snap position |
+
+```ts
+scrollSnap({ axis: 'x', strictness: 'proximity' }); // scroll-snap-type: x proximity
+```
+
+#### `padding` — Scroll padding
+
+| Option     | Type               | Default     |
+| ---------- | ------------------ | ----------- |
+| `padding?` | `number \| string` | `undefined` |
+
+Sets the offset of the snap position (`scroll-padding`). Useful for offsetting by the height of a fixed header.\
+Numbers are treated as `px`; strings are used as CSS values as-is.
+
+| Specified   | CSS property            |
+| ----------- | ----------------------- |
+| `padding`   | `scroll-padding`        |
+| `x.padding` | `scroll-padding-inline` |
+| `y.padding` | `scroll-padding-block`  |
+
+```ts
+// Offset by the height of a fixed header
+scrollSnap({ axis: 'y', align: 'start', y: { padding: 80 } });
+```
+
+#### `behavior` — Scroll behavior
+
+| Option      | Type                              | Default     |
+| ----------- | --------------------------------- | ----------- |
+| `behavior?` | `'auto' \| 'smooth' \| 'instant'` | `undefined` |
+
+Sets `scroll-behavior`. When omitted, the browser default (`auto`) is used.
+
+### Children (applied to `> *`)
+
+#### `align` — Snap alignment
+
+| Option   | Type                                     | Default     |
+| -------- | ---------------------------------------- | ----------- |
+| `align?` | `'start' \| 'center' \| 'end' \| 'none'` | `undefined` |
+
+Sets which part of each child aligns to the snap position (`scroll-snap-align`).\
+`x.align` is the alignment on the inline (horizontal) axis and `y.align` on the block (vertical) axis. An axis with no resolved value becomes `none`.
+
+```ts
+scrollSnap({ axis: 'y', align: 'start' }); // scroll-snap-align: start
+scrollSnap({ axis: 'both', x: { align: 'center' }, y: { align: 'start' } }); // scroll-snap-align: start center
+```
+
+#### `stop` — Snap stop
+
+| Option  | Type                   | Default     |
+| ------- | ---------------------- | ----------- |
+| `stop?` | `'normal' \| 'always'` | `undefined` |
+
+Sets `scroll-snap-stop`. When omitted, `normal` is used.
+
+| Value      | Description                                                |
+| ---------- | ---------------------------------------------------------- |
+| `'normal'` | Snap positions may be skipped depending on scroll momentum |
+| `'always'` | Always stops at each snap position                         |
+
+#### `margin` — Scroll margin
+
+| Option    | Type               | Default     |
+| --------- | ------------------ | ----------- |
+| `margin?` | `number \| string` | `undefined` |
+
+Sets the snap position offset on the child side (`scroll-margin`). Numbers are treated as `px`.
+
+| Specified  | CSS property           |
+| ---------- | ---------------------- |
+| `margin`   | `scroll-margin`        |
+| `x.margin` | `scroll-margin-inline` |
+| `y.margin` | `scroll-margin-block`  |
+
+```ts
+scrollSnap({ axis: 'y', align: 'start', y: { margin: 16 } });
+```
+
+---
+
 ## Type Definitions
 
 ```ts
+/** Scrollbar options (common styles + per-axis overrides) */
+type ScrollbarOptions = ScrollbarAxisOptions & {
+  x?: ScrollbarAxisOptions;
+  y?: ScrollbarAxisOptions;
+  fallbackSize?: FallbackSize;
+  arrows?: boolean;
+  noAnimation?: NoAnimation;
+};
+
+/** Styles that can be specified per axis */
+type ScrollbarAxisOptions = {
+  thumbColor?: StyleState<string, ThumbState>;
+  thumbSize?: StyleState<number, ThumbState>;
+  thumbRadius?: StyleState<ThumbRadius, ThumbState>;
+  thumbBorderColor?: StyleState<string, ThumbState>;
+  thumbBorderWidth?: StyleState<ThumbBorderWidth, ThumbState>;
+  trackColor?: StyleState<string, TrackState>;
+  trackSize?: StyleState<TrackSize, TrackState>;
+};
+
 /** Thumb states */
 type ThumbState = 'hover' | 'active';
 
@@ -401,6 +561,38 @@ type FallbackSize = 'auto' | 'thin' | 'none';
 
 /** Animation disable configuration */
 type NoAnimation = boolean | { size?: boolean; color?: boolean };
+
+/** scrollSnap options (common options + per-axis overrides) */
+type ScrollSnapOptions = ScrollSnapAxisOptions & {
+  x?: ScrollSnapAxisOptions;
+  y?: ScrollSnapAxisOptions;
+  axis?: SnapAxis;
+  strictness?: SnapStrictness;
+  behavior?: SnapBehavior;
+  stop?: SnapStop;
+};
+
+/** Options that can be specified per axis */
+type ScrollSnapAxisOptions = {
+  padding?: number | string;
+  align?: SnapAlign;
+  margin?: number | string;
+};
+
+/** Snap axis */
+type SnapAxis = 'x' | 'y' | 'both' | 'none';
+
+/** Snap strictness */
+type SnapStrictness = 'mandatory' | 'proximity';
+
+/** Snap alignment */
+type SnapAlign = 'start' | 'center' | 'end' | 'none';
+
+/** Snap stop */
+type SnapStop = 'always' | 'normal';
+
+/** Scroll behavior */
+type SnapBehavior = 'smooth' | 'auto' | 'instant';
 
 /** Per-state value type */
 type StyleState<T, S extends string> =

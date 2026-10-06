@@ -28,14 +28,14 @@ describe('scrollbar', () => {
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeY']).toBe('0px');
     });
 
-    it('thumbSizeX は thumbSize をX軸で上書きする', () => {
-      const result = scrollbar({ thumbSize: 8, thumbSizeX: 4 });
+    it('x.thumbSize は thumbSize をX軸で上書きする', () => {
+      const result = scrollbar({ thumbSize: 8, x: { thumbSize: 4 } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeX']).toBe('4px');
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeY']).toBe('8px');
     });
 
-    it('thumbSizeY は thumbSize をY軸で上書きする', () => {
-      const result = scrollbar({ thumbSize: 8, thumbSizeY: 12 });
+    it('y.thumbSize は thumbSize をY軸で上書きする', () => {
+      const result = scrollbar({ thumbSize: 8, y: { thumbSize: 12 } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeX']).toBe('8px');
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeY']).toBe('12px');
     });
@@ -52,10 +52,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbSizeX の hover は thumbSize の hover をX軸で上書きする', () => {
+    it('x.thumbSize の hover は thumbSize の hover をX軸で上書きする', () => {
       const result = scrollbar({
         thumbSize: { hover: 12 },
-        thumbSizeX: { hover: 6 },
+        x: { thumbSize: { hover: 6 } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeX-hover']).toBe(
         '6px',
@@ -65,10 +65,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbSizeY の hover は thumbSize の hover をY軸で上書きする', () => {
+    it('y.thumbSize の hover は thumbSize の hover をY軸で上書きする', () => {
       const result = scrollbar({
         thumbSize: { hover: 12 },
-        thumbSizeY: { hover: 16 },
+        y: { thumbSize: { hover: 16 } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbSizeX-hover']).toBe(
         '12px',
@@ -86,24 +86,27 @@ describe('scrollbar', () => {
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorY']).toBe('red');
     });
 
-    it('thumbColorX のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbColorX: 'blue' });
+    it('x.thumbColor のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { thumbColor: 'blue' } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX']).toBe('blue');
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbColorY'],
       ).toBeUndefined();
     });
 
-    it('thumbColorY のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ thumbColorY: 'green' });
+    it('y.thumbColor のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({ y: { thumbColor: 'green' } });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbColorX'],
       ).toBeUndefined();
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorY']).toBe('green');
     });
 
-    it('thumbColorX は thumbColor をX軸で上書きする', () => {
-      const result = scrollbar({ thumbColor: 'red', thumbColorX: 'blue' });
+    it('x.thumbColor は thumbColor をX軸で上書きする', () => {
+      const result = scrollbar({
+        thumbColor: 'red',
+        x: { thumbColor: 'blue' },
+      });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX']).toBe('blue');
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorY']).toBe('red');
     });
@@ -120,8 +123,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbColorX の hover のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbColorX: { hover: 'rgba(0,0,0,0.3)' } });
+    it('x.thumbColor の hover のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({
+        x: { thumbColor: { hover: 'rgba(0,0,0,0.3)' } },
+      });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX-hover']).toBe(
         'rgba(0,0,0,0.3)',
       );
@@ -130,8 +135,10 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbColorY の hover のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ thumbColorY: { hover: 'rgba(0,0,0,0.7)' } });
+    it('y.thumbColor の hover のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({
+        y: { thumbColor: { hover: 'rgba(0,0,0,0.7)' } },
+      });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbColorX-hover'],
       ).toBeUndefined();
@@ -140,10 +147,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbColorX の hover は thumbColor の hover をX軸で上書きする', () => {
+    it('x.thumbColor の hover は thumbColor の hover をX軸で上書きする', () => {
       const result = scrollbar({
         thumbColor: { hover: 'red' },
-        thumbColorX: { hover: 'blue' },
+        x: { thumbColor: { hover: 'blue' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX-hover']).toBe(
         'blue',
@@ -153,10 +160,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbColorX の base 指定のみで hover が未指定の場合、thumbColor の hover にフォールバックする', () => {
+    it('x.thumbColor の base 指定のみで hover が未指定の場合、thumbColor の hover にフォールバックする', () => {
       const result = scrollbar({
         thumbColor: { hover: 'blue' },
-        thumbColorX: { base: 'green' },
+        x: { thumbColor: { base: 'green' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX-hover']).toBe(
         'blue',
@@ -178,8 +185,8 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbColorX の active のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbColorX: { active: '#555' } });
+    it('x.thumbColor の active のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { thumbColor: { active: '#555' } } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX-active']).toBe(
         '#555',
       );
@@ -188,8 +195,8 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbColorY の active のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ thumbColorY: { active: '#777' } });
+    it('y.thumbColor の active のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({ y: { thumbColor: { active: '#777' } } });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbColorX-active'],
       ).toBeUndefined();
@@ -198,10 +205,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbColorX の active は thumbColor の active をX軸で上書きする', () => {
+    it('x.thumbColor の active は thumbColor の active をX軸で上書きする', () => {
       const result = scrollbar({
         thumbColor: { active: '#333' },
-        thumbColorX: { active: '#555' },
+        x: { thumbColor: { active: '#555' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX-active']).toBe(
         '#555',
@@ -211,10 +218,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbColorX の base 指定のみで active が未指定の場合、thumbColor の active にフォールバックする', () => {
+    it('x.thumbColor の base 指定のみで active が未指定の場合、thumbColor の active にフォールバックする', () => {
       const result = scrollbar({
         thumbColor: { active: '#333' },
-        thumbColorX: { base: 'blue' },
+        x: { thumbColor: { base: 'blue' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbColorX-active']).toBe(
         '#333',
@@ -248,8 +255,8 @@ describe('scrollbar', () => {
       expect(result.style?.['--lx-scroll-scrollbar-thumbRadiusY']).toBe('0');
     });
 
-    it('thumbRadiusX のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbRadiusX: 'full' });
+    it('x.thumbRadius のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { thumbRadius: 'full' } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbRadiusX']).toBe(
         '9999px',
       );
@@ -258,16 +265,16 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbRadiusY のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ thumbRadiusY: 'none' });
+    it('y.thumbRadius のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({ y: { thumbRadius: 'none' } });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbRadiusX'],
       ).toBeUndefined();
       expect(result.style?.['--lx-scroll-scrollbar-thumbRadiusY']).toBe('0');
     });
 
-    it('thumbRadiusX は thumbRadius をX軸で上書きする', () => {
-      const result = scrollbar({ thumbRadius: 4, thumbRadiusX: 8 });
+    it('x.thumbRadius は thumbRadius をX軸で上書きする', () => {
+      const result = scrollbar({ thumbRadius: 4, x: { thumbRadius: 8 } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbRadiusX']).toBe('8px');
       expect(result.style?.['--lx-scroll-scrollbar-thumbRadiusY']).toBe('4px');
     });
@@ -284,8 +291,8 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbBorderWidthX のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbBorderWidthX: 1 });
+    it('x.thumbBorderWidth のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { thumbBorderWidth: 1 } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbBorderWidthX']).toBe(
         '1px',
       );
@@ -294,8 +301,8 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbBorderWidthY のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ thumbBorderWidthY: 3 });
+    it('y.thumbBorderWidth のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({ y: { thumbBorderWidth: 3 } });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbBorderWidthX'],
       ).toBeUndefined();
@@ -304,8 +311,11 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbBorderWidthX は thumbBorderWidth をX軸で上書きする', () => {
-      const result = scrollbar({ thumbBorderWidth: 2, thumbBorderWidthX: 1 });
+    it('x.thumbBorderWidth は thumbBorderWidth をX軸で上書きする', () => {
+      const result = scrollbar({
+        thumbBorderWidth: 2,
+        x: { thumbBorderWidth: 1 },
+      });
       expect(result.style?.['--lx-scroll-scrollbar-thumbBorderWidthX']).toBe(
         '1px',
       );
@@ -326,8 +336,8 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbBorderColorX のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbBorderColorX: 'white' });
+    it('x.thumbBorderColor のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { thumbBorderColor: 'white' } });
       expect(result.style?.['--lx-scroll-scrollbar-thumbBorderColorX']).toBe(
         'white',
       );
@@ -336,8 +346,8 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbBorderColorY のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ thumbBorderColorY: 'black' });
+    it('y.thumbBorderColor のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({ y: { thumbBorderColor: 'black' } });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbBorderColorX'],
       ).toBeUndefined();
@@ -346,10 +356,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('thumbBorderColorX は thumbBorderColor をX軸で上書きする', () => {
+    it('x.thumbBorderColor は thumbBorderColor をX軸で上書きする', () => {
       const result = scrollbar({
         thumbBorderColor: 'transparent',
-        thumbBorderColorX: 'white',
+        x: { thumbBorderColor: 'white' },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbBorderColorX']).toBe(
         'white',
@@ -377,8 +387,8 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbBorderColorX の hover のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ thumbBorderColorX: { hover: 'blue' } });
+    it('x.thumbBorderColor の hover のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { thumbBorderColor: { hover: 'blue' } } });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbBorderColorX-hover'],
       ).toBe('blue');
@@ -387,10 +397,10 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('thumbBorderColorX の hover は thumbBorderColor の hover をX軸で上書きする', () => {
+    it('x.thumbBorderColor の hover は thumbBorderColor の hover をX軸で上書きする', () => {
       const result = scrollbar({
         thumbBorderColor: { hover: 'red' },
-        thumbBorderColorX: { hover: 'blue' },
+        x: { thumbBorderColor: { hover: 'blue' } },
       });
       expect(
         result.style?.['--lx-scroll-scrollbar-thumbBorderColorX-hover'],
@@ -400,10 +410,10 @@ describe('scrollbar', () => {
       ).toBe('red');
     });
 
-    it('thumbBorderColorX の base 指定のみで hover が未指定の場合、thumbBorderColor の hover にフォールバックする', () => {
+    it('x.thumbBorderColor の base 指定のみで hover が未指定の場合、thumbBorderColor の hover にフォールバックする', () => {
       const result = scrollbar({
         thumbBorderColor: { hover: 'red' },
-        thumbBorderColorX: { base: 'white' },
+        x: { thumbBorderColor: { base: 'white' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-thumbBorderColorX']).toBe(
         'white',
@@ -428,8 +438,8 @@ describe('scrollbar', () => {
       );
     });
 
-    it('trackColorX のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ trackColorX: 'rgba(0,0,0,0.2)' });
+    it('x.trackColor のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({ x: { trackColor: 'rgba(0,0,0,0.2)' } });
       expect(result.style?.['--lx-scroll-scrollbar-trackColorX']).toBe(
         'rgba(0,0,0,0.2)',
       );
@@ -438,8 +448,8 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('trackColorY のみ指定するとYだけ設定される', () => {
-      const result = scrollbar({ trackColorY: 'rgba(0,0,0,0.3)' });
+    it('y.trackColor のみ指定するとYだけ設定される', () => {
+      const result = scrollbar({ y: { trackColor: 'rgba(0,0,0,0.3)' } });
       expect(
         result.style?.['--lx-scroll-scrollbar-trackColorX'],
       ).toBeUndefined();
@@ -448,10 +458,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('trackColorX は trackColor をX軸で上書きする', () => {
+    it('x.trackColor は trackColor をX軸で上書きする', () => {
       const result = scrollbar({
         trackColor: 'rgba(0,0,0,0.1)',
-        trackColorX: 'rgba(0,0,0,0.2)',
+        x: { trackColor: 'rgba(0,0,0,0.2)' },
       });
       expect(result.style?.['--lx-scroll-scrollbar-trackColorX']).toBe(
         'rgba(0,0,0,0.2)',
@@ -479,8 +489,10 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('trackColorX の hover のみ指定するとXだけ設定される', () => {
-      const result = scrollbar({ trackColorX: { hover: 'rgba(0,0,0,0.3)' } });
+    it('x.trackColor の hover のみ指定するとXだけ設定される', () => {
+      const result = scrollbar({
+        x: { trackColor: { hover: 'rgba(0,0,0,0.3)' } },
+      });
       expect(result.style?.['--lx-scroll-scrollbar-trackColorX-hover']).toBe(
         'rgba(0,0,0,0.3)',
       );
@@ -489,10 +501,10 @@ describe('scrollbar', () => {
       ).toBeUndefined();
     });
 
-    it('trackColorX の hover は trackColor の hover をX軸で上書きする', () => {
+    it('x.trackColor の hover は trackColor の hover をX軸で上書きする', () => {
       const result = scrollbar({
         trackColor: { hover: 'rgba(0,0,0,0.2)' },
-        trackColorX: { hover: 'rgba(0,0,0,0.4)' },
+        x: { trackColor: { hover: 'rgba(0,0,0,0.4)' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-trackColorX-hover']).toBe(
         'rgba(0,0,0,0.4)',
@@ -502,10 +514,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('trackColorX の base 指定のみで hover が未指定の場合、trackColor の hover にフォールバックする', () => {
+    it('x.trackColor の base 指定のみで hover が未指定の場合、trackColor の hover にフォールバックする', () => {
       const result = scrollbar({
         trackColor: { hover: 'rgba(0,0,0,0.2)' },
-        trackColorX: { base: 'rgba(0,0,0,0.1)' },
+        x: { trackColor: { base: 'rgba(0,0,0,0.1)' } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-trackColorX']).toBe(
         'rgba(0,0,0,0.1)',
@@ -534,21 +546,21 @@ describe('scrollbar', () => {
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeY']).toBe('auto');
     });
 
-    it('trackSizeX は trackSize をX軸で上書きする', () => {
-      const result = scrollbar({ trackSize: 12, trackSizeX: 8 });
+    it('x.trackSize は trackSize をX軸で上書きする', () => {
+      const result = scrollbar({ trackSize: 12, x: { trackSize: 8 } });
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeX']).toBe('8px');
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeY']).toBe('12px');
     });
 
-    it('trackSizeX は trackSize をX軸で上書きする(auto)', () => {
-      const result = scrollbar({ trackSize: 12, trackSizeX: 'auto' });
+    it('x.trackSize は trackSize をX軸で上書きする(auto)', () => {
+      const result = scrollbar({ trackSize: 12, x: { trackSize: 'auto' } });
       expect(result.className).toContain('lx-scroll-scrollbar-trackSizeX-auto');
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeX']).toBe('auto');
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeY']).toBe('12px');
     });
 
-    it('trackSizeY は trackSize をX軸で上書きする(auto)', () => {
-      const result = scrollbar({ trackSize: 12, trackSizeY: 'auto' });
+    it('y.trackSize は trackSize をX軸で上書きする(auto)', () => {
+      const result = scrollbar({ trackSize: 12, y: { trackSize: 'auto' } });
       expect(result.className).toContain('lx-scroll-scrollbar-trackSizeY-auto');
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeX']).toBe('12px');
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeY']).toBe('auto');
@@ -584,10 +596,10 @@ describe('scrollbar', () => {
       );
     });
 
-    it('trackSizeX の hover は trackSize の hover をX軸で上書きする', () => {
+    it('x.trackSize の hover は trackSize の hover をX軸で上書きする', () => {
       const result = scrollbar({
         trackSize: { hover: 16 },
-        trackSizeX: { hover: 20 },
+        x: { trackSize: { hover: 20 } },
       });
       expect(result.style?.['--lx-scroll-scrollbar-trackSizeX-hover']).toBe(
         '20px',

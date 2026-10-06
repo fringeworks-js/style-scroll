@@ -4,7 +4,7 @@
 export const clsScrollScrollSnap = 'lx-scroll-snap';
 
 /**
- * スタイル種別: scroll-snap アイテム
+ * アイテムオプション指定時に付与するクラス（直接の子要素に適用）
  */
 export const clsScrollScrollSnapItem = 'lx-scroll-snap-item';
 

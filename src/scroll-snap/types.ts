@@ -28,18 +28,6 @@ type ScrollSnapContainerOptions = {
   padding?: number | string;
 
   /**
-   * 横方向のスクロールパディング（左右）
-   * `scroll-padding-inline` に対応
-   */
-  paddingX?: number | string;
-
-  /**
-   * 縦方向のスクロールパディング（上下）
-   * `scroll-padding-block` に対応
-   */
-  paddingY?: number | string;
-
-  /**
    * スクロール動作
    * - `'auto'`: ブラウザのデフォルト（デフォルト）
    * - `'smooth'`: スムーズスクロール
@@ -53,35 +41,63 @@ type ScrollSnapContainerOptions = {
  *
  * アイテムオプション（align, stop, margin など）を指定すると、
  * CSS の `> *` セレクタで全子要素に一括適用される。
- * 各アイテムに個別のスタイルを指定する場合は `scrollSnapItem()` を使用すること。
+ * padding・align・margin は縦横共通。`x`・`y` で軸ごとに上書きできる
  */
 export type ScrollSnapOptions = WithChildStyle<
   ScrollSnapItemOptions,
   ScrollSnapContainerOptions
->;
+> & {
+  /**
+   * 横方向（インライン軸）のオプション
+   * - 縦横共通の値を上書きする
+   */
+  x?: ScrollSnapAxisOptions;
+
+  /**
+   * 縦方向（ブロック軸）のオプション
+   * - 縦横共通の値を上書きする
+   */
+  y?: ScrollSnapAxisOptions;
+};
 
 /**
- * scrollSnapItemのオプション（子要素側）
+ * 軸ごとに指定できるオプション（直下で縦横共通、または `x`・`y` で軸ごとに指定する）
+ */
+export type ScrollSnapAxisOptions = {
+  /**
+   * スクロールパディング
+   * - `x`: `scroll-padding-inline`（左右）
+   * - `y`: `scroll-padding-block`（上下）
+   */
+  padding?: number | string;
+
+  /**
+   * スナップ位置の揃え
+   * - `x`: インライン軸
+   * - `y`: ブロック軸
+   */
+  align?: SnapAlign;
+
+  /**
+   * スクロールマージン
+   * - `x`: `scroll-margin-inline`（左右）
+   * - `y`: `scroll-margin-block`（上下）
+   */
+  margin?: number | string;
+};
+
+/**
+ * 子要素に適用するオプション
  */
 export type ScrollSnapItemOptions = {
   /**
-   * スナップ位置の揃え（縦横共通）
+   * スナップ位置の揃え
    * - `'start'`: 先頭に揃える
    * - `'center'`: 中央に揃える
    * - `'end'`: 末尾に揃える
    * - `'none'`: スナップしない
    */
   align?: SnapAlign;
-
-  /**
-   * 横方向（インライン軸）のスナップ位置の揃え
-   */
-  alignX?: SnapAlign;
-
-  /**
-   * 縦方向（ブロック軸）のスナップ位置の揃え
-   */
-  alignY?: SnapAlign;
 
   /**
    * スナップポイントの通過制御
@@ -97,18 +113,6 @@ export type ScrollSnapItemOptions = {
    * - string: CSS値
    */
   margin?: number | string;
-
-  /**
-   * 横方向のスクロールマージン（左右）
-   * `scroll-margin-inline` に対応
-   */
-  marginX?: number | string;
-
-  /**
-   * 縦方向のスクロールマージン（上下）
-   * `scroll-margin-block` に対応
-   */
-  marginY?: number | string;
 };
 
 /**

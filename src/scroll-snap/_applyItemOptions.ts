@@ -11,11 +11,24 @@ import {
   varScrollSnapItemMarginY,
   varScrollSnapItemStop,
 } from './_constants';
-import type { ScrollSnapItemOptions, SnapAlign } from './types';
+import type { SnapAlign, SnapStop } from './types';
+
+/**
+ * 子要素に適用する値（軸別の値は共通の値と分けて保持する）
+ */
+export type ItemValues = {
+  align?: SnapAlign;
+  alignX?: SnapAlign;
+  alignY?: SnapAlign;
+  stop?: SnapStop;
+  margin?: number | string;
+  marginX?: number | string;
+  marginY?: number | string;
+};
 
 export function applyItemOptions(
   result: ScrollStyle,
-  options: ScrollSnapItemOptions,
+  options: ItemValues,
 ): void {
   const { align, alignX, alignY, stop, margin, marginX, marginY } = options;
 
@@ -27,7 +40,10 @@ export function applyItemOptions(
     result.style![varScrollSnapItemStop] = stop;
   }
   if (margin != null) {
-    result.className = mergeClassName(result.className, clsScrollSnapItemMargin);
+    result.className = mergeClassName(
+      result.className,
+      clsScrollSnapItemMargin,
+    );
     result.style![varScrollSnapItemMargin] = unit(margin) as string;
   }
   if (marginX != null) {

@@ -1,5 +1,12 @@
 import type { ArgTypes, Meta, StoryObj } from '@storybook/web-components-vite';
-import type { ScrollSnapOptions, SnapAlign, SnapAxis, SnapBehavior, SnapStop, SnapStrictness } from '../../src/scroll-snap';
+import type {
+  ScrollSnapOptions,
+  SnapAlign,
+  SnapAxis,
+  SnapBehavior,
+  SnapStop,
+  SnapStrictness,
+} from '../../src/scroll-snap';
 import type { SnapDebugOptions } from '../_internal/createSnapContainer';
 import createSnapContainer from '../_internal/createSnapContainer';
 
@@ -53,16 +60,12 @@ function toOptions(args: StoryArgs): {
       axis,
       strictness,
       padding,
-      paddingX,
-      paddingY,
       behavior,
       align,
-      alignX,
-      alignY,
       stop,
       margin,
-      marginX,
-      marginY,
+      x: { padding: paddingX, align: alignX, margin: marginX },
+      y: { padding: paddingY, align: alignY, margin: marginY },
     },
     debugOptions: { containerWidth, containerHeight, itemCount },
   };

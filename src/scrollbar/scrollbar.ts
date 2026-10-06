@@ -34,26 +34,14 @@ import type { ScrollbarOptions } from './types';
 const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   const {
     thumbColor,
-    thumbColorX,
-    thumbColorY,
     thumbSize,
-    thumbSizeX,
-    thumbSizeY,
     thumbRadius,
-    thumbRadiusX,
-    thumbRadiusY,
     thumbBorderColor,
-    thumbBorderColorX,
-    thumbBorderColorY,
     thumbBorderWidth,
-    thumbBorderWidthX,
-    thumbBorderWidthY,
     trackColor,
-    trackColorX,
-    trackColorY,
     trackSize,
-    trackSizeX,
-    trackSizeY,
+    x = {},
+    y = {},
     fallbackSize,
     arrows,
     noAnimation,
@@ -67,8 +55,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // thumbSize
   const resolvedThumbSize = resolveStyleStateXY(
     thumbSize,
-    thumbSizeX,
-    thumbSizeY,
+    x.thumbSize,
+    y.thumbSize,
     thumbStates,
   );
   _applyPxStylesXY(result, varScrollbarThumbSize, resolvedThumbSize);
@@ -76,8 +64,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // thumbColor
   const resolvedThumbColor = resolveStyleStateXY(
     thumbColor,
-    thumbColorX,
-    thumbColorY,
+    x.thumbColor,
+    y.thumbColor,
     thumbStates,
   );
   _applyStylesXY(result, varScrollbarThumbColor, resolvedThumbColor);
@@ -85,8 +73,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // thumbRadius
   const resolvedThumbRadius = resolveStyleStateXY(
     thumbRadius,
-    thumbRadiusX,
-    thumbRadiusY,
+    x.thumbRadius,
+    y.thumbRadius,
     thumbStates,
   );
   _applyRadiusStylesXY(result, varScrollbarThumbRadius, resolvedThumbRadius);
@@ -94,8 +82,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // thumbBorderWidth
   const resolvedThumbBorderWidth = resolveStyleStateXY(
     thumbBorderWidth,
-    thumbBorderWidthX,
-    thumbBorderWidthY,
+    x.thumbBorderWidth,
+    y.thumbBorderWidth,
     thumbStates,
   );
   _applyPxStylesXY(
@@ -107,8 +95,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // thumbBorderColor
   const resolvedThumbBorderColor = resolveStyleStateXY(
     thumbBorderColor,
-    thumbBorderColorX,
-    thumbBorderColorY,
+    x.thumbBorderColor,
+    y.thumbBorderColor,
     thumbStates,
   );
   _applyStylesXY(
@@ -120,8 +108,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // trackColor
   const resolvedTrackColor = resolveStyleStateXY(
     trackColor,
-    trackColorX,
-    trackColorY,
+    x.trackColor,
+    y.trackColor,
     trackStates,
   );
   _applyStylesXY(result, varScrollbarTrackColor, resolvedTrackColor);
@@ -129,8 +117,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   // trackSize
   const resolvedTrackSize = resolveStyleStateXY(
     trackSize,
-    trackSizeX,
-    trackSizeY,
+    x.trackSize,
+    y.trackSize,
     trackStates,
   );
   _applyPxStylesXY(result, varScrollbarTrackSize, resolvedTrackSize);

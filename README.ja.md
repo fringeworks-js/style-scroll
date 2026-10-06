@@ -1,6 +1,6 @@
 # @fringeworks/style-scroll
 
-`@fringeworks/style-scroll` は、CSSによるスクロール関連スタイルの制御に特化したニッチなライブラリです。\
+`@fringeworks/style-scroll` は、CSSによるスクロール関連スタイルの制御に特化した、誰かにとっては便利なライブラリです。\
 オプションに応じたクラス名とCSS変数をオブジェクトとして返します。フレームワーク非依存でSSRにも対応しています。
 
 **[English README is available here](./README.md)**
@@ -57,17 +57,18 @@ import '@fringeworks/style-scroll/styles.css';
 
 // 必要なスタイルのみインポート
 import '@fringeworks/style-scroll/scrollbar.css';
+import '@fringeworks/style-scroll/scroll-snap.css';
 ```
 
 CSSを自動的に読み込みたい場合は `with-css` 配下のモジュールを使用してください。CSSのインポートを扱えるバンドラーが必要です。
 
 ```ts
-import { scrollbar } from '@fringeworks/style-scroll/with-css';
+import { scrollbar, scrollSnap } from '@fringeworks/style-scroll/with-css';
 ```
 
 ### `StyleState` について
 
-多くのオプションは `StyleState<T, S>` 型を受け付けます。スカラー値またはステート別オブジェクトで指定できます。
+`scrollbar` の多くのオプションは `StyleState<T, S>` 型を受け付けます。スカラー値またはステート別オブジェクトで指定できます。
 
 ```ts
 // スカラー値: 全ステートに同じ値を適用
@@ -86,17 +87,28 @@ thumbColor: { hover: 'rgba(0, 0, 0, 0.5)' }
 
 ### 軸別指定と共通指定
 
-縦横で異なる値を設定したい場合は、`X`（横）・`Y`（縦）サフィックス付きオプションを使用します。\
-軸別の値が指定された場合はその値が優先され、未指定のステートは共通オプションの値にフォールバックします。
+`scrollbar`・`scrollSnap` とも、直下に指定したオプションは縦横共通です。縦横で異なる値を設定したい場合は、`x`（横）・`y`（縦）の中で上書きします。\
+`x`・`y` に指定できるオプションは、それぞれ `ScrollbarAxisOptions`・`ScrollSnapAxisOptions` です。
 
 ```ts
 scrollbar({
   thumbColor: 'rgba(0, 0, 0, 0.3)', // 縦横共通
-  thumbColorX: 'rgba(0, 0, 255, 0.3)', // 横のみ上書き
+  x: { thumbColor: 'rgba(0, 0, 255, 0.3)' }, // 横のみ上書き
+});
 
-  // ホバー時: X軸は thumbColorX に指定がないため thumbColor の hover にフォールバック
+scrollSnap({
+  align: 'start', // 縦横共通
+  x: { align: 'center' }, // 横のみ上書き
+});
+```
+
+`StyleState` を受け付けるオプションでは、軸別の値はステートごとに優先され、未指定のステートは共通の値にフォールバックします。
+
+```ts
+scrollbar({
   thumbColor: { base: 'rgba(0,0,0,0.3)', hover: 'rgba(0,0,0,0.5)' },
-  thumbColorX: { base: 'rgba(0,0,255,0.3)' }, // X のホバーは上記 hover にフォールバック
+  // x に hover の指定がないため、横のホバー時は thumbColor の hover にフォールバック
+  x: { thumbColor: { base: 'rgba(0,0,255,0.3)' } },
 });
 ```
 
@@ -140,17 +152,42 @@ const { className, style } = scrollbar({
 | `thumbBorderWidth` | `2`                         |
 | `thumbBorderColor` | `transparent`               |
 
-## オプション（`ScrollbarOptions`）
+### `scrollSnap`
+
+スクロールスナップを設定します。スクロールコンテナに適用してください。\
+`align`・`stop`・`margin` は、直接の子要素（`> *`）にまとめて適用されます。
+
+```ts
+import { scrollSnap } from '@fringeworks/style-scroll';
+
+// 縦方向にスクロールし、各子要素の先頭でスナップ
+const { className, style } = scrollSnap({ axis: 'y', align: 'start' });
+```
+
+スナップさせるには `axis` と `align` の両方を指定してください。どちらも未指定時は `none` のため、スナップしません。
+
+#### 子要素ごとに個別に指定する
+
+子要素ごとに揃え位置などを変えたい場合は、その子要素のインラインスタイルで CSS プロパティを直接指定してください。インラインスタイルは `> *` に適用されるスタイルより優先されます。
+
+```html
+<div class="lx-scroll-snap ..." style="...">
+  <div>...</div>
+  <div style="scroll-snap-align: center">...</div>
+</div>
+```
+
+## `scrollbar` のオプション（`ScrollbarOptions`）
+
+Thumb・Track のオプションはすべて `x`・`y` の中で軸ごとにも指定できます（[軸別指定と共通指定](#軸別指定と共通指定)を参照）。
 
 ### Thumb（ハンドル）
 
 #### `thumbSize` — ハンドルの太さ
 
-| オプション    | 型                               | ステート                  |
-| ------------- | -------------------------------- | ------------------------- |
-| `thumbSize?`  | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
-| `thumbSizeX?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
-| `thumbSizeY?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
+| オプション   | 型                               | ステート                  |
+| ------------ | -------------------------------- | ------------------------- |
+| `thumbSize?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
 
 数値は `px` 単位として扱われます。
 
@@ -162,16 +199,14 @@ scrollbar({ thumbSize: 6 });
 scrollbar({ thumbSize: { base: 5, hover: 9 } });
 
 // 縦と横で異なる値
-scrollbar({ thumbSize: 6, thumbSizeY: 10 });
+scrollbar({ thumbSize: 6, y: { thumbSize: 10 } });
 ```
 
 #### `thumbColor` — ハンドルの色
 
-| オプション     | 型                               | ステート                  |
-| -------------- | -------------------------------- | ------------------------- |
-| `thumbColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| オプション    | 型                               | ステート                  |
+| ------------- | -------------------------------- | ------------------------- |
+| `thumbColor?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 - `hover`: コンテナにポインターがホバーしたときの色
 - `active`: thumbそのものに直接ホバーしたときの色（WebKitのみ）
@@ -188,11 +223,9 @@ scrollbar({
 
 #### `thumbRadius` — ハンドルの角丸
 
-| オプション      | 型                                    | ステート                  |
-| --------------- | ------------------------------------- | ------------------------- |
-| `thumbRadius?`  | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
-| `thumbRadiusX?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
-| `thumbRadiusY?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
+| オプション     | 型                                    | ステート                  |
+| -------------- | ------------------------------------- | ------------------------- |
+| `thumbRadius?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbRadius` の値
 
@@ -210,11 +243,9 @@ scrollbar({ thumbRadius: 4 }); // 4px
 
 #### `thumbBorderWidth` — ハンドルのボーダーの太さ
 
-| オプション           | 型                                         | ステート                  |
-| -------------------- | ------------------------------------------ | ------------------------- |
-| `thumbBorderWidth?`  | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderWidthX?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderWidthY?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
+| オプション          | 型                                         | ステート                  |
+| ------------------- | ------------------------------------------ | ------------------------- |
+| `thumbBorderWidth?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
 
 ##### `ThumbBorderWidth` の値
 
@@ -229,16 +260,14 @@ scrollbar({ thumbRadius: 4 }); // 4px
 ```ts
 scrollbar({ thumbBorderWidth: 2 }); // 固定 2px
 scrollbar({ thumbBorderWidth: 'auto' }); // autoモード
-scrollbar({ thumbBorderWidthX: 2 }); // 横のみ固定、縦はautoモード
+scrollbar({ x: { thumbBorderWidth: 2 } }); // 横のみ固定、縦はautoモード
 ```
 
 #### `thumbBorderColor` — ハンドルのボーダーの色
 
-| オプション           | 型                               | ステート                  |
-| -------------------- | -------------------------------- | ------------------------- |
-| `thumbBorderColor?`  | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderColorX?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-| `thumbBorderColorY?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
+| オプション          | 型                               | ステート                  |
+| ------------------- | -------------------------------- | ------------------------- |
+| `thumbBorderColor?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
 
 未指定時のCSSデフォルトは `transparent` です。
 
@@ -255,11 +284,9 @@ scrollbar({
 
 #### `trackColor` — トラックの色
 
-| オプション     | 型                               | ステート        |
-| -------------- | -------------------------------- | --------------- |
-| `trackColor?`  | `StyleState<string, TrackState>` | `base`, `hover` |
-| `trackColorX?` | `StyleState<string, TrackState>` | `base`, `hover` |
-| `trackColorY?` | `StyleState<string, TrackState>` | `base`, `hover` |
+| オプション    | 型                               | ステート        |
+| ------------- | -------------------------------- | --------------- |
+| `trackColor?` | `StyleState<string, TrackState>` | `base`, `hover` |
 
 - `hover`: コンテナにポインターがホバーしたときの色
 
@@ -274,11 +301,9 @@ scrollbar({
 
 #### `trackSize` — トラックの幅
 
-| オプション    | 型                                  | ステート        |
-| ------------- | ----------------------------------- | --------------- |
-| `trackSize?`  | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-| `trackSizeX?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-| `trackSizeY?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
+| オプション   | 型                                  | ステート        |
+| ------------ | ----------------------------------- | --------------- |
+| `trackSize?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
 
 ##### `TrackSize` の値
 
@@ -300,7 +325,7 @@ scrollbar({ trackSize: 'auto' });
 scrollbar({ trackSize: { base: 8, hover: 12 } });
 
 // 縦と横で異なる設定
-scrollbar({ trackSize: 12, trackSizeX: 'auto' });
+scrollbar({ trackSize: 12, x: { trackSize: 'auto' } });
 ```
 
 ---
@@ -378,9 +403,144 @@ scrollbar({ noAnimation: { color: true } });
 
 ---
 
+## `scrollSnap` のオプション（`ScrollSnapOptions`）
+
+`padding`・`align`・`margin` は `x`・`y` の中で軸ごとにも指定できます（[軸別指定と共通指定](#軸別指定と共通指定)を参照）。
+
+### コンテナ
+
+#### `axis` — スナップ軸
+
+| オプション | 型                               | デフォルト  |
+| ---------- | -------------------------------- | ----------- |
+| `axis?`    | `'x' \| 'y' \| 'both' \| 'none'` | `undefined` |
+
+`scroll-snap-type` の軸を指定します。未指定時はスナップしません。
+
+| 値       | 説明         |
+| -------- | ------------ |
+| `'x'`    | 横方向のみ   |
+| `'y'`    | 縦方向のみ   |
+| `'both'` | 縦横両方     |
+| `'none'` | スナップ無効 |
+
+#### `strictness` — スナップの厳密さ
+
+| オプション    | 型                           | デフォルト    |
+| ------------- | ---------------------------- | ------------- |
+| `strictness?` | `'mandatory' \| 'proximity'` | `'mandatory'` |
+
+`axis` と組み合わせて `scroll-snap-type` の値になります。
+
+| 値            | 説明                               |
+| ------------- | ---------------------------------- |
+| `'mandatory'` | 必ずスナップ位置で停止する         |
+| `'proximity'` | スナップ位置に近い場合のみ停止する |
+
+```ts
+scrollSnap({ axis: 'x', strictness: 'proximity' }); // scroll-snap-type: x proximity
+```
+
+#### `padding` — スクロールパディング
+
+| オプション | 型                 | デフォルト  |
+| ---------- | ------------------ | ----------- |
+| `padding?` | `number \| string` | `undefined` |
+
+スナップ位置の基準となるオフセット（`scroll-padding`）を指定します。固定ヘッダーの高さ分だけスナップ位置をずらす場合などに使用します。\
+数値は `px` 単位として扱われ、文字列はそのまま CSS の値として使われます。
+
+| 指定        | CSS プロパティ          |
+| ----------- | ----------------------- |
+| `padding`   | `scroll-padding`        |
+| `x.padding` | `scroll-padding-inline` |
+| `y.padding` | `scroll-padding-block`  |
+
+```ts
+// 固定ヘッダーの高さ分だけ下にずらす
+scrollSnap({ axis: 'y', align: 'start', y: { padding: 80 } });
+```
+
+#### `behavior` — スクロール動作
+
+| オプション  | 型                                | デフォルト  |
+| ----------- | --------------------------------- | ----------- |
+| `behavior?` | `'auto' \| 'smooth' \| 'instant'` | `undefined` |
+
+`scroll-behavior` を指定します。未指定時はブラウザーのデフォルト（`auto`）です。
+
+### 子要素（`> *` に適用）
+
+#### `align` — スナップ位置の揃え
+
+| オプション | 型                                       | デフォルト  |
+| ---------- | ---------------------------------------- | ----------- |
+| `align?`   | `'start' \| 'center' \| 'end' \| 'none'` | `undefined` |
+
+子要素のどの位置をスナップ位置に揃えるか（`scroll-snap-align`）を指定します。\
+`x.align` はインライン軸（横）、`y.align` はブロック軸（縦）の揃え位置です。値が決まらない軸は `none` になります。
+
+```ts
+scrollSnap({ axis: 'y', align: 'start' }); // scroll-snap-align: start
+scrollSnap({ axis: 'both', x: { align: 'center' }, y: { align: 'start' } }); // scroll-snap-align: start center
+```
+
+#### `stop` — スナップポイントの通過制御
+
+| オプション | 型                     | デフォルト  |
+| ---------- | ---------------------- | ----------- |
+| `stop?`    | `'normal' \| 'always'` | `undefined` |
+
+`scroll-snap-stop` を指定します。未指定時は `normal` です。
+
+| 値         | 説明                                                 |
+| ---------- | ---------------------------------------------------- |
+| `'normal'` | スクロールの勢いによってはスナップポイントを通過する |
+| `'always'` | 必ず各スナップポイントで停止する                     |
+
+#### `margin` — スクロールマージン
+
+| オプション | 型                 | デフォルト  |
+| ---------- | ------------------ | ----------- |
+| `margin?`  | `number \| string` | `undefined` |
+
+子要素側のスナップ位置のオフセット（`scroll-margin`）を指定します。数値は `px` 単位として扱われます。
+
+| 指定       | CSS プロパティ         |
+| ---------- | ---------------------- |
+| `margin`   | `scroll-margin`        |
+| `x.margin` | `scroll-margin-inline` |
+| `y.margin` | `scroll-margin-block`  |
+
+```ts
+scrollSnap({ axis: 'y', align: 'start', y: { margin: 16 } });
+```
+
+---
+
 ## 型定義
 
 ```ts
+/** scrollbarのオプション（縦横共通のスタイル + 軸ごとの上書き） */
+type ScrollbarOptions = ScrollbarAxisOptions & {
+  x?: ScrollbarAxisOptions;
+  y?: ScrollbarAxisOptions;
+  fallbackSize?: FallbackSize;
+  arrows?: boolean;
+  noAnimation?: NoAnimation;
+};
+
+/** 軸ごとに指定できるスタイル */
+type ScrollbarAxisOptions = {
+  thumbColor?: StyleState<string, ThumbState>;
+  thumbSize?: StyleState<number, ThumbState>;
+  thumbRadius?: StyleState<ThumbRadius, ThumbState>;
+  thumbBorderColor?: StyleState<string, ThumbState>;
+  thumbBorderWidth?: StyleState<ThumbBorderWidth, ThumbState>;
+  trackColor?: StyleState<string, TrackState>;
+  trackSize?: StyleState<TrackSize, TrackState>;
+};
+
 /** thumbのステート */
 type ThumbState = 'hover' | 'active';
 
@@ -401,6 +561,38 @@ type FallbackSize = 'auto' | 'thin' | 'none';
 
 /** アニメーション無効化の設定 */
 type NoAnimation = boolean | { size?: boolean; color?: boolean };
+
+/** scrollSnapのオプション（縦横共通のオプション + 軸ごとの上書き） */
+type ScrollSnapOptions = ScrollSnapAxisOptions & {
+  x?: ScrollSnapAxisOptions;
+  y?: ScrollSnapAxisOptions;
+  axis?: SnapAxis;
+  strictness?: SnapStrictness;
+  behavior?: SnapBehavior;
+  stop?: SnapStop;
+};
+
+/** 軸ごとに指定できるオプション */
+type ScrollSnapAxisOptions = {
+  padding?: number | string;
+  align?: SnapAlign;
+  margin?: number | string;
+};
+
+/** スナップ軸 */
+type SnapAxis = 'x' | 'y' | 'both' | 'none';
+
+/** スナップの厳密さ */
+type SnapStrictness = 'mandatory' | 'proximity';
+
+/** スナップ位置の揃え */
+type SnapAlign = 'start' | 'center' | 'end' | 'none';
+
+/** スナップポイントの通過制御 */
+type SnapStop = 'always' | 'normal';
+
+/** スクロール動作 */
+type SnapBehavior = 'smooth' | 'auto' | 'instant';
 
 /** ステート別の値型 */
 type StyleState<T, S extends string> =

@@ -35,22 +35,3 @@
 .lx-scroll-snap-padding-y {
   scroll-padding-block: var(--lx-scroll-snap-padding-y);
 }
-
-// scrollSnapItemのスタイル
-.lx-scroll-snap-item {
-  scroll-snap-align: var(--lx-scroll-snap-item-align, none);
-  scroll-snap-stop: var(--lx-scroll-snap-item-stop, normal);
-}
-
-// scroll-marginは指定時のみクラスを付与
-.lx-scroll-snap-item-margin {
-  scroll-margin: var(--lx-scroll-snap-item-margin);
-}
-
-.lx-scroll-snap-item-margin-x {
-  scroll-margin-inline: var(--lx-scroll-snap-item-margin-x);
-}
-
-.lx-scroll-snap-item-margin-y {
-  scroll-margin-block: var(--lx-scroll-snap-item-margin-y);
-}

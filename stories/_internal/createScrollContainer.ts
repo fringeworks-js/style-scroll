@@ -1,5 +1,4 @@
 import chroma from 'chroma-js';
-import type { ScrollbarOptions } from '../../src/scrollbar';
 import scrollbar from '../../src/with-css/scrollbar';
 import assignStyle from './assignStyle';
 import createResizableElement from './createResizableElement';

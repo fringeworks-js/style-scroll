@@ -1,6 +1,7 @@
 import mergeClassName from '../_internal/mergeClassName';
 import unit from '../_internal/unit';
 import type { CreateScrollStyle, ScrollStyle } from '../types';
+import type { ItemValues } from './_applyItemOptions';
 import { applyItemOptions } from './_applyItemOptions';
 import {
   clsScrollScrollSnap,
@@ -25,31 +26,29 @@ import type { ScrollSnapOptions } from './types';
  * - align / stop / margin など: 直接の子要素（`> *`）に一括適用
  *
  * @example
- * // 子要素に一括適用（scrollSnapItem() 不要）
+ * // 子要素に一括適用
  * scrollSnap({ axis: 'y', align: 'start' })
  *
  * // 横方向スナップ（カルーセル）
  * scrollSnap({ axis: 'x', strictness: 'proximity' })
  *
  * // 固定ヘッダー対応
- * scrollSnap({ axis: 'y', paddingY: 80 })
+ * scrollSnap({ axis: 'y', y: { padding: 80 } })
  */
 const scrollSnap: CreateScrollStyle<ScrollSnapOptions> = (options = {}) => {
   const {
     axis,
     strictness = 'mandatory',
     padding,
-    paddingX,
-    paddingY,
     behavior,
     align,
-    alignX,
-    alignY,
     stop,
     margin,
-    marginX,
-    marginY,
+    x = {},
+    y = {},
   } = options;
+  const { padding: paddingX, align: alignX, margin: marginX } = x;
+  const { padding: paddingY, align: alignY, margin: marginY } = y;
 
   const result: ScrollStyle = {
     className: clsScrollScrollSnap,
@@ -82,9 +81,20 @@ const scrollSnap: CreateScrollStyle<ScrollSnapOptions> = (options = {}) => {
   }
 
   // アイテムオプションが1つでも指定されていれば > * に一括適用
-  const itemOptions = { align, alignX, alignY, stop, margin, marginX, marginY };
+  const itemOptions: ItemValues = {
+    align,
+    alignX,
+    alignY,
+    stop,
+    margin,
+    marginX,
+    marginY,
+  };
   if (Object.values(itemOptions).some((v) => v != null)) {
-    result.className = mergeClassName(result.className, clsScrollScrollSnapItem);
+    result.className = mergeClassName(
+      result.className,
+      clsScrollScrollSnapItem,
+    );
     applyItemOptions(result, itemOptions);
   }
 

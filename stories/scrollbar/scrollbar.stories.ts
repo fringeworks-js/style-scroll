@@ -177,50 +177,62 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
   return {
     ...rest,
     thumbColor: toStyleState(thumbColor, thumbColorHover, thumbColorActive),
-    thumbColorX: toStyleState(thumbColorX, thumbColorXHover, thumbColorXActive),
-    thumbColorY: toStyleState(thumbColorY, thumbColorYHover, thumbColorYActive),
     thumbSize: toStyleState(thumbSize, thumbSizeHover, thumbSizeActive),
-    thumbSizeX: toStyleState(thumbSizeX, thumbSizeXHover, thumbSizeXActive),
-    thumbSizeY: toStyleState(thumbSizeY, thumbSizeYHover, thumbSizeYActive),
     thumbRadius: toNumberStyleState(
       thumbRadius,
       thumbRadiusHover,
       thumbRadiusActive,
     ),
-    thumbRadiusX: toNumberStyleState(
-      thumbRadiusX,
-      thumbRadiusXHover,
-      thumbRadiusXActive,
-    ),
-    thumbRadiusY: toNumberStyleState(
-      thumbRadiusY,
-      thumbRadiusYHover,
-      thumbRadiusYActive,
-    ),
     thumbBorderColor: toStyleState(thumbBorderColor, thumbBorderColorHover),
-    thumbBorderColorX: toStyleState(thumbBorderColorX, thumbBorderColorXHover),
-    thumbBorderColorY: toStyleState(thumbBorderColorY, thumbBorderColorYHover),
     thumbBorderWidth: toNumberStyleState(
       thumbBorderWidth,
       thumbBorderWidthHover,
       thumbBorderWidthActive,
     ),
-    thumbBorderWidthX: toNumberStyleState(
-      thumbBorderWidthX,
-      thumbBorderWidthXHover,
-      thumbBorderWidthXActive,
-    ),
-    thumbBorderWidthY: toNumberStyleState(
-      thumbBorderWidthY,
-      thumbBorderWidthYHover,
-      thumbBorderWidthYActive,
-    ),
     trackColor: toStyleState(trackColor, trackColorHover),
-    trackColorX: toStyleState(trackColorX, trackColorXHover),
-    trackColorY: toStyleState(trackColorY, trackColorYHover),
     trackSize: toNumberStyleState(trackSize, trackSizeHover),
-    trackSizeX: toNumberStyleState(trackSizeX, trackSizeXHover),
-    trackSizeY: toNumberStyleState(trackSizeY, trackSizeYHover),
+    x: {
+      thumbColor: toStyleState(
+        thumbColorX,
+        thumbColorXHover,
+        thumbColorXActive,
+      ),
+      thumbSize: toStyleState(thumbSizeX, thumbSizeXHover, thumbSizeXActive),
+      thumbRadius: toNumberStyleState(
+        thumbRadiusX,
+        thumbRadiusXHover,
+        thumbRadiusXActive,
+      ),
+      thumbBorderColor: toStyleState(thumbBorderColorX, thumbBorderColorXHover),
+      thumbBorderWidth: toNumberStyleState(
+        thumbBorderWidthX,
+        thumbBorderWidthXHover,
+        thumbBorderWidthXActive,
+      ),
+      trackColor: toStyleState(trackColorX, trackColorXHover),
+      trackSize: toNumberStyleState(trackSizeX, trackSizeXHover),
+    },
+    y: {
+      thumbColor: toStyleState(
+        thumbColorY,
+        thumbColorYHover,
+        thumbColorYActive,
+      ),
+      thumbSize: toStyleState(thumbSizeY, thumbSizeYHover, thumbSizeYActive),
+      thumbRadius: toNumberStyleState(
+        thumbRadiusY,
+        thumbRadiusYHover,
+        thumbRadiusYActive,
+      ),
+      thumbBorderColor: toStyleState(thumbBorderColorY, thumbBorderColorYHover),
+      thumbBorderWidth: toNumberStyleState(
+        thumbBorderWidthY,
+        thumbBorderWidthYHover,
+        thumbBorderWidthYActive,
+      ),
+      trackColor: toStyleState(trackColorY, trackColorYHover),
+      trackSize: toNumberStyleState(trackSizeY, trackSizeYHover),
+    },
     noAnimation: toNoAnimation(noAnimationSize, noAnimationColor),
   };
 }
