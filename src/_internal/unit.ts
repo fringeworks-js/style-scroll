@@ -5,10 +5,15 @@
  * @param unit
  * @returns
  */
+export default function unit(value: string | number, unit?: string): string;
+export default function unit(
+  value: string | number | null | undefined,
+  unit?: string,
+): string | null | undefined;
 export default function unit(
   value: string | number | null | undefined,
   unit: string = 'px',
-) {
+): string | null | undefined {
   if (typeof value === 'number') {
     return `${value}${unit}`;
   } else {

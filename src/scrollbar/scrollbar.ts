@@ -190,7 +190,7 @@ function _applyStylesXY<T, S extends string>(
 
 function _applyStyle(result: ScrollStyle, key: string, value: unknown) {
   if (_hasValidValue(value)) {
-    result.style[key] = value;
+    _setStyle(result, key, value);
   }
 }
 
@@ -208,7 +208,7 @@ function _applyPxStyle(
   value: number | string | null | undefined,
 ): void {
   if (_hasValidValue(value)) {
-    result.style[key] = unit(value);
+    _setStyle(result, key, unit(value));
   }
 }
 
@@ -232,9 +232,9 @@ function _applyRadiusStyle(
     } else if (value === 'none') {
       radius = '0';
     } else {
-      radius = unit(value as number);
+      radius = unit(value);
     }
-    result.style[key] = radius;
+    _setStyle(result, key, radius);
   }
 }
 
@@ -245,16 +245,24 @@ function _applyXY<T, S extends string>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   applyFn: (result: ScrollStyle, key: string, value: any) => void,
 ) {
-  for (const state in records.x) {
+  for (const state of Object.keys(records.x) as S[]) {
     applyFn(result, keys.x[state], records.x[state]);
   }
-  for (const state in records.y) {
+  for (const state of Object.keys(records.y) as S[]) {
     applyFn(result, keys.y[state], records.y[state]);
   }
 }
 
-function _hasValidValue(value: unknown) {
+function _hasValidValue<V>(value: V): value is Exclude<V, null | undefined> {
   return value !== null && value !== undefined && value !== '';
+}
+
+/**
+ * CSS変数などのスタイルを設定する\
+ * result.style は scrollbar の中で作成済みのものを使う
+ */
+function _setStyle(result: ScrollStyle, key: string, value: unknown) {
+  (result.style as Record<string, unknown>)[key] = value;
 }
 
 function _applyThumbSizeAuto(
