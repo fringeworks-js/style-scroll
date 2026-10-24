@@ -1,89 +1,94 @@
 /**
  * スタイル種別: scroll-snap コンテナ
  */
-export const clsScrollScrollSnap = 'lx-scroll-snap';
-
-/**
- * アイテムオプション指定時に付与するクラス（直接の子要素に適用）
- */
-export const clsScrollScrollSnapItem = 'lx-scroll-snap-item';
+export const clsScrollScrollSnap = 'frg-scroll-snap';
 
 /**
  * scroll-padding クラス（全辺）
  */
-export const clsScrollSnapPadding = 'lx-scroll-snap-padding';
+export const clsScrollSnapPadding = 'frg-scroll-snap-padding';
 
 /**
  * scroll-padding-inline クラス（横方向）
  */
-export const clsScrollSnapPaddingX = 'lx-scroll-snap-padding-x';
+export const clsScrollSnapPaddingX = 'frg-scroll-snap-padding-x';
 
 /**
  * scroll-padding-block クラス（縦方向）
  */
-export const clsScrollSnapPaddingY = 'lx-scroll-snap-padding-y';
+export const clsScrollSnapPaddingY = 'frg-scroll-snap-padding-y';
 
 /**
- * scroll-margin クラス（全辺）
+ * scroll-snap-align クラス（直接の子要素に適用）
  */
-export const clsScrollSnapItemMargin = 'lx-scroll-snap-item-margin';
+export const clsScrollSnapItemAlign = 'frg-scroll-snap-item-align';
 
 /**
- * scroll-margin-inline クラス（横方向）
+ * scroll-snap-stop クラス（直接の子要素に適用）
  */
-export const clsScrollSnapItemMarginX = 'lx-scroll-snap-item-margin-x';
+export const clsScrollSnapItemStop = 'frg-scroll-snap-item-stop';
 
 /**
- * scroll-margin-block クラス（縦方向）
+ * scroll-margin クラス（全辺。直接の子要素に適用）
  */
-export const clsScrollSnapItemMarginY = 'lx-scroll-snap-item-margin-y';
+export const clsScrollSnapItemMargin = 'frg-scroll-snap-item-margin';
+
+/**
+ * scroll-margin-inline クラス（横方向。直接の子要素に適用）
+ */
+export const clsScrollSnapItemMarginX = 'frg-scroll-snap-item-margin-x';
+
+/**
+ * scroll-margin-block クラス（縦方向。直接の子要素に適用）
+ */
+export const clsScrollSnapItemMarginY = 'frg-scroll-snap-item-margin-y';
 
 /**
  * 値: scroll-snap-type
  */
-export const varScrollSnapType = '--lx-scroll-snap-type';
+export const varScrollSnapType = '--frg-scroll-snap-type';
 
 /**
  * 値: scroll-behavior
  */
-export const varScrollSnapBehavior = '--lx-scroll-snap-behavior';
+export const varScrollSnapBehavior = '--frg-scroll-snap-behavior';
 
 /**
  * 値: scroll-padding（全辺）
  */
-export const varScrollSnapPadding = '--lx-scroll-snap-padding';
+export const varScrollSnapPadding = '--frg-scroll-snap-padding';
 
 /**
  * 値: scroll-padding-inline（横方向）
  */
-export const varScrollSnapPaddingX = '--lx-scroll-snap-padding-x';
+export const varScrollSnapPaddingX = '--frg-scroll-snap-padding-x';
 
 /**
  * 値: scroll-padding-block（縦方向）
  */
-export const varScrollSnapPaddingY = '--lx-scroll-snap-padding-y';
+export const varScrollSnapPaddingY = '--frg-scroll-snap-padding-y';
 
 /**
  * 値: scroll-snap-align
  */
-export const varScrollSnapItemAlign = '--lx-scroll-snap-item-align';
+export const varScrollSnapItemAlign = '--frg-scroll-snap-item-align';
 
 /**
  * 値: scroll-snap-stop
  */
-export const varScrollSnapItemStop = '--lx-scroll-snap-item-stop';
+export const varScrollSnapItemStop = '--frg-scroll-snap-item-stop';
 
 /**
  * 値: scroll-margin（全辺）
  */
-export const varScrollSnapItemMargin = '--lx-scroll-snap-item-margin';
+export const varScrollSnapItemMargin = '--frg-scroll-snap-item-margin';
 
 /**
  * 値: scroll-margin-inline（横方向）
  */
-export const varScrollSnapItemMarginX = '--lx-scroll-snap-item-margin-x';
+export const varScrollSnapItemMarginX = '--frg-scroll-snap-item-margin-x';
 
 /**
  * 値: scroll-margin-block（縦方向）
  */
-export const varScrollSnapItemMarginY = '--lx-scroll-snap-item-margin-y';
+export const varScrollSnapItemMarginY = '--frg-scroll-snap-item-margin-y';

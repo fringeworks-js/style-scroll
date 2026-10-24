@@ -9,6 +9,6 @@ export type CreateScrollStyle<O = LooseDictionary> = (
 ) => ScrollStyle;
 
 /**
- * レイアウト
+ * スタイルを作る関数の戻り値
  */
 export type ScrollStyle = StyleResult;

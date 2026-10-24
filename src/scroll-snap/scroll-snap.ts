@@ -1,11 +1,9 @@
 import mergeClassName from '../_internal/mergeClassName';
 import unit from '../_internal/unit';
 import type { CreateScrollStyle, ScrollStyle } from '../types';
-import type { ItemValues } from './_applyItemOptions';
 import { applyItemOptions } from './_applyItemOptions';
 import {
   clsScrollScrollSnap,
-  clsScrollScrollSnapItem,
   clsScrollSnapPadding,
   clsScrollSnapPaddingX,
   clsScrollSnapPaddingY,
@@ -69,19 +67,19 @@ const scrollSnap: CreateScrollStyle<ScrollSnapOptions> = (options = {}) => {
   // scroll-padding
   if (padding != null) {
     result.className = mergeClassName(result.className, clsScrollSnapPadding);
-    result.style![varScrollSnapPadding] = unit(padding) as string;
+    result.style![varScrollSnapPadding] = unit(padding);
   }
   if (paddingX != null) {
     result.className = mergeClassName(result.className, clsScrollSnapPaddingX);
-    result.style![varScrollSnapPaddingX] = unit(paddingX) as string;
+    result.style![varScrollSnapPaddingX] = unit(paddingX);
   }
   if (paddingY != null) {
     result.className = mergeClassName(result.className, clsScrollSnapPaddingY);
-    result.style![varScrollSnapPaddingY] = unit(paddingY) as string;
+    result.style![varScrollSnapPaddingY] = unit(paddingY);
   }
 
-  // アイテムオプションが1つでも指定されていれば > * に一括適用
-  const itemOptions: ItemValues = {
+  // アイテムオプションは指定したものだけ > * に一括適用
+  applyItemOptions(result, {
     align,
     alignX,
     alignY,
@@ -89,14 +87,7 @@ const scrollSnap: CreateScrollStyle<ScrollSnapOptions> = (options = {}) => {
     margin,
     marginX,
     marginY,
-  };
-  if (Object.values(itemOptions).some((v) => v != null)) {
-    result.className = mergeClassName(
-      result.className,
-      clsScrollScrollSnapItem,
-    );
-    applyItemOptions(result, itemOptions);
-  }
+  });
 
   return result;
 };

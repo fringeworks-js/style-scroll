@@ -34,7 +34,7 @@ export default function createSnapContainer(
 
   const { className: containerClass, style: containerStyle } =
     scrollSnap(containerOptions);
-  if (containerClass) container.className = containerClass;
+  if (containerClass) {container.className = containerClass;}
 
   assignStyle(container, {
     ...(containerStyle ?? {}),

@@ -34,7 +34,7 @@ export default function createScrollContainer(
     }
     containerStyle = { ...containerStyle, ...style };
   } else {
-    container.className = 'lx-scroll-disabled';
+    container.className = 'frg-scroll-disabled';
   }
   assignStyle(container, containerStyle);
 

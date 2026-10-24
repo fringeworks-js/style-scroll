@@ -1,58 +1,38 @@
 /**
- * 横スクロールバーのハンドルの線の幅: autoモード（thumbSizeXに追従）
+ * 横スクロールバーのトラックの幅: autoモード（thumbSizeXとthumbBorderWidthXから算出）
  */
-export const clsScrollbarThumbBorderWidthXAuto =
-  'lx-scroll-scrollbar-thumbBorderWidthX-auto';
+export const clsScrollbarTrackSizeXAuto =
+  'frg-scroll-scrollbar-trackSizeX-auto';
 
 /**
- * 縦スクロールバーのハンドルの線の幅: autoモード（thumbSizeYに追従）
+ * 縦スクロールバーのトラックの幅: autoモード（thumbSizeYとthumbBorderWidthYから算出）
  */
-export const clsScrollbarThumbBorderWidthYAuto =
-  'lx-scroll-scrollbar-thumbBorderWidthY-auto';
-
-/**
- * 横スクロールバーのトラックの幅: autoモード（thumbSizeXに追従）
- */
-export const clsScrollbarTrackSizeXAuto = 'lx-scroll-scrollbar-trackSizeX-auto';
-
-/**
- * 縦スクロールバーのトラックの幅: autoモード（thumbSizeYに追従）
- */
-export const clsScrollbarTrackSizeYAuto = 'lx-scroll-scrollbar-trackSizeY-auto';
+export const clsScrollbarTrackSizeYAuto =
+  'frg-scroll-scrollbar-trackSizeY-auto';
 
 /**
  * 矢印ボタン表示
  */
-export const clsScrollbarArrowsTrue = 'lx-scroll-scrollbar-arrows-true';
+export const clsScrollbarArrows = 'frg-scroll-scrollbar-arrows';
 
 /**
- * 矢印ボタン非表示
+ * transition有効
  */
-export const clsScrollbarArrowsFalse = 'lx-scroll-scrollbar-arrows-false';
-
-/**
- * サイズ系transition有効（thumbSize・trackSize・thumbBorderWidth）
- */
-export const clsScrollbarAnimationSize = 'lx-scroll-scrollbar-animation-size';
-
-/**
- * カラー系transition有効（thumbColor・trackColor・thumbBorderColor）
- */
-export const clsScrollbarAnimationColor = 'lx-scroll-scrollbar-animation-color';
+export const clsScrollbarAnimation = 'frg-scroll-scrollbar-animation';
 
 /**
  * 値: ハンドルの色
  */
 export const varScrollbarThumbColor = {
   x: {
-    base: '--lx-scroll-scrollbar-thumbColorX',
-    hover: '--lx-scroll-scrollbar-thumbColorX-hover',
-    active: '--lx-scroll-scrollbar-thumbColorX-active',
+    base: '--frg-scroll-scrollbar-thumbColorX',
+    hover: '--frg-scroll-scrollbar-thumbColorX-hover',
+    active: '--frg-scroll-scrollbar-thumbColorX-active',
   },
   y: {
-    base: '--lx-scroll-scrollbar-thumbColorY',
-    hover: '--lx-scroll-scrollbar-thumbColorY-hover',
-    active: '--lx-scroll-scrollbar-thumbColorY-active',
+    base: '--frg-scroll-scrollbar-thumbColorY',
+    hover: '--frg-scroll-scrollbar-thumbColorY-hover',
+    active: '--frg-scroll-scrollbar-thumbColorY-active',
   },
 } as const;
 
@@ -61,14 +41,14 @@ export const varScrollbarThumbColor = {
  */
 export const varScrollbarThumbSize = {
   x: {
-    base: '--lx-scroll-scrollbar-thumbSizeX',
-    hover: '--lx-scroll-scrollbar-thumbSizeX-hover',
-    active: '--lx-scroll-scrollbar-thumbSizeX-active',
+    base: '--frg-scroll-scrollbar-thumbSizeX',
+    hover: '--frg-scroll-scrollbar-thumbSizeX-hover',
+    active: '--frg-scroll-scrollbar-thumbSizeX-active',
   },
   y: {
-    base: '--lx-scroll-scrollbar-thumbSizeY',
-    hover: '--lx-scroll-scrollbar-thumbSizeY-hover',
-    active: '--lx-scroll-scrollbar-thumbSizeY-active',
+    base: '--frg-scroll-scrollbar-thumbSizeY',
+    hover: '--frg-scroll-scrollbar-thumbSizeY-hover',
+    active: '--frg-scroll-scrollbar-thumbSizeY-active',
   },
 } as const;
 
@@ -77,14 +57,14 @@ export const varScrollbarThumbSize = {
  */
 export const varScrollbarThumbRadius = {
   x: {
-    base: '--lx-scroll-scrollbar-thumbRadiusX',
-    hover: '--lx-scroll-scrollbar-thumbRadiusX-hover',
-    active: '--lx-scroll-scrollbar-thumbRadiusX-active',
+    base: '--frg-scroll-scrollbar-thumbRadiusX',
+    hover: '--frg-scroll-scrollbar-thumbRadiusX-hover',
+    active: '--frg-scroll-scrollbar-thumbRadiusX-active',
   },
   y: {
-    base: '--lx-scroll-scrollbar-thumbRadiusY',
-    hover: '--lx-scroll-scrollbar-thumbRadiusY-hover',
-    active: '--lx-scroll-scrollbar-thumbRadiusY-active',
+    base: '--frg-scroll-scrollbar-thumbRadiusY',
+    hover: '--frg-scroll-scrollbar-thumbRadiusY-hover',
+    active: '--frg-scroll-scrollbar-thumbRadiusY-active',
   },
 } as const;
 
@@ -93,30 +73,28 @@ export const varScrollbarThumbRadius = {
  */
 export const varScrollbarThumbBorderColor = {
   x: {
-    base: '--lx-scroll-scrollbar-thumbBorderColorX',
-    hover: '--lx-scroll-scrollbar-thumbBorderColorX-hover',
-    active: '--lx-scroll-scrollbar-thumbBorderColorX-active',
+    base: '--frg-scroll-scrollbar-thumbBorderColorX',
+    hover: '--frg-scroll-scrollbar-thumbBorderColorX-hover',
+    active: '--frg-scroll-scrollbar-thumbBorderColorX-active',
   },
   y: {
-    base: '--lx-scroll-scrollbar-thumbBorderColorY',
-    hover: '--lx-scroll-scrollbar-thumbBorderColorY-hover',
-    active: '--lx-scroll-scrollbar-thumbBorderColorY-active',
+    base: '--frg-scroll-scrollbar-thumbBorderColorY',
+    hover: '--frg-scroll-scrollbar-thumbBorderColorY-hover',
+    active: '--frg-scroll-scrollbar-thumbBorderColorY-active',
   },
 } as const;
 
 /**
- * 値: ハンドルの線の幅
+ * 値: ハンドルの線の幅（trackSizeがautoのときだけ使う）
  */
 export const varScrollbarThumbBorderWidth = {
   x: {
-    base: '--lx-scroll-scrollbar-thumbBorderWidthX',
-    hover: '--lx-scroll-scrollbar-thumbBorderWidthX-hover',
-    active: '--lx-scroll-scrollbar-thumbBorderWidthX-active',
+    base: '--frg-scroll-scrollbar-thumbBorderWidthX',
+    hover: '--frg-scroll-scrollbar-thumbBorderWidthX-hover',
   },
   y: {
-    base: '--lx-scroll-scrollbar-thumbBorderWidthY',
-    hover: '--lx-scroll-scrollbar-thumbBorderWidthY-hover',
-    active: '--lx-scroll-scrollbar-thumbBorderWidthY-active',
+    base: '--frg-scroll-scrollbar-thumbBorderWidthY',
+    hover: '--frg-scroll-scrollbar-thumbBorderWidthY-hover',
   },
 } as const;
 
@@ -125,12 +103,12 @@ export const varScrollbarThumbBorderWidth = {
  */
 export const varScrollbarTrackColor = {
   x: {
-    base: '--lx-scroll-scrollbar-trackColorX',
-    hover: '--lx-scroll-scrollbar-trackColorX-hover',
+    base: '--frg-scroll-scrollbar-trackColorX',
+    hover: '--frg-scroll-scrollbar-trackColorX-hover',
   },
   y: {
-    base: '--lx-scroll-scrollbar-trackColorY',
-    hover: '--lx-scroll-scrollbar-trackColorY-hover',
+    base: '--frg-scroll-scrollbar-trackColorY',
+    hover: '--frg-scroll-scrollbar-trackColorY-hover',
   },
 } as const;
 
@@ -139,19 +117,19 @@ export const varScrollbarTrackColor = {
  */
 export const varScrollbarTrackSize = {
   x: {
-    base: '--lx-scroll-scrollbar-trackSizeX',
-    hover: '--lx-scroll-scrollbar-trackSizeX-hover',
+    base: '--frg-scroll-scrollbar-trackSizeX',
+    hover: '--frg-scroll-scrollbar-trackSizeX-hover',
   },
   y: {
-    base: '--lx-scroll-scrollbar-trackSizeY',
-    hover: '--lx-scroll-scrollbar-trackSizeY-hover',
+    base: '--frg-scroll-scrollbar-trackSizeY',
+    hover: '--frg-scroll-scrollbar-trackSizeY-hover',
   },
 } as const;
 
 /**
  * 値: フォールバック（非WebKit）スクロールバーの幅プリセット
  */
-export const varScrollbarFallbackSize = '--lx-scroll-scrollbar-fallbackSize';
+export const varScrollbarFallbackSize = '--frg-scroll-scrollbar-fallbackSize';
 
 // state
 export const thumbStates = ['hover', 'active'] as const;

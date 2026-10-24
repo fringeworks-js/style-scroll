@@ -19,34 +19,32 @@ export type ScrollbarOptions = ScrollbarAxisOptions & {
   y?: ScrollbarAxisOptions;
 
   /**
-   * 非WebKitブラウザ向けスクロールバーの幅プリセット（CSS scrollbar-width）
-   * - `'auto'`: ブラウザデフォルト
-   * - `'thin'`: 細め（デフォルト）
+   * 非WebKitブラウザー向けスクロールバーの幅プリセット（CSS の `scrollbar-width`）
+   * - `'auto'`: ブラウザーの既定の幅
+   * - `'thin'`: 細め
    * - `'none'`: 非表示（スクロール自体は維持）
-   * WebKitブラウザでは無効。WebKit向けには trackSize を使用。
    *
-   * @default 'auto'
+   * WebKitブラウザーでは無効。WebKit向けには trackSize を使用する
+   *
+   * @default 'thin'
    */
-  fallbackSize?: FallbackSize;
+  fallbackSize?: ScrollbarFallbackSize;
 
   /**
-   * スクロールバー端の矢印ボタンの表示・非表示
-   * - `true`: 表示
-   * - `false`: 非表示
+   * スクロールバー端の矢印ボタンを表示する（WebKitのみ）
    *
    * @default false
    */
   arrows?: boolean;
 
   /**
-   * アニメーション（transition）の無効化
-   * - `true`: 全アニメーションを無効化
-   * - `{ size?, color? }`: グループ別に無効化
-   *   - `size`: thumbSize・trackSize・thumbBorderWidth のtransitionを無効化
-   *   - `color`: thumbColor・trackColor・thumbBorderColor のtransitionを無効化
-   * 未指定・`false` はCSSデフォルト（transitionあり）
+   * アニメーション（transition）を無効にする
+   *
+   * `prefers-reduced-motion: reduce` の環境では、指定しなくても無効になる
+   *
+   * @default false
    */
-  noAnimation?: NoAnimation;
+  noAnimation?: boolean;
 };
 
 /**
@@ -55,55 +53,57 @@ export type ScrollbarOptions = ScrollbarAxisOptions & {
 export type ScrollbarAxisOptions = {
   /**
    * ハンドルの色
-   * - string: 全状態で同じ値
-   * - { base?, hover?, active? }: 状態別に値を指定
-   *   - active: thumbそのものにホバーしたときの色（WebKitのみ）
+   * - `hover`: コンテナにホバーしたときの色
+   * - `active`: ハンドルそのものにホバーしたときの色（WebKitのみ）
    */
   thumbColor?: StyleState<string, ThumbState>;
 
   /**
-   * ハンドルの太さ
-   * - number: 全状態で同じ値（ホバーアニメーションなし）
-   * - { base?, hover? }: 状態別に値を指定
+   * ハンドルの太さ（px）
+   *
+   * トラックより太い場合は、トラックの幅で頭打ちになる
    */
   thumbSize?: StyleState<number, ThumbState>;
 
   /**
    * ハンドルの角丸
+   *
    * @default 'full'
    */
   thumbRadius?: StyleState<ThumbRadius, ThumbState>;
 
   /**
-   * ハンドルのボーダーの色（未指定時は transparent）
-   * - string: 全状態で同じ値
-   * - { base?, hover? }: 状態別に値を指定
+   * ハンドルの線の色（未指定時は透明）
+   *
+   * 線はトラックとハンドルの隙間に描かれる
    */
   thumbBorderColor?: StyleState<string, ThumbState>;
 
   /**
-   * ハンドルのボーダーの太さ
-   * - number: 全状態で同じ値
-   * - { base?, hover? }: 状態別に値を指定
+   * ハンドルの線の幅（px）
+   *
+   * trackSize が `'auto'` のときだけ使い、トラックの幅を
+   * `thumbSize + 2 × thumbBorderWidth` にする。
+   * trackSize が数値のときは、線の幅は `(trackSize − thumbSize) / 2` になる
+   *
+   * @default 0
    */
-  thumbBorderWidth?: StyleState<ThumbBorderWidth, ThumbState>;
+  thumbBorderWidth?: StyleState<number, TrackState>;
 
   /**
    * トラックの色
-   * - string: 全状態で同じ値
-   * - { base?, hover? }: 状態別に値を指定
+   * - `hover`: コンテナにホバーしたときの色
    */
   trackColor?: StyleState<string, TrackState>;
 
   /**
    * トラックの幅
-   * - number: 指定値で固定（ホバー時も同じ幅）
-   * - `'auto'`: 同じ軸の thumbSize-active + 2×thumbBorderWidth に追従（hover 時にアニメーション）
-   * - { base?, hover? }: 状態別に値を指定
+   * - number: 指定値で固定（px）
+   * - `'auto'`: 全ステートで `thumbSize + 2 × thumbBorderWidth` に追従する
    *
-   * @default 'auto'
+   * @default 13
    */
-  trackSize?: StyleState<TrackSize, TrackState>;
+  trackSize?: StyleState<number, TrackState> | 'auto';
 };
 
 /**
@@ -117,35 +117,11 @@ export type ThumbState = 'hover' | 'active';
 export type TrackState = 'hover';
 
 /**
- * thumbの幅
- */
-type ThumbBorderWidth = number | 'auto';
-
-/**
  * thumbの角丸
  */
-type ThumbRadius = number | 'full' | 'none';
+export type ThumbRadius = number | 'full' | 'none';
 
 /**
- * trackの幅
+ * 非WebKitブラウザー向けのスクロールバーの幅
  */
-type TrackSize = number | 'auto';
-
-/**
- * フォールバック時のスクロールバーの幅
- */
-type FallbackSize = 'auto' | 'thin' | 'none';
-
-/**
- * アニメーション（transition）の無効化
- * - `true`: 全アニメーションを無効化
- * - `{ size?, color? }`: グループ別に無効化
- *   - `size`: thumbSize・trackSize・thumbBorderWidth のtransitionを無効化
- *   - `color`: thumbColor・trackColor・thumbBorderColor のtransitionを無効化
- */
-type NoAnimation =
-  | boolean
-  | {
-      size?: boolean;
-      color?: boolean;
-    };
+export type ScrollbarFallbackSize = 'auto' | 'thin' | 'none';

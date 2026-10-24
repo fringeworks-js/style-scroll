@@ -1,5 +1,3 @@
 export type * from '../types';
-export type * from './scroll-snap';
-export { scrollSnap } from './scroll-snap';
-export type * from './scrollbar';
-export { default as scrollbar } from './scrollbar';
+export * from './scroll-snap';
+export * from './scrollbar';

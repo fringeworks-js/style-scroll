@@ -1,16 +1,13 @@
-import type { StyleStateRecord } from '@fringeworks/style-utils';
+import type { StyleState, StyleStateRecord } from '@fringeworks/style-utils';
+import { fillStyleState, resolveXY } from '@fringeworks/style-utils';
 import { clsScrollScrollbar } from '../_constants';
 import mergeClassName from '../_internal/mergeClassName';
 import resolveStyleStateXY from '../_internal/resolveStyleStateXY';
 import unit from '../_internal/unit';
 import type { CreateScrollStyle, ScrollStyle } from '../types';
 import {
-  clsScrollbarAnimationColor,
-  clsScrollbarAnimationSize,
-  clsScrollbarArrowsFalse,
-  clsScrollbarArrowsTrue,
-  clsScrollbarThumbBorderWidthXAuto,
-  clsScrollbarThumbBorderWidthYAuto,
+  clsScrollbarAnimation,
+  clsScrollbarArrows,
   clsScrollbarTrackSizeXAuto,
   clsScrollbarTrackSizeYAuto,
   thumbStates,
@@ -24,7 +21,7 @@ import {
   varScrollbarTrackColor,
   varScrollbarTrackSize,
 } from './_constants';
-import type { ScrollbarOptions } from './types';
+import type { ScrollbarOptions, TrackState } from './types';
 
 /**
  * scrollbarスタイル
@@ -43,8 +40,8 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
     x = {},
     y = {},
     fallbackSize,
-    arrows,
-    noAnimation,
+    arrows = false,
+    noAnimation = false,
   } = options;
 
   const result: ScrollStyle = {
@@ -53,234 +50,182 @@ const scrollbar: CreateScrollStyle<ScrollbarOptions> = (options = {}) => {
   };
 
   // thumbSize
-  const resolvedThumbSize = resolveStyleStateXY(
-    thumbSize,
-    x.thumbSize,
-    y.thumbSize,
-    thumbStates,
+  _applyXY(
+    result,
+    varScrollbarThumbSize,
+    resolveStyleStateXY(thumbSize, x.thumbSize, y.thumbSize, thumbStates),
+    _toPx,
   );
-  _applyPxStylesXY(result, varScrollbarThumbSize, resolvedThumbSize);
 
   // thumbColor
-  const resolvedThumbColor = resolveStyleStateXY(
-    thumbColor,
-    x.thumbColor,
-    y.thumbColor,
-    thumbStates,
+  _applyXY(
+    result,
+    varScrollbarThumbColor,
+    resolveStyleStateXY(thumbColor, x.thumbColor, y.thumbColor, thumbStates),
+    _toString,
   );
-  _applyStylesXY(result, varScrollbarThumbColor, resolvedThumbColor);
 
   // thumbRadius
-  const resolvedThumbRadius = resolveStyleStateXY(
-    thumbRadius,
-    x.thumbRadius,
-    y.thumbRadius,
-    thumbStates,
+  _applyXY(
+    result,
+    varScrollbarThumbRadius,
+    resolveStyleStateXY(thumbRadius, x.thumbRadius, y.thumbRadius, thumbStates),
+    _toRadius,
   );
-  _applyRadiusStylesXY(result, varScrollbarThumbRadius, resolvedThumbRadius);
 
   // thumbBorderWidth
-  const resolvedThumbBorderWidth = resolveStyleStateXY(
-    thumbBorderWidth,
-    x.thumbBorderWidth,
-    y.thumbBorderWidth,
-    thumbStates,
-  );
-  _applyPxStylesXY(
+  _applyXY(
     result,
     varScrollbarThumbBorderWidth,
-    resolvedThumbBorderWidth,
+    resolveStyleStateXY(
+      thumbBorderWidth,
+      x.thumbBorderWidth,
+      y.thumbBorderWidth,
+      trackStates,
+    ),
+    _toPx,
   );
 
   // thumbBorderColor
-  const resolvedThumbBorderColor = resolveStyleStateXY(
-    thumbBorderColor,
-    x.thumbBorderColor,
-    y.thumbBorderColor,
-    thumbStates,
-  );
-  _applyStylesXY(
+  _applyXY(
     result,
     varScrollbarThumbBorderColor,
-    resolvedThumbBorderColor,
+    resolveStyleStateXY(
+      thumbBorderColor,
+      x.thumbBorderColor,
+      y.thumbBorderColor,
+      thumbStates,
+    ),
+    _toString,
   );
 
   // trackColor
-  const resolvedTrackColor = resolveStyleStateXY(
-    trackColor,
-    x.trackColor,
-    y.trackColor,
-    trackStates,
+  _applyXY(
+    result,
+    varScrollbarTrackColor,
+    resolveStyleStateXY(trackColor, x.trackColor, y.trackColor, trackStates),
+    _toString,
   );
-  _applyStylesXY(result, varScrollbarTrackColor, resolvedTrackColor);
 
   // trackSize
-  const resolvedTrackSize = resolveStyleStateXY(
+  const resolvedTrackSize = resolveXY(trackSize, x.trackSize, y.trackSize);
+  _applyTrackSize(
+    result,
+    varScrollbarTrackSize.x,
+    clsScrollbarTrackSizeXAuto,
+    resolvedTrackSize.x,
     trackSize,
-    x.trackSize,
-    y.trackSize,
-    trackStates,
   );
-  _applyPxStylesXY(result, varScrollbarTrackSize, resolvedTrackSize);
+  _applyTrackSize(
+    result,
+    varScrollbarTrackSize.y,
+    clsScrollbarTrackSizeYAuto,
+    resolvedTrackSize.y,
+    trackSize,
+  );
 
   // fallbackSize
-  _applyStyle(result, varScrollbarFallbackSize, fallbackSize);
+  if (fallbackSize !== undefined) {
+    _setStyle(result, varScrollbarFallbackSize, fallbackSize);
+  }
 
   // arrows
-  if (arrows !== undefined) {
-    result.className = mergeClassName(
-      result.className,
-      arrows ? clsScrollbarArrowsTrue : clsScrollbarArrowsFalse,
-    );
+  if (arrows) {
+    _addClassName(result, clsScrollbarArrows);
   }
 
-  // noAnimation → transition クラス（noAnimation の反転でクラスを付与）
-  const noSize =
-    noAnimation === true ||
-    (typeof noAnimation === 'object' && !!noAnimation?.size);
-  const noColor =
-    noAnimation === true ||
-    (typeof noAnimation === 'object' && !!noAnimation?.color);
-  if (!noSize) {
-    result.className = mergeClassName(
-      result.className,
-      clsScrollbarAnimationSize,
-    );
+  // noAnimation
+  if (!noAnimation) {
+    _addClassName(result, clsScrollbarAnimation);
   }
-  if (!noColor) {
-    result.className = mergeClassName(
-      result.className,
-      clsScrollbarAnimationColor,
-    );
-  }
-
-  // autoの設定
-  _applyThumbSizeAuto(
-    result,
-    resolvedThumbBorderWidth.x.base,
-    clsScrollbarThumbBorderWidthXAuto,
-  );
-  _applyThumbSizeAuto(
-    result,
-    resolvedThumbBorderWidth.y.base,
-    clsScrollbarThumbBorderWidthYAuto,
-  );
-  _applyTrackSizeAuto(
-    result,
-    resolvedTrackSize.x.base,
-    clsScrollbarTrackSizeXAuto,
-  );
-  _applyTrackSizeAuto(
-    result,
-    resolvedTrackSize.y.base,
-    clsScrollbarTrackSizeYAuto,
-  );
 
   return result;
 };
 export default scrollbar;
 
-function _applyStylesXY<T, S extends string>(
-  result: ScrollStyle,
-  keys: Record<'x' | 'y', Record<S, string>>,
-  records: Record<'x' | 'y', StyleStateRecord<T, S>>,
-) {
-  _applyXY(result, keys, records, _applyStyle);
-}
-
-function _applyStyle(result: ScrollStyle, key: string, value: unknown) {
-  if (_hasValidValue(value)) {
-    _setStyle(result, key, value);
-  }
-}
-
-function _applyPxStylesXY<T, S extends string>(
-  result: ScrollStyle,
-  keys: Record<'x' | 'y', Record<S, string>>,
-  records: Record<'x' | 'y', StyleStateRecord<T, S>>,
-) {
-  _applyXY(result, keys, records, _applyPxStyle);
-}
-
-function _applyPxStyle(
-  result: ScrollStyle,
-  key: string,
-  value: number | string | null | undefined,
-): void {
-  if (_hasValidValue(value)) {
-    _setStyle(result, key, unit(value));
-  }
-}
-
-function _applyRadiusStylesXY<T, S extends string>(
-  result: ScrollStyle,
-  keys: Record<'x' | 'y', Record<S, string>>,
-  records: Record<'x' | 'y', StyleStateRecord<T, S>>,
-) {
-  _applyXY(result, keys, records, _applyRadiusStyle);
-}
-
-function _applyRadiusStyle(
-  result: ScrollStyle,
-  key: string,
-  value: number | string | null | undefined,
-) {
-  if (_hasValidValue(value)) {
-    let radius: string;
-    if (value === 'full') {
-      radius = '9999px';
-    } else if (value === 'none') {
-      radius = '0';
-    } else {
-      radius = unit(value);
-    }
-    _setStyle(result, key, radius);
-  }
-}
-
+/**
+ * X軸・Y軸のステートごとの値を、変換してCSS変数に設定する
+ */
 function _applyXY<T, S extends string>(
   result: ScrollStyle,
-  keys: Record<'x' | 'y', Record<S, string>>,
+  keys: Record<'x' | 'y', Record<'base' | S, string>>,
   records: Record<'x' | 'y', StyleStateRecord<T, S>>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  applyFn: (result: ScrollStyle, key: string, value: any) => void,
-) {
-  for (const state of Object.keys(records.x) as S[]) {
-    applyFn(result, keys.x[state], records.x[state]);
-  }
-  for (const state of Object.keys(records.y) as S[]) {
-    applyFn(result, keys.y[state], records.y[state]);
+  toValue: (value: T) => string,
+): void {
+  for (const axis of ['x', 'y'] as const) {
+    _applyRecord(result, keys[axis], records[axis], toValue);
   }
 }
 
-function _hasValidValue<V>(value: V): value is Exclude<V, null | undefined> {
-  return value !== null && value !== undefined && value !== '';
+/**
+ * ステートごとの値を、変換してCSS変数に設定する
+ */
+function _applyRecord<T, S extends string>(
+  result: ScrollStyle,
+  keys: Record<'base' | S, string>,
+  record: StyleStateRecord<T, S>,
+  toValue: (value: T) => string,
+): void {
+  for (const [state, value] of Object.entries(record) as [
+    'base' | S,
+    T | undefined,
+  ][]) {
+    if (value !== undefined && value !== null && value !== '') {
+      _setStyle(result, keys[state], toValue(value));
+    }
+  }
+}
+
+/**
+ * 1軸分のトラックの幅を設定する
+ * - `'auto'` の場合はクラスを付与し、CSS変数は設定しない
+ * - 軸別の値で省略したステートは、共通の値（`'auto'` 以外）で補う
+ */
+function _applyTrackSize(
+  result: ScrollStyle,
+  keys: Record<'base' | TrackState, string>,
+  autoClassName: string,
+  value: StyleState<number, TrackState> | 'auto' | undefined,
+  common: StyleState<number, TrackState> | 'auto' | undefined,
+): void {
+  if (value === 'auto') {
+    _addClassName(result, autoClassName);
+    return;
+  }
+  const record = fillStyleState(
+    value,
+    trackStates,
+    common === 'auto' ? undefined : common,
+  );
+  _applyRecord(result, keys, record, _toPx);
+}
+
+function _toString(value: string): string {
+  return value;
+}
+
+function _toPx(value: number): string {
+  return unit(value);
+}
+
+function _toRadius(value: number | string): string {
+  if (value === 'full') {
+    return '9999px';
+  } else if (value === 'none') {
+    return '0';
+  } else {
+    return unit(value);
+  }
+}
+
+function _addClassName(result: ScrollStyle, className: string): void {
+  result.className = mergeClassName(result.className, className);
 }
 
 /**
  * CSS変数などのスタイルを設定する\
  * result.style は scrollbar の中で作成済みのものを使う
  */
-function _setStyle(result: ScrollStyle, key: string, value: unknown) {
-  (result.style as Record<string, unknown>)[key] = value;
-}
-
-function _applyThumbSizeAuto(
-  result: ScrollStyle,
-  value: unknown,
-  className: string,
-) {
-  if (value == null || value === 'auto') {
-    result.className = mergeClassName(result.className, className);
-  }
-}
-
-function _applyTrackSizeAuto(
-  result: ScrollStyle,
-  value: unknown,
-  className: string,
-) {
-  if (value === 'auto') {
-    result.className = mergeClassName(result.className, className);
-  }
+function _setStyle(result: ScrollStyle, key: string, value: string): void {
+  (result.style as Record<string, string>)[key] = value;
 }

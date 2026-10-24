@@ -1,4 +1,4 @@
 import '../../scroll-snap/styles.scss';
 
-export type * from '../../scroll-snap';
-export { scrollSnap } from '../../scroll-snap';
+export * from '../../scroll-snap';
+export { default } from '../../scroll-snap';

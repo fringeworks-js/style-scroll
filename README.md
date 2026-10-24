@@ -3,7 +3,7 @@
 `@fringeworks/style-scroll` is a library some will find handy, specialized in controlling scroll-related styles via CSS.\
 It returns class names and CSS variables as an object based on the provided options. Framework-agnostic and SSR-compatible.
 
-**[日本語版READMEはこちら](./README.ja.md)**
+**[日本語のREADMEはこちら](./README.ja.md)**
 
 ## Features
 
@@ -21,7 +21,7 @@ pnpm add @fringeworks/style-scroll
 
 ## Usage
 
-Each style function returns a `{ className, style }` object. Apply it to the target element.
+Each function returns a `{ className, style }` object. Apply it to the scroll container.
 
 ```ts
 import { scrollbar } from '@fringeworks/style-scroll';
@@ -32,14 +32,14 @@ const { className, style } = scrollbar({
   trackColor: 'rgba(0, 0, 0, 0.05)',
 });
 
-// className: "lx-scroll-scrollbar ..."
-// style: { "--lx-scroll-scrollbar-thumbSizeX": "6px", ... }
+// className: "frg-scroll-scrollbar ..."
+// style: { "--frg-scroll-scrollbar-thumbSizeX": "6px", ... }
 ```
 
 ```html
 <div
-  class="lx-scroll-scrollbar ..."
-  style="--lx-scroll-scrollbar-thumbSizeX: 6px; ..."
+  class="frg-scroll-scrollbar ..."
+  style="--frg-scroll-scrollbar-thumbSizeX: 6px; ..."
 >
   <!-- scrollable content -->
 </div>
@@ -66,60 +66,87 @@ If you want the CSS to be loaded automatically, use the modules under `with-css`
 import { scrollbar, scrollSnap } from '@fringeworks/style-scroll/with-css';
 ```
 
-### About `StyleState`
+### Common and Per-Axis Options
 
-Many `scrollbar` options accept the `StyleState<T, S>` type. You can specify either a scalar value or a per-state object.
-
-```ts
-// Scalar: applies the same value to all states
-thumbColor: 'rgba(0, 0, 0, 0.3)'
-
-// Per-state object: specify values per state
-thumbColor: {
-  base: 'rgba(0, 0, 0, 0.3)',   // default state
-  hover: 'rgba(0, 0, 0, 0.5)',  // when the container is hovered
-  active: 'rgba(0, 0, 0, 0.7)', // when the thumb itself is hovered (WebKit only)
-}
-
-// Partial states are also valid (unspecified states are not set)
-thumbColor: { hover: 'rgba(0, 0, 0, 0.5)' }
-```
-
-### Axis-specific and Common Options
-
-For both `scrollbar` and `scrollSnap`, top-level options apply to both axes. To set different values per axis, override them under `x` (horizontal) or `y` (vertical).\
-The options accepted by `x` and `y` are `ScrollbarAxisOptions` and `ScrollSnapAxisOptions` respectively.
+For both `scrollbar` and `scrollSnap`, options specified at the top level apply to both axes. To use different values per axis, override them inside `x` (horizontal) or `y` (vertical).
 
 ```ts
 scrollbar({
-  thumbColor: 'rgba(0, 0, 0, 0.3)', // common for both axes
-  x: { thumbColor: 'rgba(0, 0, 255, 0.3)' }, // overrides horizontal only
+  thumbColor: 'rgba(0, 0, 0, 0.3)', // both axes
+  x: { thumbColor: 'rgba(0, 0, 255, 0.3)' }, // override horizontal only
 });
 
 scrollSnap({
-  align: 'start', // common for both axes
-  x: { align: 'center' }, // overrides horizontal only
+  align: 'start', // both axes
+  x: { align: 'center' }, // override horizontal only
 });
 ```
 
-For options that accept `StyleState`, axis-specific values take precedence per state; unspecified states fall back to the common value.
+### Per-State Values (`StyleState`)
+
+Many `scrollbar` options accept a value per state, such as hover. A plain value applies to all states.
+
+```ts
+// Same value for all states
+scrollbar({ thumbColor: 'rgba(0, 0, 0, 0.3)' });
+
+// Per-state values (omitted states use the defaults)
+scrollbar({
+  thumbColor: {
+    base: 'rgba(0, 0, 0, 0.3)', // normal
+    hover: 'rgba(0, 0, 0, 0.5)', // when hovering the container
+    active: 'rgba(0, 0, 0, 0.7)', // when hovering the thumb itself (WebKit only)
+  },
+});
+```
+
+| State    | Applied when                                                                       |
+| -------- | ---------------------------------------------------------------------------------- |
+| `base`   | Normal                                                                             |
+| `hover`  | Hovering the container                                                             |
+| `active` | Hovering the thumb itself (WebKit only; some of the options starting with `thumb`) |
+
+Per-axis values in `x` / `y` take precedence state by state; states omitted in the per-axis value fall back to the common value.
 
 ```ts
 scrollbar({
   thumbColor: { base: 'rgba(0,0,0,0.3)', hover: 'rgba(0,0,0,0.5)' },
-  // x has no hover, so horizontal hover falls back to thumbColor's hover
+  // x has no hover value, so the horizontal hover color is thumbColor's hover
   x: { thumbColor: { base: 'rgba(0,0,255,0.3)' } },
 });
 ```
 
-## Style Types
+## API
 
 ### `scrollbar`
 
-Customizes the appearance of the scrollbar.
+```ts
+scrollbar(options?: ScrollbarOptions): ScrollStyle
+```
 
-In WebKit browsers (Chrome, Edge, Safari), full customization via `::-webkit-scrollbar` is available.\
-In non-WebKit browsers (Firefox), a fallback using `scrollbar-width` / `scrollbar-color` is applied.
+Returns class names and CSS variables that customize the appearance of scrollbars.
+
+In browsers that support WebKit scrollbars (`::-webkit-scrollbar`; Chrome, Edge, Safari), all options are applied.\
+In browsers that do not (Firefox), only the color and width via `scrollbar-width` and `scrollbar-color` are applied (see [Non-WebKit Browsers](#non-webkit-browsers)).
+
+| Parameter  | Type               | Description       |
+| ---------- | ------------------ | ----------------- |
+| `options?` | `ScrollbarOptions` | The options below |
+
+| Option              | Type                                       | Description                                                                                                                 |
+| ------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `thumbColor?`       | `StyleState<string, ThumbState>`           | Thumb color                                                                                                                 |
+| `thumbSize?`        | `StyleState<number, ThumbState>`           | Thumb thickness (px). Capped at the track width if larger                                                                   |
+| `thumbRadius?`      | `StyleState<ThumbRadius, ThumbState>`      | Thumb corner radius. A number (px), `'full'` (fully rounded), or `'none'` (square)                                          |
+| `thumbBorderColor?` | `StyleState<string, ThumbState>`           | Thumb border color. The border fills the gap between the track and the thumb                                                |
+| `thumbBorderWidth?` | `StyleState<number, TrackState>`           | Thumb border width (px). Used only when `trackSize` is `'auto'` (see [How Sizes Are Determined](#how-sizes-are-determined)) |
+| `trackColor?`       | `StyleState<string, TrackState>`           | Track color                                                                                                                 |
+| `trackSize?`        | `StyleState<number, TrackState> \| 'auto'` | Track width (px). `'auto'` follows `thumbSize + 2 × thumbBorderWidth`                                                       |
+| `x?`                | `ScrollbarAxisOptions`                     | The options above starting with `thumb` / `track`, applied to the horizontal scrollbar only                                 |
+| `y?`                | `ScrollbarAxisOptions`                     | The options above starting with `thumb` / `track`, applied to the vertical scrollbar only                                   |
+| `fallbackSize?`     | `ScrollbarFallbackSize`                    | Scrollbar width for non-WebKit browsers (`scrollbar-width`): `'auto'`, `'thin'`, or `'none'`. Defaults to `'thin'`          |
+| `arrows?`           | `boolean`                                  | Shows arrow buttons at the ends of the scrollbar (WebKit only). Defaults to `false`                                         |
+| `noAnimation?`      | `boolean`                                  | Disables animations. Defaults to `false` (see [Animation](#animation))                                                      |
 
 ```ts
 import { scrollbar } from '@fringeworks/style-scroll';
@@ -132,501 +159,165 @@ const { className, style } = scrollbar({
   },
   thumbSize: { base: 5, hover: 9 },
   trackColor: 'rgba(128, 128, 128, 0.04)',
-  thumbRadius: 'full',
-  thumbBorderWidth: 2,
-  thumbBorderColor: 'transparent',
 });
 ```
 
-#### CSS Default Values (WebKit)
+#### Default Values
 
-These are the CSS defaults when no option is specified.
+Values used when an option is omitted.
 
-| Property           | Default Value               |
-| ------------------ | --------------------------- |
-| `thumbSize`        | `5` (normal) / `9` (hover)  |
-| `thumbColor`       | `rgba(0, 0, 0, 0.1)`        |
-| `thumbColor.hover` | `rgba(0, 0, 0, 0.3)`        |
-| `trackColor`       | `rgba(128, 128, 128, 0.04)` |
-| `thumbRadius`      | `'full'` (9999px)           |
-| `thumbBorderWidth` | `2`                         |
-| `thumbBorderColor` | `transparent`               |
+| Option             | `base`                      | `hover`                     | `active`                   |
+| ------------------ | --------------------------- | --------------------------- | -------------------------- |
+| `thumbColor`       | `rgba(127, 127, 127, 0.1)`  | `rgba(127, 127, 127, 0.3)`  | `rgba(127, 127, 127, 0.5)` |
+| `thumbSize`        | `5`                         | `7`                         | `7`                        |
+| `thumbRadius`      | `'full'`                    | `'full'`                    | `'full'`                   |
+| `thumbBorderColor` | transparent                 | transparent                 | transparent                |
+| `thumbBorderWidth` | `0`                         | `0`                         | -                          |
+| `trackColor`       | `rgba(127, 127, 127, 0.04)` | `rgba(127, 127, 127, 0.04)` | -                          |
+| `trackSize`        | `13`                        | `13`                        | -                          |
 
-### `scrollSnap`
+#### How Sizes Are Determined
 
-Configures scroll snapping. Apply it to the scroll container.\
-`align`, `stop` and `margin` are applied to all direct children (`> *`) at once.
+The thumb is drawn in the center of the track, with the remaining space (track width minus thumb thickness) as its border. The track width is determined in one of two ways.
 
-```ts
-import { scrollSnap } from '@fringeworks/style-scroll';
+- `trackSize` is a number (default): the track width is fixed. The thumb has the thickness of `thumbSize`, and the remaining gap is painted with `thumbBorderColor`. `thumbBorderWidth` is not used.
+- `trackSize` is `'auto'`: the track width is `thumbSize + 2 × thumbBorderWidth`. If you specify a hover value for `thumbSize`, the track grows together with the thumb when hovering the container.
 
-// Scroll vertically and snap to the start of each child
-const { className, style } = scrollSnap({ axis: 'y', align: 'start' });
-```
-
-To enable snapping, specify both `axis` and `align`. Both default to `none`, so nothing snaps when they are omitted.
-
-#### Per-child settings
-
-To use a different alignment (or other setting) for a specific child, set the CSS property directly in that child's inline style. Inline styles take precedence over the styles applied via `> *`.
-
-```html
-<div class="lx-scroll-snap ..." style="...">
-  <div>...</div>
-  <div style="scroll-snap-align: center">...</div>
-</div>
-```
-
-## `scrollbar` Options (`ScrollbarOptions`)
-
-All Thumb and Track options can also be specified per axis under `x` / `y` (see [Axis-specific and Common Options](#axis-specific-and-common-options)).
-
-### Thumb
-
-#### `thumbSize` — Thumb thickness
-
-| Option       | Type                             | States                    |
-| ------------ | -------------------------------- | ------------------------- |
-| `thumbSize?` | `StyleState<number, ThumbState>` | `base`, `hover`, `active` |
-
-Numbers are treated as `px` values.
+When hovering the thumb itself (`active`), the track width does not change; only the thumb takes the `active` thickness. In either case, a thumb thicker than the track is capped at the track width.
 
 ```ts
-// 6px for both axes, all states
-scrollbar({ thumbSize: 6 });
-
-// 5px normally, 9px on hover
+// The track stays at 13px; only the thumb grows on hover
 scrollbar({ thumbSize: { base: 5, hover: 9 } });
 
-// Different values per axis
-scrollbar({ thumbSize: 6, y: { thumbSize: 10 } });
-```
-
-#### `thumbColor` — Thumb color
-
-| Option        | Type                             | States                    |
-| ------------- | -------------------------------- | ------------------------- |
-| `thumbColor?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-
-- `hover`: color when the container is hovered
-- `active`: color when the thumb itself is directly hovered (WebKit only)
-
-```ts
+// The track grows together with the thumb (2px gap around the thumb)
 scrollbar({
-  thumbColor: {
-    base: 'rgba(0, 0, 0, 0.2)',
-    hover: 'rgba(0, 0, 0, 0.4)',
-    active: 'rgba(0, 0, 0, 0.6)',
-  },
-});
-```
-
-#### `thumbRadius` — Thumb corner radius
-
-| Option         | Type                                  | States                    |
-| -------------- | ------------------------------------- | ------------------------- |
-| `thumbRadius?` | `StyleState<ThumbRadius, ThumbState>` | `base`, `hover`, `active` |
-
-##### `ThumbRadius` values
-
-| Value    | Output   | Description      |
-| -------- | -------- | ---------------- |
-| `number` | `${n}px` | Fixed value (px) |
-| `'full'` | `9999px` | Fully rounded    |
-| `'none'` | `0`      | No rounding      |
-
-```ts
-scrollbar({ thumbRadius: 'full' }); // 9999px
-scrollbar({ thumbRadius: 'none' }); // 0
-scrollbar({ thumbRadius: 4 }); // 4px
-```
-
-#### `thumbBorderWidth` — Thumb border width
-
-| Option              | Type                                       | States                    |
-| ------------------- | ------------------------------------------ | ------------------------- |
-| `thumbBorderWidth?` | `StyleState<ThumbBorderWidth, ThumbState>` | `base`, `hover`, `active` |
-
-##### `ThumbBorderWidth` values
-
-| Value    | Description                                                          |
-| -------- | -------------------------------------------------------------------- |
-| `number` | Fixed width (px)                                                     |
-| `'auto'` | Automatically adjusts to follow the thumb size animation (auto mode) |
-
-> **Auto mode**: When the `base` of `thumbBorderWidth` is `null`, `undefined`, or `'auto'`, auto mode is applied.\
-> Auto mode is also active by default when the option is not specified at all.
-
-```ts
-scrollbar({ thumbBorderWidth: 2 }); // fixed 2px
-scrollbar({ thumbBorderWidth: 'auto' }); // auto mode
-scrollbar({ x: { thumbBorderWidth: 2 } }); // horizontal fixed, vertical auto mode
-```
-
-#### `thumbBorderColor` — Thumb border color
-
-| Option              | Type                             | States                    |
-| ------------------- | -------------------------------- | ------------------------- |
-| `thumbBorderColor?` | `StyleState<string, ThumbState>` | `base`, `hover`, `active` |
-
-The CSS default when not specified is `transparent`.
-
-```ts
-scrollbar({
+  thumbSize: { base: 5, hover: 9 },
   thumbBorderWidth: 2,
-  thumbBorderColor: 'transparent', // thumb background shows through
+  trackSize: 'auto',
 });
-```
-
----
-
-### Track
-
-#### `trackColor` — Track color
-
-| Option        | Type                             | States          |
-| ------------- | -------------------------------- | --------------- |
-| `trackColor?` | `StyleState<string, TrackState>` | `base`, `hover` |
-
-- `hover`: color when the container is hovered
-
-```ts
-scrollbar({
-  trackColor: {
-    base: 'rgba(0, 0, 0, 0.04)',
-    hover: 'rgba(0, 0, 0, 0.08)',
-  },
-});
-```
-
-#### `trackSize` — Track width
-
-| Option       | Type                                | States          |
-| ------------ | ----------------------------------- | --------------- |
-| `trackSize?` | `StyleState<TrackSize, TrackState>` | `base`, `hover` |
-
-##### `TrackSize` values
-
-| Value    | Description                                                         |
-| -------- | ------------------------------------------------------------------- |
-| `number` | Fixed width (px)                                                    |
-| `'auto'` | Tracks `thumbSizeActive + 2×thumbBorderWidth` and animates on hover |
-
-> **Auto mode**: Specifying `'auto'` for `trackSize` activates auto mode.
-
-```ts
-// Fixed width
-scrollbar({ trackSize: 12 });
-
-// Auto mode (follows thumb size)
-scrollbar({ trackSize: 'auto' });
-
-// 8px normally, 12px on hover
-scrollbar({ trackSize: { base: 8, hover: 12 } });
 
 // Different settings per axis
 scrollbar({ trackSize: 12, x: { trackSize: 'auto' } });
 ```
 
----
+#### Animation
 
-### Other
+Value changes between states are animated: 0.3 seconds for sizes and 0.5 seconds for colors. There is no animation when `noAnimation: true` is specified, or when the user prefers reduced motion (`prefers-reduced-motion: reduce`).
 
-#### `fallbackSize` — Non-WebKit fallback
+The animation uses the `transition` property of the element the style is applied to. If you specify another `transition` on the same element, one of them overrides the other. To animate other properties on the same element, specify `noAnimation: true` or use a separate element as the scroll container.
 
-| Option          | Type                         | Default  |
-| --------------- | ---------------------------- | -------- |
-| `fallbackSize?` | `'auto' \| 'thin' \| 'none'` | `'auto'` |
+#### Non-WebKit Browsers
 
-Controls the `scrollbar-width` CSS property for non-WebKit browsers (Firefox). Has no effect in WebKit browsers.
+In browsers that do not support WebKit scrollbars (Firefox), only the following are applied.
 
-| Value    | Description                    |
-| -------- | ------------------------------ |
-| `'auto'` | Browser default                |
-| `'thin'` | Thin scrollbar                 |
-| `'none'` | Hidden (scrolling still works) |
+| CSS Property      | Value                                                                   |
+| ----------------- | ----------------------------------------------------------------------- |
+| `scrollbar-width` | `fallbackSize`                                                          |
+| `scrollbar-color` | The vertical (`y`) `thumbColor` and `trackColor` (states are reflected) |
+
+Since the two axes cannot have different colors, colors specified in `x` are not used.
+
+### `scrollSnap`
 
 ```ts
-scrollbar({ fallbackSize: 'thin' });
+scrollSnap(options?: ScrollSnapOptions): ScrollStyle
 ```
 
-#### `arrows` — Arrow buttons
+Returns class names and CSS variables that configure scroll snapping. Apply it to the scroll container.\
+The child options (`align`, `stop`, `margin`) are applied to all direct children of the container (`> *`).
 
-| Option    | Type      | Default     |
-| --------- | --------- | ----------- |
-| `arrows?` | `boolean` | `undefined` |
+To enable snapping, specify both `axis` and `align`. If either is omitted, no snapping occurs.
 
-Forces the display or hiding of scrollbar end arrow buttons (WebKit only).
+| Parameter  | Type                | Description       |
+| ---------- | ------------------- | ----------------- |
+| `options?` | `ScrollSnapOptions` | The options below |
 
-| Value       | Description                        |
-| ----------- | ---------------------------------- |
-| `true`      | Show arrow buttons                 |
-| `false`     | Hide arrow buttons                 |
-| `undefined` | No class applied (browser default) |
+| Option        | Type                    | Description                                                                                                                          |
+| ------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `axis?`       | `SnapAxis`              | Snap axis (`scroll-snap-type`): `'x'`, `'y'`, `'both'`, or `'none'`. No snapping if omitted                                          |
+| `strictness?` | `SnapStrictness`        | Snap strictness: `'mandatory'` (always stops at a snap position) or `'proximity'` (stops only when close). Defaults to `'mandatory'` |
+| `padding?`    | `number \| string`      | Offset of the snap position (`scroll-padding`), e.g. for the height of a fixed header                                                |
+| `behavior?`   | `SnapBehavior`          | Scroll behavior (`scroll-behavior`): `'auto'`, `'smooth'`, or `'instant'`. Browser default if omitted                                |
+| `align?`      | `SnapAlign`             | Which part of each child aligns to the snap position (`scroll-snap-align`): `'start'`, `'center'`, `'end'`, or `'none'`              |
+| `stop?`       | `SnapStop`              | Whether snap positions can be passed (`scroll-snap-stop`): `'normal'` (can be passed with momentum) or `'always'`                    |
+| `margin?`     | `number \| string`      | Offset of the snap position on the child side (`scroll-margin`)                                                                      |
+| `x?`          | `ScrollSnapAxisOptions` | `padding`, `align`, and `margin` applied to the horizontal (inline) axis only                                                        |
+| `y?`          | `ScrollSnapAxisOptions` | `padding`, `align`, and `margin` applied to the vertical (block) axis only                                                           |
 
-```ts
-scrollbar({ arrows: false }); // hide arrows
-```
+Numbers for `padding` / `margin` are treated as `px`; strings are used as CSS values as-is.\
+Values in `x` / `y` map to the following CSS properties. An axis whose `align` is not determined becomes `none`.
 
-#### `noAnimation` — Disable animations
-
-| Option         | Type          | Default     |
-| -------------- | ------------- | ----------- |
-| `noAnimation?` | `NoAnimation` | `undefined` |
-
-Disables transition animations. Animations are enabled by default when not specified.
-
-| Value                 | Description                   |
-| --------------------- | ----------------------------- |
-| `undefined` / `false` | Animations enabled (default)  |
-| `true`                | Disable both size and color   |
-| `{ size: true }`      | Disable size animations only  |
-| `{ color: true }`     | Disable color animations only |
-
-Animations can be controlled per property group.
-
-| Group   | Target Properties                                           |
-| ------- | ----------------------------------------------------------- |
-| `size`  | `thumbSize`, `trackSize`, `thumbBorderWidth`, `thumbRadius` |
-| `color` | `thumbColor`, `trackColor`, `thumbBorderColor`              |
+| Option                   | CSS Property                                    |
+| ------------------------ | ----------------------------------------------- |
+| `x.padding`, `y.padding` | `scroll-padding-inline`, `scroll-padding-block` |
+| `x.margin`, `y.margin`   | `scroll-margin-inline`, `scroll-margin-block`   |
+| `x.align`, `y.align`     | `scroll-snap-align: <y.align> <x.align>`        |
 
 ```ts
-// Disable all animations
-scrollbar({ noAnimation: true });
+import { scrollSnap } from '@fringeworks/style-scroll';
 
-// Disable size animations only
-scrollbar({ noAnimation: { size: true } });
+// Scroll vertically and snap to the start of each child
+scrollSnap({ axis: 'y', align: 'start' });
 
-// Disable color animations only
-scrollbar({ noAnimation: { color: true } });
-```
+// Horizontal carousel (snap only when close)
+scrollSnap({ axis: 'x', strictness: 'proximity', align: 'center' });
 
----
-
-## `scrollSnap` Options (`ScrollSnapOptions`)
-
-`padding`, `align` and `margin` can also be specified per axis under `x` / `y` (see [Axis-specific and Common Options](#axis-specific-and-common-options)).
-
-### Container
-
-#### `axis` — Snap axis
-
-| Option  | Type                             | Default     |
-| ------- | -------------------------------- | ----------- |
-| `axis?` | `'x' \| 'y' \| 'both' \| 'none'` | `undefined` |
-
-Sets the axis of `scroll-snap-type`. When omitted, nothing snaps.
-
-| Value    | Description       |
-| -------- | ----------------- |
-| `'x'`    | Horizontal only   |
-| `'y'`    | Vertical only     |
-| `'both'` | Both axes         |
-| `'none'` | Snapping disabled |
-
-#### `strictness` — Snap strictness
-
-| Option        | Type                         | Default       |
-| ------------- | ---------------------------- | ------------- |
-| `strictness?` | `'mandatory' \| 'proximity'` | `'mandatory'` |
-
-Combined with `axis` to form the `scroll-snap-type` value.
-
-| Value         | Description                              |
-| ------------- | ---------------------------------------- |
-| `'mandatory'` | Always rests on a snap position          |
-| `'proximity'` | Snaps only when close to a snap position |
-
-```ts
-scrollSnap({ axis: 'x', strictness: 'proximity' }); // scroll-snap-type: x proximity
-```
-
-#### `padding` — Scroll padding
-
-| Option     | Type               | Default     |
-| ---------- | ------------------ | ----------- |
-| `padding?` | `number \| string` | `undefined` |
-
-Sets the offset of the snap position (`scroll-padding`). Useful for offsetting by the height of a fixed header.\
-Numbers are treated as `px`; strings are used as CSS values as-is.
-
-| Specified   | CSS property            |
-| ----------- | ----------------------- |
-| `padding`   | `scroll-padding`        |
-| `x.padding` | `scroll-padding-inline` |
-| `y.padding` | `scroll-padding-block`  |
-
-```ts
-// Offset by the height of a fixed header
+// Shift the snap position down by the height of a fixed header
 scrollSnap({ axis: 'y', align: 'start', y: { padding: 80 } });
 ```
 
-#### `behavior` — Scroll behavior
+#### Per-Child Overrides
 
-| Option      | Type                              | Default     |
-| ----------- | --------------------------------- | ----------- |
-| `behavior?` | `'auto' \| 'smooth' \| 'instant'` | `undefined` |
+Only the child options you specify are applied to the children. Their specificity is 0, so you can override them per child with a class or an inline style on the child.
 
-Sets `scroll-behavior`. When omitted, the browser default (`auto`) is used.
-
-### Children (applied to `> *`)
-
-#### `align` — Snap alignment
-
-| Option   | Type                                     | Default     |
-| -------- | ---------------------------------------- | ----------- |
-| `align?` | `'start' \| 'center' \| 'end' \| 'none'` | `undefined` |
-
-Sets which part of each child aligns to the snap position (`scroll-snap-align`).\
-`x.align` is the alignment on the inline (horizontal) axis and `y.align` on the block (vertical) axis. An axis with no resolved value becomes `none`.
-
-```ts
-scrollSnap({ axis: 'y', align: 'start' }); // scroll-snap-align: start
-scrollSnap({ axis: 'both', x: { align: 'center' }, y: { align: 'start' } }); // scroll-snap-align: start center
+```html
+<div class="frg-scroll-snap ..." style="...">
+  <div>...</div>
+  <div class="featured">...</div>
+</div>
 ```
 
-#### `stop` — Snap stop
-
-| Option  | Type                   | Default     |
-| ------- | ---------------------- | ----------- |
-| `stop?` | `'normal' \| 'always'` | `undefined` |
-
-Sets `scroll-snap-stop`. When omitted, `normal` is used.
-
-| Value      | Description                                                |
-| ---------- | ---------------------------------------------------------- |
-| `'normal'` | Snap positions may be skipped depending on scroll momentum |
-| `'always'` | Always stops at each snap position                         |
-
-#### `margin` — Scroll margin
-
-| Option    | Type               | Default     |
-| --------- | ------------------ | ----------- |
-| `margin?` | `number \| string` | `undefined` |
-
-Sets the snap position offset on the child side (`scroll-margin`). Numbers are treated as `px`.
-
-| Specified  | CSS property           |
-| ---------- | ---------------------- |
-| `margin`   | `scroll-margin`        |
-| `x.margin` | `scroll-margin-inline` |
-| `y.margin` | `scroll-margin-block`  |
-
-```ts
-scrollSnap({ axis: 'y', align: 'start', y: { margin: 16 } });
+```css
+.featured {
+  scroll-snap-align: center;
+}
 ```
 
----
+### Types
 
-## Type Definitions
+| Type                    | Description                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `ScrollStyle`           | Return value of the functions, with `className` and `style` (CSS variables) |
+| `CreateScrollStyle<O>`  | Type of a function that takes options `O` and returns `ScrollStyle`         |
+| `ScrollbarOptions`      | Options for `scrollbar`                                                     |
+| `ScrollbarAxisOptions`  | Options for `x` / `y` of `scrollbar`                                        |
+| `ThumbState`            | Thumb states (`'hover' \| 'active'`)                                        |
+| `TrackState`            | Track states (`'hover'`)                                                    |
+| `ThumbRadius`           | Thumb corner radius (`number \| 'full' \| 'none'`)                          |
+| `ScrollbarFallbackSize` | Scrollbar width for non-WebKit browsers (`'auto' \| 'thin' \| 'none'`)      |
+| `ScrollSnapOptions`     | Options for `scrollSnap`                                                    |
+| `ScrollSnapAxisOptions` | Options for `x` / `y` of `scrollSnap`                                       |
+| `ScrollSnapItemOptions` | Options of `scrollSnap` applied to the children                             |
+| `SnapAxis`              | Snap axis (`'x' \| 'y' \| 'both' \| 'none'`)                                |
+| `SnapStrictness`        | Snap strictness (`'mandatory' \| 'proximity'`)                              |
+| `SnapAlign`             | Snap alignment (`'start' \| 'center' \| 'end' \| 'none'`)                   |
+| `SnapStop`              | Whether snap positions can be passed (`'normal' \| 'always'`)               |
+| `SnapBehavior`          | Scroll behavior (`'auto' \| 'smooth' \| 'instant'`)                         |
 
-```ts
-/** Scrollbar options (common styles + per-axis overrides) */
-type ScrollbarOptions = ScrollbarAxisOptions & {
-  x?: ScrollbarAxisOptions;
-  y?: ScrollbarAxisOptions;
-  fallbackSize?: FallbackSize;
-  arrows?: boolean;
-  noAnimation?: NoAnimation;
-};
-
-/** Styles that can be specified per axis */
-type ScrollbarAxisOptions = {
-  thumbColor?: StyleState<string, ThumbState>;
-  thumbSize?: StyleState<number, ThumbState>;
-  thumbRadius?: StyleState<ThumbRadius, ThumbState>;
-  thumbBorderColor?: StyleState<string, ThumbState>;
-  thumbBorderWidth?: StyleState<ThumbBorderWidth, ThumbState>;
-  trackColor?: StyleState<string, TrackState>;
-  trackSize?: StyleState<TrackSize, TrackState>;
-};
-
-/** Thumb states */
-type ThumbState = 'hover' | 'active';
-
-/** Track states */
-type TrackState = 'hover';
-
-/** Thumb border width */
-type ThumbBorderWidth = number | 'auto';
-
-/** Thumb corner radius */
-type ThumbRadius = number | 'full' | 'none';
-
-/** Track width */
-type TrackSize = number | 'auto';
-
-/** Non-WebKit fallback size */
-type FallbackSize = 'auto' | 'thin' | 'none';
-
-/** Animation disable configuration */
-type NoAnimation = boolean | { size?: boolean; color?: boolean };
-
-/** scrollSnap options (common options + per-axis overrides) */
-type ScrollSnapOptions = ScrollSnapAxisOptions & {
-  x?: ScrollSnapAxisOptions;
-  y?: ScrollSnapAxisOptions;
-  axis?: SnapAxis;
-  strictness?: SnapStrictness;
-  behavior?: SnapBehavior;
-  stop?: SnapStop;
-};
-
-/** Options that can be specified per axis */
-type ScrollSnapAxisOptions = {
-  padding?: number | string;
-  align?: SnapAlign;
-  margin?: number | string;
-};
-
-/** Snap axis */
-type SnapAxis = 'x' | 'y' | 'both' | 'none';
-
-/** Snap strictness */
-type SnapStrictness = 'mandatory' | 'proximity';
-
-/** Snap alignment */
-type SnapAlign = 'start' | 'center' | 'end' | 'none';
-
-/** Snap stop */
-type SnapStop = 'always' | 'normal';
-
-/** Scroll behavior */
-type SnapBehavior = 'smooth' | 'auto' | 'instant';
-
-/** Per-state value type */
-type StyleState<T, S extends string> =
-  | T
-  | { [key in S]?: T }
-  | { base?: T; [key in S]?: T };
-```
-
-## Return Value
-
-Style functions return a `ScrollStyle`.
-
-```ts
-type ScrollStyle = {
-  className?: string;
-  style?: {
-    [key: `--${string}`]: string | undefined;
-  };
-};
-```
+`StyleState<T, S>` is a type from `@fringeworks/style-utils` that accepts either a plain value `T` or per-state values `{ base?: T; [state in S]?: T }`.
 
 ## Browser Support
 
 This library is designed using modern CSS standards and supports the following major browser versions.
 
-| Browser         | Supported Version  | Supported Version (no animation) | Scrollbar Customization      |
-| --------------- | ------------------ | -------------------------------- | ---------------------------- |
-| Google Chrome   | 85 (August 2020)+  | 83 (May 2020)+                   | Full customization (WebKit)  |
-| Microsoft Edge  | 85 (August 2020)+  | 83 (May 2020)+                   | Full customization (WebKit)  |
-| Apple Safari    | 16.4 (March 2023)+ | 14.1 (April 2021)+               | Full customization (WebKit)  |
-| Mozilla Firefox | 128 (July 2024)+   | 83 (November 2020)+              | Fallback (`scrollbar-width`) |
+| Browser         | Supported Version  | Supported Version (no animation) | Scrollbar Customization                        |
+| --------------- | ------------------ | -------------------------------- | ---------------------------------------------- |
+| Google Chrome   | 88 (January 2021)+ | 88 (January 2021)+               | All options (WebKit)                           |
+| Microsoft Edge  | 88 (January 2021)+ | 88 (January 2021)+               | All options (WebKit)                           |
+| Apple Safari    | 16.4 (March 2023)+ | 14.1 (April 2021)+               | All options (WebKit)                           |
+| Mozilla Firefox | 128 (July 2024)+   | 83 (November 2020)+              | Color and width only (`scrollbar-width`, etc.) |
 
-> **WebKit browsers (Chrome, Edge, Safari)** support full customization via `::-webkit-scrollbar`.\
-> **Non-WebKit browsers (Firefox)** only apply `scrollbar-width` / `scrollbar-color` (color and width only).
+Animations use `@property`. Browsers without `@property` support still apply all other styles, just without animation.
 
 ## License
 

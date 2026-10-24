@@ -1,37 +1,41 @@
 // scrollSnapコンテナのスタイル
-.lx-scroll-snap {
-  scroll-snap-type: var(--lx-scroll-snap-type, none);
-  scroll-behavior: var(--lx-scroll-snap-behavior, auto);
-
-  // アイテムオプション指定時: 直接の子要素にスナップアイテムスタイルを一括適用
-  // lx-scroll-snap-item* クラスをコンテナに付与することで > * に適用される
-  &.lx-scroll-snap-item > * {
-    scroll-snap-align: var(--lx-scroll-snap-item-align, none);
-    scroll-snap-stop: var(--lx-scroll-snap-item-stop, normal);
-  }
-
-  &.lx-scroll-snap-item-margin > * {
-    scroll-margin: var(--lx-scroll-snap-item-margin);
-  }
-
-  &.lx-scroll-snap-item-margin-x > * {
-    scroll-margin-inline: var(--lx-scroll-snap-item-margin-x);
-  }
-
-  &.lx-scroll-snap-item-margin-y > * {
-    scroll-margin-block: var(--lx-scroll-snap-item-margin-y);
-  }
+.frg-scroll-snap {
+  scroll-snap-type: var(--frg-scroll-snap-type, none);
+  scroll-behavior: var(--frg-scroll-snap-behavior, auto);
 }
 
 // scroll-paddingは指定時のみクラスを付与（shorthandと個別指定の競合を避けるため個別クラス）
-.lx-scroll-snap-padding {
-  scroll-padding: var(--lx-scroll-snap-padding);
+.frg-scroll-snap-padding {
+  scroll-padding: var(--frg-scroll-snap-padding);
 }
 
-.lx-scroll-snap-padding-x {
-  scroll-padding-inline: var(--lx-scroll-snap-padding-x);
+.frg-scroll-snap-padding-x {
+  scroll-padding-inline: var(--frg-scroll-snap-padding-x);
 }
 
-.lx-scroll-snap-padding-y {
-  scroll-padding-block: var(--lx-scroll-snap-padding-y);
+.frg-scroll-snap-padding-y {
+  scroll-padding-block: var(--frg-scroll-snap-padding-y);
+}
+
+// アイテムオプション: 指定したものだけクラスを付与し、直接の子要素に一括適用する
+// :where() で詳細度を 0 にし、子要素に付けたクラスなどで個別に上書きできるようにする
+:where(.frg-scroll-snap.frg-scroll-snap-item-align) > * {
+  scroll-snap-align: var(--frg-scroll-snap-item-align);
+}
+
+:where(.frg-scroll-snap.frg-scroll-snap-item-stop) > * {
+  scroll-snap-stop: var(--frg-scroll-snap-item-stop);
+}
+
+// shorthand の後に個別指定を置き、個別指定を優先させる
+:where(.frg-scroll-snap.frg-scroll-snap-item-margin) > * {
+  scroll-margin: var(--frg-scroll-snap-item-margin);
+}
+
+:where(.frg-scroll-snap.frg-scroll-snap-item-margin-x) > * {
+  scroll-margin-inline: var(--frg-scroll-snap-item-margin-x);
+}
+
+:where(.frg-scroll-snap.frg-scroll-snap-item-margin-y) > * {
+  scroll-margin-block: var(--frg-scroll-snap-item-margin-y);
 }

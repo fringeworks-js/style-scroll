@@ -32,3 +32,5 @@ tsconfig.tsbuildinfo
 
 memo.md
 test-results/
+.vitest-attachments/
+**/__screenshots__/

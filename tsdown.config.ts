@@ -1,84 +1,11 @@
-import createExternal from '@fringeworks/dev/createExternal';
-import distPackage from '@fringeworks/rollup-plugin-dist-package';
-import copy from 'rollup-plugin-copy';
-import { defineConfig } from 'tsdown';
+import createTsdownConfig from '@fringeworks/dev/createTsdownConfig';
 
-export default defineConfig({
-  entry: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.test.{ts,tsx}',
-    '!src/**/*.spec.{ts,tsx}',
-    '!src/**/*.d.{ts,tsx}',
-  ],
-  format: ['esm', 'cjs'],
-  dts: true,
-  unbundle: true,
-  sourcemap: false,
-  clean: true,
-  outDir: 'dist',
-  minify: false,
-  css: {
-    inject: true,
-  },
-  inputOptions: {
-    external: createExternal(),
-  },
-  outputOptions: {
-    preserveModules: true,
-    preserveModulesRoot: 'src',
-  },
-  plugins: [
-    distPackage({
-      content: {
-        main: './index.cjs',
-        module: './index.mjs',
-        sideEffects: ['**/*.css'],
-        exports: {
-          '.': {
-            import: './index.mjs',
-            require: './index.cjs',
-          },
-          './styles.css': './styles.css',
-          './*.css': './*/styles.css',
-          './with-css': {
-            import: './with-css/index.mjs',
-            require: './with-css/index.cjs',
-          },
-          './with-css/*': {
-            import: './with-css/*/index.mjs',
-            require: './with-css/*/index.cjs',
-          },
-          './*': {
-            import: './*/index.mjs',
-            require: './*/index.cjs',
-          },
-        },
-      },
-      resolveWorkspaceDeps: true,
-      range: '^',
-    }),
-    copy({
-      targets: [
-        {
-          src: ['LICENSE', 'README.md', 'README.ja.md'],
-          dest: 'dist',
-        },
-      ],
-    }),
-    {
-      name: 'fix-css-cjs-extension',
-      renderChunk(code, _, options) {
-        if (options.format !== 'cjs') {
-          return null;
-        }
-        return {
-          code: code.replace(
-            /require\((['"])([^'"]*\/styles)\.cjs\1\)/g,
-            'require($1$2.css$1)',
-          ),
-          map: null,
-        };
-      },
+export default createTsdownConfig({
+  css: true,
+  exports: {
+    extraExports: {
+      './styles.css': './styles.css',
+      './*.css': './*/styles.css',
     },
-  ],
+  },
 });

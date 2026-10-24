@@ -44,15 +44,12 @@ type ScrollbarStoryOptions = {
   thumbBorderColorActive?: string;
   thumbBorderColorXActive?: string;
   thumbBorderColorYActive?: string;
-  thumbBorderWidth?: string | 'auto';
-  thumbBorderWidthX?: string | 'auto';
-  thumbBorderWidthY?: string | 'auto';
-  thumbBorderWidthHover?: string | 'auto';
-  thumbBorderWidthXHover?: string | 'auto';
-  thumbBorderWidthYHover?: string | 'auto';
-  thumbBorderWidthActive?: string | 'auto';
-  thumbBorderWidthXActive?: string | 'auto';
-  thumbBorderWidthYActive?: string | 'auto';
+  thumbBorderWidth?: number;
+  thumbBorderWidthX?: number;
+  thumbBorderWidthY?: number;
+  thumbBorderWidthHover?: number;
+  thumbBorderWidthXHover?: number;
+  thumbBorderWidthYHover?: number;
   trackColor?: string;
   trackColorX?: string;
   trackColorY?: string;
@@ -67,8 +64,7 @@ type ScrollbarStoryOptions = {
   trackSizeYHover?: string | 'auto';
   fallbackSize?: 'auto' | 'thin' | 'none';
   arrows?: boolean;
-  noAnimationSize?: boolean;
-  noAnimationColor?: boolean;
+  noAnimation?: boolean;
 };
 
 type StoryOptions = ScrollbarStoryOptions & DebugOptions;
@@ -154,9 +150,6 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
     thumbBorderWidthHover,
     thumbBorderWidthXHover,
     thumbBorderWidthYHover,
-    thumbBorderWidthActive,
-    thumbBorderWidthXActive,
-    thumbBorderWidthYActive,
     trackColor,
     trackColorX,
     trackColorY,
@@ -169,8 +162,6 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
     trackSizeHover,
     trackSizeXHover,
     trackSizeYHover,
-    noAnimationSize,
-    noAnimationColor,
     ...rest
   } = opts;
 
@@ -184,11 +175,7 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
       thumbRadiusActive,
     ),
     thumbBorderColor: toStyleState(thumbBorderColor, thumbBorderColorHover),
-    thumbBorderWidth: toNumberStyleState(
-      thumbBorderWidth,
-      thumbBorderWidthHover,
-      thumbBorderWidthActive,
-    ),
+    thumbBorderWidth: toStyleState(thumbBorderWidth, thumbBorderWidthHover),
     trackColor: toStyleState(trackColor, trackColorHover),
     trackSize: toNumberStyleState(trackSize, trackSizeHover),
     x: {
@@ -204,11 +191,7 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
         thumbRadiusXActive,
       ),
       thumbBorderColor: toStyleState(thumbBorderColorX, thumbBorderColorXHover),
-      thumbBorderWidth: toNumberStyleState(
-        thumbBorderWidthX,
-        thumbBorderWidthXHover,
-        thumbBorderWidthXActive,
-      ),
+      thumbBorderWidth: toStyleState(thumbBorderWidthX, thumbBorderWidthXHover),
       trackColor: toStyleState(trackColorX, trackColorXHover),
       trackSize: toNumberStyleState(trackSizeX, trackSizeXHover),
     },
@@ -225,25 +208,11 @@ function toScrollbarOptions(opts: ScrollbarStoryOptions): ScrollbarOptions {
         thumbRadiusYActive,
       ),
       thumbBorderColor: toStyleState(thumbBorderColorY, thumbBorderColorYHover),
-      thumbBorderWidth: toNumberStyleState(
-        thumbBorderWidthY,
-        thumbBorderWidthYHover,
-        thumbBorderWidthYActive,
-      ),
+      thumbBorderWidth: toStyleState(thumbBorderWidthY, thumbBorderWidthYHover),
       trackColor: toStyleState(trackColorY, trackColorYHover),
       trackSize: toNumberStyleState(trackSizeY, trackSizeYHover),
     },
-    noAnimation: toNoAnimation(noAnimationSize, noAnimationColor),
   };
-}
-
-function toNoAnimation(
-  size?: boolean,
-  color?: boolean,
-): ScrollbarOptions['noAnimation'] {
-  if (!size && !color) return undefined;
-  if (size && color) return true;
-  return { size, color };
 }
 
 const ARG_TYPES: ArgTypes<StoryOptions> = {
@@ -265,15 +234,33 @@ const ARG_TYPES: ArgTypes<StoryOptions> = {
   thumbSizeActive: { control: 'number' },
   thumbSizeXActive: { control: 'number' },
   thumbSizeYActive: { control: 'number' },
-  thumbRadius: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusX: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusY: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusHover: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusXHover: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusYHover: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusActive: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusXActive: { control: 'text', description: 'number | "auto"' },
-  thumbRadiusYActive: { control: 'text', description: 'number | "auto"' },
+  thumbRadius: { control: 'text', description: 'number | "full" | "none"' },
+  thumbRadiusX: { control: 'text', description: 'number | "full" | "none"' },
+  thumbRadiusY: { control: 'text', description: 'number | "full" | "none"' },
+  thumbRadiusHover: {
+    control: 'text',
+    description: 'number | "full" | "none"',
+  },
+  thumbRadiusXHover: {
+    control: 'text',
+    description: 'number | "full" | "none"',
+  },
+  thumbRadiusYHover: {
+    control: 'text',
+    description: 'number | "full" | "none"',
+  },
+  thumbRadiusActive: {
+    control: 'text',
+    description: 'number | "full" | "none"',
+  },
+  thumbRadiusXActive: {
+    control: 'text',
+    description: 'number | "full" | "none"',
+  },
+  thumbRadiusYActive: {
+    control: 'text',
+    description: 'number | "full" | "none"',
+  },
   thumbBorderColor: { control: 'color' },
   thumbBorderColorX: { control: 'color' },
   thumbBorderColorY: { control: 'color' },
@@ -283,15 +270,15 @@ const ARG_TYPES: ArgTypes<StoryOptions> = {
   thumbBorderColorActive: { control: 'color' },
   thumbBorderColorXActive: { control: 'color' },
   thumbBorderColorYActive: { control: 'color' },
-  thumbBorderWidth: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthX: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthY: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthHover: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthXHover: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthYHover: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthActive: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthXActive: { control: 'text', description: 'number | "auto"' },
-  thumbBorderWidthYActive: { control: 'text', description: 'number | "auto"' },
+  thumbBorderWidth: {
+    control: 'number',
+    description: 'Used only when trackSize is "auto"',
+  },
+  thumbBorderWidthX: { control: 'number' },
+  thumbBorderWidthY: { control: 'number' },
+  thumbBorderWidthHover: { control: 'number' },
+  thumbBorderWidthXHover: { control: 'number' },
+  thumbBorderWidthYHover: { control: 'number' },
   trackSize: { control: 'text', description: 'number | "auto"' },
   trackSizeX: { control: 'text', description: 'number | "auto"' },
   trackSizeY: { control: 'text', description: 'number | "auto"' },
@@ -310,16 +297,7 @@ const ARG_TYPES: ArgTypes<StoryOptions> = {
     description: 'Non-WebKit only (CSS scrollbar-width)',
   },
   arrows: { control: 'boolean' },
-  noAnimationSize: {
-    control: 'boolean',
-    description:
-      'Disable size transitions (thumbSize, trackSize, thumbBorderWidth)',
-  },
-  noAnimationColor: {
-    control: 'boolean',
-    description:
-      'Disable color transitions (thumbColor, trackColor, thumbBorderColor)',
-  },
+  noAnimation: { control: 'boolean' },
   containerWidth: { control: 'number' },
   containerHeight: { control: 'number' },
   containerBackground: { control: 'color' },
@@ -385,7 +363,7 @@ export const Thin: Story = {
   argTypes: ARG_TYPES,
   args: {
     thumbSize: 4,
-    thumbBorderWidth: '1',
+    thumbBorderWidth: 1,
     trackSize: 'auto',
   },
 };
@@ -428,9 +406,8 @@ export const ExpandOnHover: Story = {
     thumbSize: 4,
     thumbSizeHover: 9,
     thumbSizeActive: 9,
-    thumbBorderWidth: '0',
-    thumbBorderWidthHover: '2',
-    thumbBorderWidthActive: '2',
+    thumbBorderWidth: 0,
+    thumbBorderWidthHover: 2,
     trackSize: 'auto',
   },
 };
@@ -445,9 +422,8 @@ export const ExpandOnHoverIndividual: Story = {
     thumbSizeY: 4,
     thumbSizeYHover: 16,
     thumbSizeYActive: 16,
-    thumbBorderWidth: '0',
-    thumbBorderWidthHover: '2',
-    thumbBorderWidthActive: '2',
+    thumbBorderWidth: 0,
+    thumbBorderWidthHover: 2,
     trackSize: 'auto',
   },
 };
@@ -486,14 +462,6 @@ export const WithArrows: Story = {
   },
 };
 
-// 矢印ボタン非表示
-export const WithoutArrows: Story = {
-  argTypes: ARG_TYPES,
-  args: {
-    arrows: false,
-  },
-};
-
 // コンテナ・thumbホバーで3段階の色変化（thumbColorActiveはinstant change）
 export const ThumbHover: Story = {
   argTypes: ARG_TYPES,
@@ -504,7 +472,7 @@ export const ThumbHover: Story = {
   },
 };
 
-// ホバーするまでスクロールバーを非表示（auto trackモード）
+// ホバーするまでスクロールバーを非表示
 export const HiddenUntilHover: Story = {
   argTypes: ARG_TYPES,
   args: {
@@ -525,52 +493,19 @@ export const FallbackHidden: Story = {
   },
 };
 
-// 全アニメーション無効（サイズ・色の変化が即時）
+// アニメーション無効（サイズ・色の変化が即時）
 export const NoAnimation: Story = {
   argTypes: ARG_TYPES,
   args: {
     thumbSize: 5,
     thumbSizeHover: 11,
     thumbSizeActive: 17,
-    thumbBorderWidth: '2',
+    thumbBorderWidth: 2,
     trackSize: 'auto',
     thumbColor: 'rgb(169, 198, 207)',
     thumbColorHover: 'rgb(203, 168, 111)',
     thumbColorActive: 'rgb(237, 138, 15)',
-    noAnimationSize: true,
-    noAnimationColor: true,
-  },
-};
-
-// サイズ系アニメーション無効（拡縮は即時・色の変化はふわっと）
-export const NoAnimationSize: Story = {
-  argTypes: ARG_TYPES,
-  args: {
-    thumbSize: 5,
-    thumbSizeHover: 11,
-    thumbSizeActive: 17,
-    thumbBorderWidth: '2',
-    trackSize: 'auto',
-    thumbColor: 'rgb(169, 198, 207)',
-    thumbColorHover: 'rgb(203, 168, 111)',
-    thumbColorActive: 'rgb(237, 138, 15)',
-    noAnimationSize: true,
-  },
-};
-
-// カラー系アニメーション無効（色の変化は即時・拡縮はアニメーション）
-export const NoAnimationColor: Story = {
-  argTypes: ARG_TYPES,
-  args: {
-    thumbSize: 5,
-    thumbSizeHover: 11,
-    thumbSizeActive: 17,
-    thumbBorderWidth: '2',
-    trackSize: 'auto',
-    thumbColor: 'rgb(169, 198, 207)',
-    thumbColorHover: 'rgb(203, 168, 111)',
-    thumbColorActive: 'rgb(237, 138, 15)',
-    noAnimationColor: true,
+    noAnimation: true,
   },
 };
 

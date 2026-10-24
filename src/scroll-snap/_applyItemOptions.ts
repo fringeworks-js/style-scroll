@@ -2,9 +2,11 @@ import mergeClassName from '../_internal/mergeClassName';
 import unit from '../_internal/unit';
 import type { ScrollStyle } from '../types';
 import {
+  clsScrollSnapItemAlign,
   clsScrollSnapItemMargin,
   clsScrollSnapItemMarginX,
   clsScrollSnapItemMarginY,
+  clsScrollSnapItemStop,
   varScrollSnapItemAlign,
   varScrollSnapItemMargin,
   varScrollSnapItemMarginX,
@@ -26,6 +28,11 @@ export type ItemValues = {
   marginY?: number | string;
 };
 
+/**
+ * 子要素に適用する値を設定する
+ *
+ * 指定した値ごとにクラスを付与し、指定していないプロパティは子要素に適用しない
+ */
 export function applyItemOptions(
   result: ScrollStyle,
   options: ItemValues,
@@ -34,31 +41,34 @@ export function applyItemOptions(
 
   const snapAlign = resolveSnapAlign(align, alignX, alignY);
   if (snapAlign != null) {
-    result.style![varScrollSnapItemAlign] = snapAlign;
+    _apply(result, clsScrollSnapItemAlign, varScrollSnapItemAlign, snapAlign);
   }
   if (stop != null) {
-    result.style![varScrollSnapItemStop] = stop;
+    _apply(result, clsScrollSnapItemStop, varScrollSnapItemStop, stop);
   }
   if (margin != null) {
-    result.className = mergeClassName(
-      result.className,
+    _apply(
+      result,
       clsScrollSnapItemMargin,
+      varScrollSnapItemMargin,
+      unit(margin),
     );
-    result.style![varScrollSnapItemMargin] = unit(margin) as string;
   }
   if (marginX != null) {
-    result.className = mergeClassName(
-      result.className,
+    _apply(
+      result,
       clsScrollSnapItemMarginX,
+      varScrollSnapItemMarginX,
+      unit(marginX),
     );
-    result.style![varScrollSnapItemMarginX] = unit(marginX) as string;
   }
   if (marginY != null) {
-    result.className = mergeClassName(
-      result.className,
+    _apply(
+      result,
       clsScrollSnapItemMarginY,
+      varScrollSnapItemMarginY,
+      unit(marginY),
     );
-    result.style![varScrollSnapItemMarginY] = unit(marginY) as string;
   }
 }
 
@@ -81,4 +91,14 @@ export function resolveSnapAlign(
     return resolvedY ?? 'none';
   }
   return `${resolvedY ?? 'none'} ${resolvedX ?? 'none'}`;
+}
+
+function _apply(
+  result: ScrollStyle,
+  className: string,
+  key: `--${string}`,
+  value: string,
+): void {
+  result.className = mergeClassName(result.className, className);
+  result.style![key] = value;
 }
