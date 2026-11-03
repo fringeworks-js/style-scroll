@@ -1,285 +1,285 @@
 // ステートを反映した現在の値（transition でアニメーションさせるため型付きで登録する）
-@property --frg-scroll-scrollbar-thumbColorX-state {
+@property --frgs-scroll-scrollbar-thumbColorX-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.1);
 }
 
-@property --frg-scroll-scrollbar-thumbColorY-state {
+@property --frgs-scroll-scrollbar-thumbColorY-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.1);
 }
 
-@property --frg-scroll-scrollbar-thumbSizeX-state {
+@property --frgs-scroll-scrollbar-thumbSizeX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 5px;
 }
 
-@property --frg-scroll-scrollbar-thumbSizeY-state {
+@property --frgs-scroll-scrollbar-thumbSizeY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 5px;
 }
 
-@property --frg-scroll-scrollbar-thumbRadiusX-state {
+@property --frgs-scroll-scrollbar-thumbRadiusX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 9999px;
 }
 
-@property --frg-scroll-scrollbar-thumbRadiusY-state {
+@property --frgs-scroll-scrollbar-thumbRadiusY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 9999px;
 }
 
-@property --frg-scroll-scrollbar-thumbBorderColorX-state {
+@property --frgs-scroll-scrollbar-thumbBorderColorX-state {
   syntax: '<color>';
   inherits: true;
   initial-value: transparent;
 }
 
-@property --frg-scroll-scrollbar-thumbBorderColorY-state {
+@property --frgs-scroll-scrollbar-thumbBorderColorY-state {
   syntax: '<color>';
   inherits: true;
   initial-value: transparent;
 }
 
-@property --frg-scroll-scrollbar-thumbBorderWidthX-state {
+@property --frgs-scroll-scrollbar-thumbBorderWidthX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 0px;
 }
 
-@property --frg-scroll-scrollbar-thumbBorderWidthY-state {
+@property --frgs-scroll-scrollbar-thumbBorderWidthY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 0px;
 }
 
-@property --frg-scroll-scrollbar-trackColorX-state {
+@property --frgs-scroll-scrollbar-trackColorX-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.04);
 }
 
-@property --frg-scroll-scrollbar-trackColorY-state {
+@property --frgs-scroll-scrollbar-trackColorY-state {
   syntax: '<color>';
   inherits: true;
   initial-value: rgba(127, 127, 127, 0.04);
 }
 
-@property --frg-scroll-scrollbar-trackSizeX-state {
+@property --frgs-scroll-scrollbar-trackSizeX-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 13px;
 }
 
-@property --frg-scroll-scrollbar-trackSizeY-state {
+@property --frgs-scroll-scrollbar-trackSizeY-state {
   syntax: '<length>';
   inherits: true;
   initial-value: 13px;
 }
 
 // scrollbarのスタイル
-.frg-scroll-scrollbar {
+.frgs-scroll-scrollbar {
   // 初期値
   // thumbColor
-  --frg-scroll-scrollbar-thumbColorX: rgba(127, 127, 127, 0.1);
-  --frg-scroll-scrollbar-thumbColorY: rgba(127, 127, 127, 0.1);
-  --frg-scroll-scrollbar-thumbColorX-hover: rgba(127, 127, 127, 0.3);
-  --frg-scroll-scrollbar-thumbColorY-hover: rgba(127, 127, 127, 0.3);
-  --frg-scroll-scrollbar-thumbColorX-active: rgba(127, 127, 127, 0.5);
-  --frg-scroll-scrollbar-thumbColorY-active: rgba(127, 127, 127, 0.5);
+  --frgs-scroll-scrollbar-thumbColorX: rgba(127, 127, 127, 0.1);
+  --frgs-scroll-scrollbar-thumbColorY: rgba(127, 127, 127, 0.1);
+  --frgs-scroll-scrollbar-thumbColorX-hover: rgba(127, 127, 127, 0.3);
+  --frgs-scroll-scrollbar-thumbColorY-hover: rgba(127, 127, 127, 0.3);
+  --frgs-scroll-scrollbar-thumbColorX-active: rgba(127, 127, 127, 0.5);
+  --frgs-scroll-scrollbar-thumbColorY-active: rgba(127, 127, 127, 0.5);
   // thumbSize
-  --frg-scroll-scrollbar-thumbSizeX: 5px;
-  --frg-scroll-scrollbar-thumbSizeY: 5px;
-  --frg-scroll-scrollbar-thumbSizeX-hover: 7px;
-  --frg-scroll-scrollbar-thumbSizeY-hover: 7px;
-  --frg-scroll-scrollbar-thumbSizeX-active: 7px;
-  --frg-scroll-scrollbar-thumbSizeY-active: 7px;
+  --frgs-scroll-scrollbar-thumbSizeX: 5px;
+  --frgs-scroll-scrollbar-thumbSizeY: 5px;
+  --frgs-scroll-scrollbar-thumbSizeX-hover: 7px;
+  --frgs-scroll-scrollbar-thumbSizeY-hover: 7px;
+  --frgs-scroll-scrollbar-thumbSizeX-active: 7px;
+  --frgs-scroll-scrollbar-thumbSizeY-active: 7px;
   // thumbRadius
-  --frg-scroll-scrollbar-thumbRadiusX: 9999px;
-  --frg-scroll-scrollbar-thumbRadiusY: 9999px;
-  --frg-scroll-scrollbar-thumbRadiusX-hover: 9999px;
-  --frg-scroll-scrollbar-thumbRadiusY-hover: 9999px;
-  --frg-scroll-scrollbar-thumbRadiusX-active: 9999px;
-  --frg-scroll-scrollbar-thumbRadiusY-active: 9999px;
+  --frgs-scroll-scrollbar-thumbRadiusX: 9999px;
+  --frgs-scroll-scrollbar-thumbRadiusY: 9999px;
+  --frgs-scroll-scrollbar-thumbRadiusX-hover: 9999px;
+  --frgs-scroll-scrollbar-thumbRadiusY-hover: 9999px;
+  --frgs-scroll-scrollbar-thumbRadiusX-active: 9999px;
+  --frgs-scroll-scrollbar-thumbRadiusY-active: 9999px;
   // thumbBorderWidth（trackSize が auto のときだけ使う）
-  --frg-scroll-scrollbar-thumbBorderWidthX: 0px;
-  --frg-scroll-scrollbar-thumbBorderWidthY: 0px;
-  --frg-scroll-scrollbar-thumbBorderWidthX-hover: 0px;
-  --frg-scroll-scrollbar-thumbBorderWidthY-hover: 0px;
+  --frgs-scroll-scrollbar-thumbBorderWidthX: 0px;
+  --frgs-scroll-scrollbar-thumbBorderWidthY: 0px;
+  --frgs-scroll-scrollbar-thumbBorderWidthX-hover: 0px;
+  --frgs-scroll-scrollbar-thumbBorderWidthY-hover: 0px;
   // thumbBorderColor
-  --frg-scroll-scrollbar-thumbBorderColorX: rgba(0, 0, 0, 0);
-  --frg-scroll-scrollbar-thumbBorderColorY: rgba(0, 0, 0, 0);
-  --frg-scroll-scrollbar-thumbBorderColorX-hover: rgba(0, 0, 0, 0);
-  --frg-scroll-scrollbar-thumbBorderColorY-hover: rgba(0, 0, 0, 0);
-  --frg-scroll-scrollbar-thumbBorderColorX-active: rgba(0, 0, 0, 0);
-  --frg-scroll-scrollbar-thumbBorderColorY-active: rgba(0, 0, 0, 0);
+  --frgs-scroll-scrollbar-thumbBorderColorX: rgba(0, 0, 0, 0);
+  --frgs-scroll-scrollbar-thumbBorderColorY: rgba(0, 0, 0, 0);
+  --frgs-scroll-scrollbar-thumbBorderColorX-hover: rgba(0, 0, 0, 0);
+  --frgs-scroll-scrollbar-thumbBorderColorY-hover: rgba(0, 0, 0, 0);
+  --frgs-scroll-scrollbar-thumbBorderColorX-active: rgba(0, 0, 0, 0);
+  --frgs-scroll-scrollbar-thumbBorderColorY-active: rgba(0, 0, 0, 0);
   // trackColor
-  --frg-scroll-scrollbar-trackColorX: rgba(127, 127, 127, 0.04);
-  --frg-scroll-scrollbar-trackColorY: rgba(127, 127, 127, 0.04);
-  --frg-scroll-scrollbar-trackColorX-hover: rgba(127, 127, 127, 0.04);
-  --frg-scroll-scrollbar-trackColorY-hover: rgba(127, 127, 127, 0.04);
+  --frgs-scroll-scrollbar-trackColorX: rgba(127, 127, 127, 0.04);
+  --frgs-scroll-scrollbar-trackColorY: rgba(127, 127, 127, 0.04);
+  --frgs-scroll-scrollbar-trackColorX-hover: rgba(127, 127, 127, 0.04);
+  --frgs-scroll-scrollbar-trackColorY-hover: rgba(127, 127, 127, 0.04);
   // trackSize
-  --frg-scroll-scrollbar-trackSizeX: 13px;
-  --frg-scroll-scrollbar-trackSizeY: 13px;
-  --frg-scroll-scrollbar-trackSizeX-hover: 13px;
-  --frg-scroll-scrollbar-trackSizeY-hover: 13px;
+  --frgs-scroll-scrollbar-trackSizeX: 13px;
+  --frgs-scroll-scrollbar-trackSizeY: 13px;
+  --frgs-scroll-scrollbar-trackSizeX-hover: 13px;
+  --frgs-scroll-scrollbar-trackSizeY-hover: 13px;
   // fallbackSize
-  --frg-scroll-scrollbar-fallbackSize: thin;
+  --frgs-scroll-scrollbar-fallbackSize: thin;
 
   // 以降はステートに応じた値を設定
 
-  --frg-scroll-scrollbar-thumbColorX-state: var(
-    --frg-scroll-scrollbar-thumbColorX
+  --frgs-scroll-scrollbar-thumbColorX-state: var(
+    --frgs-scroll-scrollbar-thumbColorX
   );
-  --frg-scroll-scrollbar-thumbColorY-state: var(
-    --frg-scroll-scrollbar-thumbColorY
+  --frgs-scroll-scrollbar-thumbColorY-state: var(
+    --frgs-scroll-scrollbar-thumbColorY
   );
-  --frg-scroll-scrollbar-thumbSizeX-state: var(
-    --frg-scroll-scrollbar-thumbSizeX
+  --frgs-scroll-scrollbar-thumbSizeX-state: var(
+    --frgs-scroll-scrollbar-thumbSizeX
   );
-  --frg-scroll-scrollbar-thumbSizeY-state: var(
-    --frg-scroll-scrollbar-thumbSizeY
+  --frgs-scroll-scrollbar-thumbSizeY-state: var(
+    --frgs-scroll-scrollbar-thumbSizeY
   );
-  --frg-scroll-scrollbar-thumbRadiusX-state: var(
-    --frg-scroll-scrollbar-thumbRadiusX
+  --frgs-scroll-scrollbar-thumbRadiusX-state: var(
+    --frgs-scroll-scrollbar-thumbRadiusX
   );
-  --frg-scroll-scrollbar-thumbRadiusY-state: var(
-    --frg-scroll-scrollbar-thumbRadiusY
+  --frgs-scroll-scrollbar-thumbRadiusY-state: var(
+    --frgs-scroll-scrollbar-thumbRadiusY
   );
-  --frg-scroll-scrollbar-thumbBorderColorX-state: var(
-    --frg-scroll-scrollbar-thumbBorderColorX
+  --frgs-scroll-scrollbar-thumbBorderColorX-state: var(
+    --frgs-scroll-scrollbar-thumbBorderColorX
   );
-  --frg-scroll-scrollbar-thumbBorderColorY-state: var(
-    --frg-scroll-scrollbar-thumbBorderColorY
+  --frgs-scroll-scrollbar-thumbBorderColorY-state: var(
+    --frgs-scroll-scrollbar-thumbBorderColorY
   );
-  --frg-scroll-scrollbar-thumbBorderWidthX-state: var(
-    --frg-scroll-scrollbar-thumbBorderWidthX
+  --frgs-scroll-scrollbar-thumbBorderWidthX-state: var(
+    --frgs-scroll-scrollbar-thumbBorderWidthX
   );
-  --frg-scroll-scrollbar-thumbBorderWidthY-state: var(
-    --frg-scroll-scrollbar-thumbBorderWidthY
+  --frgs-scroll-scrollbar-thumbBorderWidthY-state: var(
+    --frgs-scroll-scrollbar-thumbBorderWidthY
   );
-  --frg-scroll-scrollbar-trackColorX-state: var(
-    --frg-scroll-scrollbar-trackColorX
+  --frgs-scroll-scrollbar-trackColorX-state: var(
+    --frgs-scroll-scrollbar-trackColorX
   );
-  --frg-scroll-scrollbar-trackColorY-state: var(
-    --frg-scroll-scrollbar-trackColorY
+  --frgs-scroll-scrollbar-trackColorY-state: var(
+    --frgs-scroll-scrollbar-trackColorY
   );
-  --frg-scroll-scrollbar-trackSizeX-state: var(
-    --frg-scroll-scrollbar-trackSizeX
+  --frgs-scroll-scrollbar-trackSizeX-state: var(
+    --frgs-scroll-scrollbar-trackSizeX
   );
-  --frg-scroll-scrollbar-trackSizeY-state: var(
-    --frg-scroll-scrollbar-trackSizeY
+  --frgs-scroll-scrollbar-trackSizeY-state: var(
+    --frgs-scroll-scrollbar-trackSizeY
   );
 
   &:hover {
     // エレメントへのホバー時
-    --frg-scroll-scrollbar-thumbColorX-state: var(
-      --frg-scroll-scrollbar-thumbColorX-hover
+    --frgs-scroll-scrollbar-thumbColorX-state: var(
+      --frgs-scroll-scrollbar-thumbColorX-hover
     );
-    --frg-scroll-scrollbar-thumbColorY-state: var(
-      --frg-scroll-scrollbar-thumbColorY-hover
+    --frgs-scroll-scrollbar-thumbColorY-state: var(
+      --frgs-scroll-scrollbar-thumbColorY-hover
     );
-    --frg-scroll-scrollbar-thumbSizeX-state: var(
-      --frg-scroll-scrollbar-thumbSizeX-hover
+    --frgs-scroll-scrollbar-thumbSizeX-state: var(
+      --frgs-scroll-scrollbar-thumbSizeX-hover
     );
-    --frg-scroll-scrollbar-thumbSizeY-state: var(
-      --frg-scroll-scrollbar-thumbSizeY-hover
+    --frgs-scroll-scrollbar-thumbSizeY-state: var(
+      --frgs-scroll-scrollbar-thumbSizeY-hover
     );
-    --frg-scroll-scrollbar-thumbRadiusX-state: var(
-      --frg-scroll-scrollbar-thumbRadiusX-hover
+    --frgs-scroll-scrollbar-thumbRadiusX-state: var(
+      --frgs-scroll-scrollbar-thumbRadiusX-hover
     );
-    --frg-scroll-scrollbar-thumbRadiusY-state: var(
-      --frg-scroll-scrollbar-thumbRadiusY-hover
+    --frgs-scroll-scrollbar-thumbRadiusY-state: var(
+      --frgs-scroll-scrollbar-thumbRadiusY-hover
     );
-    --frg-scroll-scrollbar-thumbBorderColorX-state: var(
-      --frg-scroll-scrollbar-thumbBorderColorX-hover
+    --frgs-scroll-scrollbar-thumbBorderColorX-state: var(
+      --frgs-scroll-scrollbar-thumbBorderColorX-hover
     );
-    --frg-scroll-scrollbar-thumbBorderColorY-state: var(
-      --frg-scroll-scrollbar-thumbBorderColorY-hover
+    --frgs-scroll-scrollbar-thumbBorderColorY-state: var(
+      --frgs-scroll-scrollbar-thumbBorderColorY-hover
     );
-    --frg-scroll-scrollbar-thumbBorderWidthX-state: var(
-      --frg-scroll-scrollbar-thumbBorderWidthX-hover
+    --frgs-scroll-scrollbar-thumbBorderWidthX-state: var(
+      --frgs-scroll-scrollbar-thumbBorderWidthX-hover
     );
-    --frg-scroll-scrollbar-thumbBorderWidthY-state: var(
-      --frg-scroll-scrollbar-thumbBorderWidthY-hover
+    --frgs-scroll-scrollbar-thumbBorderWidthY-state: var(
+      --frgs-scroll-scrollbar-thumbBorderWidthY-hover
     );
-    --frg-scroll-scrollbar-trackColorX-state: var(
-      --frg-scroll-scrollbar-trackColorX-hover
+    --frgs-scroll-scrollbar-trackColorX-state: var(
+      --frgs-scroll-scrollbar-trackColorX-hover
     );
-    --frg-scroll-scrollbar-trackColorY-state: var(
-      --frg-scroll-scrollbar-trackColorY-hover
+    --frgs-scroll-scrollbar-trackColorY-state: var(
+      --frgs-scroll-scrollbar-trackColorY-hover
     );
-    --frg-scroll-scrollbar-trackSizeX-state: var(
-      --frg-scroll-scrollbar-trackSizeX-hover
+    --frgs-scroll-scrollbar-trackSizeX-state: var(
+      --frgs-scroll-scrollbar-trackSizeX-hover
     );
-    --frg-scroll-scrollbar-trackSizeY-state: var(
-      --frg-scroll-scrollbar-trackSizeY-hover
+    --frgs-scroll-scrollbar-trackSizeY-state: var(
+      --frgs-scroll-scrollbar-trackSizeY-hover
     );
   }
 
   &::-webkit-scrollbar-thumb:horizontal:hover {
     // thumbのホバー（トラックの幅はスクロールバー全体で決まるため変えない）
-    --frg-scroll-scrollbar-thumbColorX-state: var(
-      --frg-scroll-scrollbar-thumbColorX-active
+    --frgs-scroll-scrollbar-thumbColorX-state: var(
+      --frgs-scroll-scrollbar-thumbColorX-active
     );
-    --frg-scroll-scrollbar-thumbSizeX-state: var(
-      --frg-scroll-scrollbar-thumbSizeX-active
+    --frgs-scroll-scrollbar-thumbSizeX-state: var(
+      --frgs-scroll-scrollbar-thumbSizeX-active
     );
-    --frg-scroll-scrollbar-thumbRadiusX-state: var(
-      --frg-scroll-scrollbar-thumbRadiusX-active
+    --frgs-scroll-scrollbar-thumbRadiusX-state: var(
+      --frgs-scroll-scrollbar-thumbRadiusX-active
     );
-    --frg-scroll-scrollbar-thumbBorderColorX-state: var(
-      --frg-scroll-scrollbar-thumbBorderColorX-active
+    --frgs-scroll-scrollbar-thumbBorderColorX-state: var(
+      --frgs-scroll-scrollbar-thumbBorderColorX-active
     );
   }
 
   &::-webkit-scrollbar-thumb:vertical:hover {
     // thumbのホバー（トラックの幅はスクロールバー全体で決まるため変えない）
-    --frg-scroll-scrollbar-thumbColorY-state: var(
-      --frg-scroll-scrollbar-thumbColorY-active
+    --frgs-scroll-scrollbar-thumbColorY-state: var(
+      --frgs-scroll-scrollbar-thumbColorY-active
     );
-    --frg-scroll-scrollbar-thumbSizeY-state: var(
-      --frg-scroll-scrollbar-thumbSizeY-active
+    --frgs-scroll-scrollbar-thumbSizeY-state: var(
+      --frgs-scroll-scrollbar-thumbSizeY-active
     );
-    --frg-scroll-scrollbar-thumbRadiusY-state: var(
-      --frg-scroll-scrollbar-thumbRadiusY-active
+    --frgs-scroll-scrollbar-thumbRadiusY-state: var(
+      --frgs-scroll-scrollbar-thumbRadiusY-active
     );
-    --frg-scroll-scrollbar-thumbBorderColorY-state: var(
-      --frg-scroll-scrollbar-thumbBorderColorY-active
+    --frgs-scroll-scrollbar-thumbBorderColorY-state: var(
+      --frgs-scroll-scrollbar-thumbBorderColorY-active
     );
   }
 
   // trackSize が auto のときは、thumbSize と thumbBorderWidth からトラックの幅を算出する
   // （:hover と詳細度が同じため、後に置いてホバー時の trackSize の値より優先させる）
-  &.frg-scroll-scrollbar-trackSizeX-auto {
-    --frg-scroll-scrollbar-trackSizeX-state: calc(
-      var(--frg-scroll-scrollbar-thumbSizeX-state) + 2 *
-        var(--frg-scroll-scrollbar-thumbBorderWidthX-state)
+  &.frgs-scroll-scrollbar-trackSizeX-auto {
+    --frgs-scroll-scrollbar-trackSizeX-state: calc(
+      var(--frgs-scroll-scrollbar-thumbSizeX-state) + 2 *
+        var(--frgs-scroll-scrollbar-thumbBorderWidthX-state)
     );
   }
 
-  &.frg-scroll-scrollbar-trackSizeY-auto {
-    --frg-scroll-scrollbar-trackSizeY-state: calc(
-      var(--frg-scroll-scrollbar-thumbSizeY-state) + 2 *
-        var(--frg-scroll-scrollbar-thumbBorderWidthY-state)
+  &.frgs-scroll-scrollbar-trackSizeY-auto {
+    --frgs-scroll-scrollbar-trackSizeY-state: calc(
+      var(--frgs-scroll-scrollbar-thumbSizeY-state) + 2 *
+        var(--frgs-scroll-scrollbar-thumbBorderWidthY-state)
     );
   }
 
   // 以降はステートに応じた値を要素に適用
 
   &::-webkit-scrollbar {
-    height: var(--frg-scroll-scrollbar-trackSizeX-state);
-    width: var(--frg-scroll-scrollbar-trackSizeY-state);
+    height: var(--frgs-scroll-scrollbar-trackSizeX-state);
+    width: var(--frgs-scroll-scrollbar-trackSizeY-state);
   }
 
   &::-webkit-scrollbar-corner {
-    background-color: var(--frg-scroll-scrollbar-trackColorY-state);
+    background-color: var(--frgs-scroll-scrollbar-trackColorY-state);
   }
 
   // thumb の太さは、トラックの幅との差を線（border）の幅にして表す
@@ -287,72 +287,72 @@
   &::-webkit-scrollbar-thumb:horizontal {
     // 横スクロールバーのthumb
     border-style: solid;
-    border-color: var(--frg-scroll-scrollbar-thumbBorderColorX-state);
+    border-color: var(--frgs-scroll-scrollbar-thumbBorderColorX-state);
     border-width: max(
       0px,
       (
-          var(--frg-scroll-scrollbar-trackSizeX-state) - var(
-              --frg-scroll-scrollbar-thumbSizeX-state
+          var(--frgs-scroll-scrollbar-trackSizeX-state) - var(
+              --frgs-scroll-scrollbar-thumbSizeX-state
             )
         ) /
         2
     );
-    background-color: var(--frg-scroll-scrollbar-thumbColorX-state);
-    border-radius: var(--frg-scroll-scrollbar-thumbRadiusX-state);
+    background-color: var(--frgs-scroll-scrollbar-thumbColorX-state);
+    border-radius: var(--frgs-scroll-scrollbar-thumbRadiusX-state);
     background-clip: content-box;
   }
 
   &::-webkit-scrollbar-thumb:vertical {
     // 縦スクロールバーのthumb
     border-style: solid;
-    border-color: var(--frg-scroll-scrollbar-thumbBorderColorY-state);
+    border-color: var(--frgs-scroll-scrollbar-thumbBorderColorY-state);
     border-width: max(
       0px,
       (
-          var(--frg-scroll-scrollbar-trackSizeY-state) - var(
-              --frg-scroll-scrollbar-thumbSizeY-state
+          var(--frgs-scroll-scrollbar-trackSizeY-state) - var(
+              --frgs-scroll-scrollbar-thumbSizeY-state
             )
         ) /
         2
     );
-    background-color: var(--frg-scroll-scrollbar-thumbColorY-state);
-    border-radius: var(--frg-scroll-scrollbar-thumbRadiusY-state);
+    background-color: var(--frgs-scroll-scrollbar-thumbColorY-state);
+    border-radius: var(--frgs-scroll-scrollbar-thumbRadiusY-state);
     background-clip: content-box;
   }
 
   &::-webkit-scrollbar-track:horizontal {
     // 横スクロールバーのtrack
-    background-color: var(--frg-scroll-scrollbar-trackColorX-state);
+    background-color: var(--frgs-scroll-scrollbar-trackColorX-state);
   }
 
   &::-webkit-scrollbar-track:vertical {
     // 縦スクロールバーのtrack
-    background-color: var(--frg-scroll-scrollbar-trackColorY-state);
+    background-color: var(--frgs-scroll-scrollbar-trackColorY-state);
   }
 
   // 動きを減らす設定の環境ではアニメーションしない
   @media (prefers-reduced-motion: no-preference) {
-    &.frg-scroll-scrollbar-animation {
+    &.frgs-scroll-scrollbar-animation {
       // サイズ系は 0.3s、カラー系は 0.5s
       transition:
-        --frg-scroll-scrollbar-thumbColorX-state 0.5s,
-        --frg-scroll-scrollbar-thumbColorY-state 0.5s,
-        --frg-scroll-scrollbar-thumbSizeX-state 0.3s,
-        --frg-scroll-scrollbar-thumbSizeY-state 0.3s,
-        --frg-scroll-scrollbar-thumbRadiusX-state 0.3s,
-        --frg-scroll-scrollbar-thumbRadiusY-state 0.3s,
-        --frg-scroll-scrollbar-thumbBorderColorX-state 0.5s,
-        --frg-scroll-scrollbar-thumbBorderColorY-state 0.5s,
-        --frg-scroll-scrollbar-thumbBorderWidthX-state 0.3s,
-        --frg-scroll-scrollbar-thumbBorderWidthY-state 0.3s,
-        --frg-scroll-scrollbar-trackColorX-state 0.5s,
-        --frg-scroll-scrollbar-trackColorY-state 0.5s,
-        --frg-scroll-scrollbar-trackSizeX-state 0.3s,
-        --frg-scroll-scrollbar-trackSizeY-state 0.3s;
+        --frgs-scroll-scrollbar-thumbColorX-state 0.5s,
+        --frgs-scroll-scrollbar-thumbColorY-state 0.5s,
+        --frgs-scroll-scrollbar-thumbSizeX-state 0.3s,
+        --frgs-scroll-scrollbar-thumbSizeY-state 0.3s,
+        --frgs-scroll-scrollbar-thumbRadiusX-state 0.3s,
+        --frgs-scroll-scrollbar-thumbRadiusY-state 0.3s,
+        --frgs-scroll-scrollbar-thumbBorderColorX-state 0.5s,
+        --frgs-scroll-scrollbar-thumbBorderColorY-state 0.5s,
+        --frgs-scroll-scrollbar-thumbBorderWidthX-state 0.3s,
+        --frgs-scroll-scrollbar-thumbBorderWidthY-state 0.3s,
+        --frgs-scroll-scrollbar-trackColorX-state 0.5s,
+        --frgs-scroll-scrollbar-trackColorY-state 0.5s,
+        --frgs-scroll-scrollbar-trackSizeX-state 0.3s,
+        --frgs-scroll-scrollbar-trackSizeY-state 0.3s;
     }
   }
 
-  &.frg-scroll-scrollbar-arrows {
+  &.frgs-scroll-scrollbar-arrows {
     // 矢印ボタンあり
     &::-webkit-scrollbar-button:start:decrement,
     &::-webkit-scrollbar-button:end:increment {
@@ -364,12 +364,12 @@
 
     &::-webkit-scrollbar-button:vertical:start:decrement,
     &::-webkit-scrollbar-button:vertical:end:increment {
-      background-color: var(--frg-scroll-scrollbar-trackColorY-state);
+      background-color: var(--frgs-scroll-scrollbar-trackColorY-state);
     }
 
     &::-webkit-scrollbar-button:horizontal:start:decrement,
     &::-webkit-scrollbar-button:horizontal:end:increment {
-      background-color: var(--frg-scroll-scrollbar-trackColorX-state);
+      background-color: var(--frgs-scroll-scrollbar-trackColorX-state);
     }
 
     &::-webkit-scrollbar-button:start:increment,
@@ -382,7 +382,7 @@
       background-image: conic-gradient(
         at 50% 0%,
         transparent 150deg,
-        var(--frg-scroll-scrollbar-thumbColorY-state) 150deg 210deg,
+        var(--frgs-scroll-scrollbar-thumbColorY-state) 150deg 210deg,
         transparent 210deg 360deg
       );
     }
@@ -391,9 +391,9 @@
       // ▽
       background-image: conic-gradient(
         at 50% 100%,
-        var(--frg-scroll-scrollbar-thumbColorY-state) 0deg 30deg,
+        var(--frgs-scroll-scrollbar-thumbColorY-state) 0deg 30deg,
         transparent 30deg 330deg,
-        var(--frg-scroll-scrollbar-thumbColorY-state) 330deg
+        var(--frgs-scroll-scrollbar-thumbColorY-state) 330deg
       );
     }
 
@@ -402,7 +402,7 @@
       background-image: conic-gradient(
         at 0% 50%,
         transparent 0deg 60deg,
-        var(--frg-scroll-scrollbar-thumbColorX-state) 60deg 120deg,
+        var(--frgs-scroll-scrollbar-thumbColorX-state) 60deg 120deg,
         transparent 120deg 360deg
       );
     }
@@ -412,7 +412,7 @@
       background-image: conic-gradient(
         at 100% 50%,
         transparent 0deg 240deg,
-        var(--frg-scroll-scrollbar-thumbColorX-state) 240deg 300deg,
+        var(--frgs-scroll-scrollbar-thumbColorX-state) 240deg 300deg,
         transparent 300deg 360deg
       );
     }
@@ -420,8 +420,8 @@
 
   @supports not (selector(::-webkit-scrollbar)) {
     // 非WebKitブラウザー: 色と幅のみ指定できる。縦横で別の色にできないため、縦（Y）の値を使う
-    scrollbar-width: var(--frg-scroll-scrollbar-fallbackSize);
-    scrollbar-color: var(--frg-scroll-scrollbar-thumbColorY-state)
-      var(--frg-scroll-scrollbar-trackColorY-state);
+    scrollbar-width: var(--frgs-scroll-scrollbar-fallbackSize);
+    scrollbar-color: var(--frgs-scroll-scrollbar-thumbColorY-state)
+      var(--frgs-scroll-scrollbar-trackColorY-state);
   }
 }

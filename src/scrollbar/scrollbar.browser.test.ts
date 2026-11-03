@@ -117,14 +117,14 @@ describe('scrollbar（CSS）', () => {
   it('thumbRadius の値がステートを反映した変数に入る', () => {
     const container = createContainer(scrollbar({ thumbRadius: 3 }));
     expect(
-      getVariable(container, '--frg-scroll-scrollbar-thumbRadiusY-state'),
+      getVariable(container, '--frgs-scroll-scrollbar-thumbRadiusY-state'),
     ).toBe('3px');
   });
 
   it('noAnimation 未指定では transition が設定される', () => {
     const container = createContainer(scrollbar());
     expect(getComputedStyle(container).transitionProperty).toContain(
-      '--frg-scroll-scrollbar-trackSizeY-state',
+      '--frgs-scroll-scrollbar-trackSizeY-state',
     );
   });
 

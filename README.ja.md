@@ -32,14 +32,14 @@ const { className, style } = scrollbar({
   trackColor: 'rgba(0, 0, 0, 0.05)',
 });
 
-// className: "frg-scroll-scrollbar ..."
-// style: { "--frg-scroll-scrollbar-thumbSizeX": "6px", ... }
+// className: "frgs-scroll-scrollbar ..."
+// style: { "--frgs-scroll-scrollbar-thumbSizeX": "6px", ... }
 ```
 
 ```html
 <div
-  class="frg-scroll-scrollbar ..."
-  style="--frg-scroll-scrollbar-thumbSizeX: 6px; ..."
+  class="frgs-scroll-scrollbar ..."
+  style="--frgs-scroll-scrollbar-thumbSizeX: 6px; ..."
 >
   <!-- スクロール可能なコンテンツ -->
 </div>
@@ -57,7 +57,7 @@ import '@fringeworks/style-scroll/styles.css';
 
 // 必要なスタイルのみインポート
 import '@fringeworks/style-scroll/scrollbar.css';
-import '@fringeworks/style-scroll/scroll-snap.css';
+import '@fringeworks/style-scroll/snap.css';
 ```
 
 CSSを自動的に読み込みたい場合は `with-css` 配下のモジュールを使用してください。CSSのインポートを扱えるバンドラーが必要です。
@@ -271,7 +271,7 @@ scrollSnap({ axis: 'y', align: 'start', y: { padding: 80 } });
 子要素のオプションは、指定したものだけが子要素に適用されます。また、詳細度を 0 にしているため、子要素に付けたクラスやインラインスタイルで個別に上書きできます。
 
 ```html
-<div class="frg-scroll-snap ..." style="...">
+<div class="frgs-scroll-snap ..." style="...">
   <div>...</div>
   <div class="featured">...</div>
 </div>

@@ -1,0 +1,41 @@
+// scrollSnapコンテナのスタイル
+.frgs-scroll-snap {
+  scroll-snap-type: var(--frgs-scroll-snap-type, none);
+  scroll-behavior: var(--frgs-scroll-snap-behavior, auto);
+}
+
+// scroll-paddingは指定時のみクラスを付与（shorthandと個別指定の競合を避けるため個別クラス）
+.frgs-scroll-snap-padding {
+  scroll-padding: var(--frgs-scroll-snap-padding);
+}
+
+.frgs-scroll-snap-paddingX {
+  scroll-padding-inline: var(--frgs-scroll-snap-paddingX);
+}
+
+.frgs-scroll-snap-paddingY {
+  scroll-padding-block: var(--frgs-scroll-snap-paddingY);
+}
+
+// アイテムオプション: 指定したものだけクラスを付与し、直接の子要素に一括適用する
+// :where() で詳細度を 0 にし、子要素に付けたクラスなどで個別に上書きできるようにする
+:where(.frgs-scroll-snap.frgs-scroll-snap-item-align) > * {
+  scroll-snap-align: var(--frgs-scroll-snap-item-align);
+}
+
+:where(.frgs-scroll-snap.frgs-scroll-snap-item-stop) > * {
+  scroll-snap-stop: var(--frgs-scroll-snap-item-stop);
+}
+
+// shorthand の後に個別指定を置き、個別指定を優先させる
+:where(.frgs-scroll-snap.frgs-scroll-snap-item-margin) > * {
+  scroll-margin: var(--frgs-scroll-snap-item-margin);
+}
+
+:where(.frgs-scroll-snap.frgs-scroll-snap-item-marginX) > * {
+  scroll-margin-inline: var(--frgs-scroll-snap-item-marginX);
+}
+
+:where(.frgs-scroll-snap.frgs-scroll-snap-item-marginY) > * {
+  scroll-margin-block: var(--frgs-scroll-snap-item-marginY);
+}

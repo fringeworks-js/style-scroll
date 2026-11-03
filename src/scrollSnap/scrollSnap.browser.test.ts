@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import type { ScrollStyle } from '../types';
-import scrollSnap from './scroll-snap';
+import scrollSnap from './scrollSnap';
 import './styles.scss';
 
 const containers: HTMLElement[] = [];

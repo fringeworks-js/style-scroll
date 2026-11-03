@@ -34,7 +34,7 @@ export default function createScrollContainer(
     }
     containerStyle = { ...containerStyle, ...style };
   } else {
-    container.className = 'frg-scroll-disabled';
+    container.className = 'frgs-scroll-disabled';
   }
   assignStyle(container, containerStyle);
 

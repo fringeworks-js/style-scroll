@@ -6,7 +6,7 @@ import type {
   SnapBehavior,
   SnapStop,
   SnapStrictness,
-} from '../../src/scroll-snap';
+} from '../../src/scrollSnap';
 import type { SnapDebugOptions } from '../_internal/createSnapContainer';
 import createSnapContainer from '../_internal/createSnapContainer';
 
@@ -137,7 +137,7 @@ const ARG_TYPES: ArgTypes<StoryArgs> = {
 };
 
 const meta = {
-  title: 'scroll-snap',
+  title: 'scrollSnap',
   render: (args) => {
     const { containerOptions, debugOptions } = toOptions(args);
     return createSnapContainer(containerOptions, debugOptions);

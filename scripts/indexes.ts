@@ -11,10 +11,6 @@ generateIndexFiles({
     CONSTANTS,
     PRIVATE,
     TEST_FILE,
-    {
-      valueType: 'path',
-      conditions: 'src/css',
-    },
     // with-css は CSS を読み込むため、ルートからは export しない（`./with-css` から読み込む）
     {
       valueType: 'path',

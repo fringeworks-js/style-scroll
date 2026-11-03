@@ -32,14 +32,14 @@ const { className, style } = scrollbar({
   trackColor: 'rgba(0, 0, 0, 0.05)',
 });
 
-// className: "frg-scroll-scrollbar ..."
-// style: { "--frg-scroll-scrollbar-thumbSizeX": "6px", ... }
+// className: "frgs-scroll-scrollbar ..."
+// style: { "--frgs-scroll-scrollbar-thumbSizeX": "6px", ... }
 ```
 
 ```html
 <div
-  class="frg-scroll-scrollbar ..."
-  style="--frg-scroll-scrollbar-thumbSizeX: 6px; ..."
+  class="frgs-scroll-scrollbar ..."
+  style="--frgs-scroll-scrollbar-thumbSizeX: 6px; ..."
 >
   <!-- scrollable content -->
 </div>
@@ -57,7 +57,7 @@ import '@fringeworks/style-scroll/styles.css';
 
 // Import only what you need
 import '@fringeworks/style-scroll/scrollbar.css';
-import '@fringeworks/style-scroll/scroll-snap.css';
+import '@fringeworks/style-scroll/snap.css';
 ```
 
 If you want the CSS to be loaded automatically, use the modules under `with-css`. This requires a bundler that can handle CSS imports.
@@ -271,7 +271,7 @@ scrollSnap({ axis: 'y', align: 'start', y: { padding: 80 } });
 Only the child options you specify are applied to the children. Their specificity is 0, so you can override them per child with a class or an inline style on the child.
 
 ```html
-<div class="frg-scroll-snap ..." style="...">
+<div class="frgs-scroll-snap ..." style="...">
   <div>...</div>
   <div class="featured">...</div>
 </div>

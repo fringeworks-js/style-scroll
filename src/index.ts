@@ -1,3 +1,3 @@
-export * from './scroll-snap';
 export * from './scrollbar';
+export * from './scrollSnap';
 export type * from './types';
