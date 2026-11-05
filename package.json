@@ -1,6 +1,6 @@
 {
   "name": "@fringeworks/style-scroll",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "private": true,
   "description": "A library some will find handy, specialized in controlling scroll-related styles via CSS.",
   "keywords": [
@@ -47,13 +47,13 @@
     "tidy": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" --config ./prettier.tidy.config.ts"
   },
   "dependencies": {
-    "@fringeworks/style-utils": "^0.9.0",
-    "@fringeworks/types": "^1.0.0",
-    "@fringeworks/utils": "^2.1.0"
+    "@fringeworks/style-utils": "^0.9.1",
+    "@fringeworks/types": "^1.1.1",
+    "@fringeworks/utils": "^2.2.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
-    "@fringeworks/dev": "^0.13.2",
+    "@fringeworks/dev": "^0.13.3",
     "@playwright/test": "^1.60.0",
     "@storybook/addon-a11y": "^10.3.6",
     "@storybook/addon-docs": "^10.3.6",

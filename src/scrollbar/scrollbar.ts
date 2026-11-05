@@ -1,9 +1,9 @@
 import type { StyleState, StyleStateRecord } from '@fringeworks/style-utils';
 import { fillStyleState, resolveXY } from '@fringeworks/style-utils';
 import { clsScrollScrollbar } from '../_constants';
-import mergeClassName from '../_internal/mergeClassName';
-import resolveStyleStateXY from '../_internal/resolveStyleStateXY';
-import unit from '../_internal/unit';
+import mergeClassName from '../_internal/_mergeClassName';
+import resolveStyleStateXY from '../_internal/_resolveStyleStateXY';
+import unit from '../_internal/_unit';
 import type { CreateScrollStyle, ScrollStyle } from '../types';
 import {
   clsScrollbarAnimation,

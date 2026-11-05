@@ -1,5 +1,5 @@
-import mergeClassName from '../_internal/mergeClassName';
-import unit from '../_internal/unit';
+import mergeClassName from '../_internal/_mergeClassName';
+import unit from '../_internal/_unit';
 import type { CreateScrollStyle, ScrollStyle } from '../types';
 import { applyItemOptions } from './_applyItemOptions';
 import {
